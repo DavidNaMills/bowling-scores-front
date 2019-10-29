@@ -1,0 +1,10 @@
+{
+    "testRegex": "((\\.|/*.)(test))\\.js?$",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/jest.setup.js",
+      "enzyme-to-json/serializer"
+    ]
+  }
