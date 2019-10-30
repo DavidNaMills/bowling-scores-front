@@ -1,0 +1,25 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/fonts.scss';
+
+.title{
+    -webkit-box-shadow: $title_shadow_full;
+    -moz-box-shadow: $title_shadow_full;
+    box-shadow: $title_shadow_full;
+    padding: 2px;
+    text-align: center;
+    font-family: $header;
+
+    &__main{
+        font-size: $header_size_main;
+        color: $title_main_color;
+    }
+    
+    &__section{
+        font-size: $header_size_section;
+        color: $title_rest_color;
+    }
+    &__sub{
+        font-size: $header_size_sub;
+        color: $title_rest_color;
+    }
+}

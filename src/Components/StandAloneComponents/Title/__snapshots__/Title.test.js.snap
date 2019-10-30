@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Title/> component test suite Title snapshot tests <Title/> type MAIN snapshot test 1`] = `
+<div
+  className="title"
+>
+  <h3
+    className="title__sub"
+  >
+    Bowling Scores
+  </h3>
+</div>
+`;
+
+exports[`<Title/> component test suite Title snapshot tests <Title/> type SECTION snapshot test 1`] = `
+<div
+  className="title"
+>
+  <h3
+    className="title__sub"
+  >
+    Bowling Scores
+  </h3>
+</div>
+`;
+
+exports[`<Title/> component test suite Title snapshot tests <Title/> type SUB snapshot test 1`] = `
+<div
+  className="title"
+>
+  <h3
+    className="title__sub"
+  >
+    Bowling Scores
+  </h3>
+</div>
+`;
