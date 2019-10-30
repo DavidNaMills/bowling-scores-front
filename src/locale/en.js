@@ -1,4 +1,4 @@
-import {MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD} from '../consts/formRestrictions';
+import { MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD } from '../consts/formRestrictions';
 
 
 export default {

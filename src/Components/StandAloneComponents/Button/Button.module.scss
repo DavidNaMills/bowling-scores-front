@@ -1,0 +1,47 @@
+@import '../../../styles/colors.scss';
+
+
+.button{
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    min-width: 100px;
+    font-weight: 550;
+
+    &__default{
+        background-color: $btn_default_bkg;
+        color: $btn_font_clr;
+        
+        &:hover{
+            background-color: $btn_default_bkg_active_hover;
+        }
+        &:active{
+            background-color: $btn_default_bkg_active;
+        }
+    }
+
+    &__warning{
+        background-color: $btn_warning_bkg;
+        color: $btn_font_clr;
+        
+        &:hover{
+            background-color: $btn_warning_bkg_active_hover;
+        }
+        &:active{
+            background-color: $btn_warning_bkg_active;
+        }    
+    }
+    
+    &__danger{
+        background-color: $btn_danger_bkg;
+        color: $btn_font_clr_light;
+        
+        &:hover{
+            background-color: $btn_danger_bkg_active_hover;
+        }
+        &:active{
+            background-color: $btn_danger_bkg_active;
+        }    
+    }
+
+}

@@ -1,4 +1,4 @@
-import {MIN_LENGTH, MAX_LENGTH, MIN_LENGTH_PASSWORD} from '../consts/formRestrictions';
+import { MIN_LENGTH, MAX_LENGTH, MIN_LENGTH_PASSWORD } from '../consts/formRestrictions';
 
 export default {
     username: {
@@ -20,7 +20,8 @@ export default {
         },
         touched: false,
         isValid: false,
-        shouldValidate: true
+        shouldValidate: true,
+        hasErr: []
     },
     password: {
         elementtype: 'input',
@@ -41,6 +42,7 @@ export default {
             }
         },
         touched: false,
-        shouldValidate: true
+        shouldValidate: true,
+        hasErr: []
     }
 }

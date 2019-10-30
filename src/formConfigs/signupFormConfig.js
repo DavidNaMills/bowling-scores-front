@@ -1,4 +1,4 @@
-import {MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD} from '../consts/formRestrictions';
+import { MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD } from '../consts/formRestrictions';
 
 export default {
     username: {
@@ -20,7 +20,8 @@ export default {
         },
         touched: false,
         isValid: false,
-        shouldValidate: true
+        shouldValidate: true,
+        hasErr: []
     },
     password: {
         elementtype: 'input',
@@ -41,7 +42,8 @@ export default {
         },
         touched: false,
         isValid: false,
-        shouldValidate: true
+        shouldValidate: true,
+        hasErr: []
     },
     passwordConfirm: {
         elementtype: 'input',
@@ -51,16 +53,17 @@ export default {
         },
         value: '',
         validation: {
-            isSame:{
+            isSame: {
                 field: 'password',
                 errMsg: 'pass_not_same'
             }
         },
         touched: false,
-        isValid: false, 
-        shouldValidate: true
+        isValid: false,
+        shouldValidate: true,
+        hasErr: []
     },
-    alleyName:{
+    alleyName: {
         elementtype: 'input',
         elementConfig: {
             type: 'text',
@@ -74,8 +77,9 @@ export default {
             }
         },
         touched: false,
-        isValid: true, 
-        shouldValidate: true
+        isValid: true,
+        shouldValidate: true,
+        hasErr: []
     }
 
 }

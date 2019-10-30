@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component test suite snapshot test suite matches danger snapshot 1`] = `
+<button
+  className="button button__danger"
+  isDisabled={true}
+  onClick={[Function]}
+>
+  Test label
+</button>
+`;
+
+exports[`Button component test suite snapshot test suite matches default snapshot 1`] = `
+<button
+  className="button button__default"
+  isDisabled={true}
+  onClick={[Function]}
+>
+  Test label
+</button>
+`;
+
+exports[`Button component test suite snapshot test suite matches warning snapshot 1`] = `
+<button
+  className="button button__warning"
+  isDisabled={true}
+  onClick={[Function]}
+>
+  Test label
+</button>
+`;
