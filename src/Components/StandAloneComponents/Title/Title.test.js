@@ -4,6 +4,8 @@ import {shallow} from 'enzyme';
 
 import Title from './Title';
 
+//TODO: optional center align
+
 const testObject = [
     {
         msg: 'should display the correct message with type MAIN',

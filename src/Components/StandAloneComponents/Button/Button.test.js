@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Button from './Button';
 
+//TODO: isDisabled
+
 
 describe('Button component test suite', () => {
     const testLabel = 'Test label';

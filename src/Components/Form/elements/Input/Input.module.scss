@@ -1,0 +1,59 @@
+@import '../../../../styles/colors.scss';
+@import '../../../../styles/fonts.scss';
+
+.input{
+    border: none;
+    padding: 5px;
+    width: $input_width;
+    
+    &__label{
+        margin-top: $input_spacing;
+    }
+
+    &__default{
+        background: rgb(230, 230, 230);
+    }
+
+    &__valid{
+        -webkit-box-shadow: $valid_input_shadow;
+        -moz-box-shadow: $valid_input_shadow;
+        box-shadow: $valid_input_shadow;
+        border-bottom: solid 1px $btn_default_bkg;
+    };
+    
+    &__error{
+        -webkit-box-shadow: $error_input_shadow;
+        -moz-box-shadow: $error_input_shadow;
+        box-shadow: $error_input_shadow;
+        border-bottom: solid 1px $btn_danger_bkg;
+    }
+
+    &__errorContainer{
+        width: $input_width;
+        padding: 5px;
+
+        -webkit-box-shadow: $error_input_shadow;
+        -moz-box-shadow: $error_input_shadow;
+        box-shadow: $error_input_shadow;
+
+        &_errorMsg{
+            font-size: $error_size_small;
+            color: $btn_danger_bkg;
+        }
+    }
+}
+
+.icon{
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    &__required{
+        color: $btn_default_bkg_active_hover;
+    }
+
+    &__error{
+        color: $btn_danger_bkg_active;
+    }
+}

@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input/> test suite Snapshot tests basic with placeholder and label snapshot test 1`] = `
+<div
+  className="input__label"
+>
+  <label
+    htmlFor="test"
+  >
+    Test Label
+  </label>
+  <div>
+    <input
+      className="input input__default"
+      id="test"
+      onChange={[Function]}
+      placeholder="placeholder"
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`<Input/> test suite Snapshot tests invalid snapshot test 1`] = `
+<div
+  className="input__label"
+>
+  <label
+    htmlFor="test"
+  >
+    Test Label
+  </label>
+  <div>
+    <input
+      className="input input__default input__error"
+      id="test"
+      onChange={[Function]}
+      placeholder="placeholder"
+      type="text"
+    />
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root icon icon__error"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+      />
+    </svg>
+  </div>
+  <div
+    className="input__errorContainer"
+  >
+    <p
+      className="input__errorContainer_errorMsg"
+    >
+      error 1
+    </p>
+    <p
+      className="input__errorContainer_errorMsg"
+    >
+      error 2
+    </p>
+  </div>
+</div>
+`;
+
+exports[`<Input/> test suite Snapshot tests minimal config snapshot test 1`] = `
+<div
+  className="input__label"
+>
+  <div>
+    <input
+      className="input input__default"
+      id="test"
+      onChange={[Function]}
+      placeholder={null}
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`<Input/> test suite Snapshot tests required with label and placeholder snapshot test 1`] = `
+<div
+  className="input__label"
+>
+  <label
+    htmlFor="test"
+  >
+    Test Label
+  </label>
+  <div>
+    <input
+      className="input input__default"
+      id="test"
+      onChange={[Function]}
+      placeholder="placeholder"
+      type="text"
+    />
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root icon icon__required"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"
+      />
+    </svg>
+  </div>
+</div>
+`;

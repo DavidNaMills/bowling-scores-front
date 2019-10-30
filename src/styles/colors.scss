@@ -19,3 +19,9 @@ $title_shadow_color: rgb(240, 245, 241);
 $title_shadow_full: -10px 10px 23px 3px $title_shadow_color;
 $title_main_color: rgb(86, 156, 156);
 $title_rest_color: rgb(38, 74, 74);
+
+$valid_color: rgb(176,245,164);
+$valid_input_shadow: inset 1px -2px 37px 9px rgba($valid_color,0.5);
+
+$error_input_shadow: inset 1px -2px 152px -53px rgba($btn_danger_bkg,0.5);
+$error_input_msg: rgba($btn_danger_bkg,0.56);
