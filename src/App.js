@@ -3,7 +3,10 @@ import React from 'react';
 import Title from './Components/StandAloneComponents/Title/Title';
 import Button from './Components/StandAloneComponents/Button/Button'
 import Input from './Components/Form/elements/Input/Input';
-import LoginContainer from './Containers/LoginContainer/LoginContainer';
+import AccessContainer from './Containers/AccessContainer/AccessContainer';
+
+import loginFormConfig from './formConfigs/loginFormConfig';
+import signupFormConfig from './formConfigs/signupFormConfig';
 
 const testLabel = 'Bowling Scores';
 
@@ -12,7 +15,8 @@ function App() {
 
   return (
     <div>
-      <LoginContainer />
+      <AccessContainer formConfig={loginFormConfig} title='Login'  />
+      {/* <AccessContainer formConfig={signupFormConfig} title='Signup'  /> */}
     </div>
   );
 }

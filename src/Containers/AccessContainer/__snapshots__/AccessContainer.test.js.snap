@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AccessContainer/> test suite Snapshot test suite should match the snapshot 1`] = `
+<div>
+  <div
+    className="title"
+  >
+    <h2
+      className="title__section"
+    >
+      Test Title
+    </h2>
+  </div>
+  <div>
+    <form
+      onSubmit={[Function]}
+    >
+      <button
+        className="button button__default"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Login
+      </button>
+    </form>
+    <button
+      className="button button__danger"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Clear
+    </button>
+  </div>
+</div>
+`;

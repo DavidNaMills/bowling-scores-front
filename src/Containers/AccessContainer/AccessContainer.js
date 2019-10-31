@@ -6,26 +6,27 @@ import Button from '../../Components/StandAloneComponents/Button/Button'
 import useFormHook from '../../Hooks/useFormHook/useformHook';
 import objectToArray from '../../helpers/objectToArray/objectToArray';
 
-const LoginContainer = () => {
-    const {manageState, formState, completeCheck, clearForm} = useFormHook(loginFormConfig);
+const AccessContainer = (props) => {
+
+    const { manageState, formState, completeCheck, clearForm } = useFormHook(props.formConfig);
 
 
     const submit = (e) => {
         e.preventDefault();
         const valid = completeCheck();
 
-        if(valid){
+        if (valid) {
             //make submission
         }
-     };
+    };
 
     const clear = () => {
         clearForm();
-     };
+    };
 
     return (
         <div>
-            <Title label="Login" ttlType='section' />
+            <Title label={props.title} ttlType='section' />
 
             <div>
                 <form onSubmit={submit}>
@@ -36,14 +37,14 @@ const LoginContainer = () => {
                                 config={x.config}
                                 id={x.id}
                                 changed={manageState}
-                            />,0)
+                            />, 0)
                     }
-                    <Button label='Submit' type='default' click={submit} />
+                    <Button label='Login' type='default' click={submit} />
                 </form>
-                    <Button label='Clear' type='danger' click={clear} />
+                <Button label='Clear' type='danger' click={clear} />
             </div>
         </div>
     )
 };
 
-export default LoginContainer;
+export default AccessContainer;
