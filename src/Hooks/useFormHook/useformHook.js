@@ -8,27 +8,40 @@ function useFormHook(defaultState) {
     useEffect(() => {
         setFormState(defaultState);
     }, [])
+    
+    const clearForm = () =>{
+        setFormState(defaultState);
+    }
 
     const completeCheck = () => {
         let tempValid = true;
+        let temp = JSON.parse(JSON.stringify(formState));
 
-        for (let key in formState) {
-            if (!formState[key].isValid) {
+        for (let key in temp) {
+            const result = formValidate(temp[key].value, temp, key);
+            if (!result.isValid) {
+                temp[key].hasErr = result.errorMsg;
+                temp[key].isValid = false;
+            } else {
+                temp[key].hasErr = [];
+                temp[key].isValid = true;
+            }
+        }
+
+        for (let key in temp) {
+            if (!temp[key].isValid) {
                 tempValid = false;
             }
         }
+        setFormState(temp);
         return tempValid;
     }
 
-    const manageState = (id, val) => {
-        const result = formValidate(val, formState, id);
+    const manageState = (e, id) => {
+        const val = e.target.value;
 
         let t = JSON.parse(JSON.stringify(formState[id]));
-        if (!result.isValid) {
-            t.hasErr = result.errorMsg;
-        } else {
-            t.value = val;
-        }
+        t.value = val;
 
         t.touched = true;
         setFormState(prev => ({ ...prev, [id]: t }))
@@ -37,7 +50,8 @@ function useFormHook(defaultState) {
     return {
         manageState,
         formState,
-        completeCheck
+        completeCheck,
+        clearForm
     }
 };
 

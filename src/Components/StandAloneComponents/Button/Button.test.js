@@ -54,6 +54,14 @@ describe('Button component test suite', () => {
             expect(btn.text()).toEqual(testLabel);
         });
 
+        it('should disable the button', ()=>{
+            const wrapper = shallow(<Button label={testLabel} type='danger' isDisabled/>);
+            const btn = wrapper.find('button');
+
+            expect(btn.hasClass('button__disabled')).toBe(true);
+            expect(btn.props().disabled).toBeTruthy();
+        })
+
     });
 
     describe('behvioural test suite', () => {

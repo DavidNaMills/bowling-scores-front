@@ -5,35 +5,24 @@ import loginFormConfig from '../../formConfigs/loginFormConfig';
 
 
 describe('useFormHook test suite', () => {
+    const testValue = {target: {value:'myverylongpassword'}};
 
     it('should update the formState', () => {
-        const testValue = 'myverylongpassword';
         const { result } = renderHook(() => useFormHook(loginFormConfig))
         act(() => {
-            result.current.manageState('password', testValue);
+            result.current.manageState(testValue, 'password');
         });
-        expect(result.current.formState.password.value).toEqual(testValue);
+        expect(result.current.formState.password.value).toEqual(testValue.target.value);
         expect(result.current.formState.password.touched).toBeTruthy()
     });
 
 
-    it('should set error messages if the value is invalid', () => {
-        const testValue = 'thisisasuperlongpasswordthatwillbetoolong';
-        const { result } = renderHook(() => useFormHook(loginFormConfig))
-        act(() => {
-            result.current.manageState('password', testValue);
-        });
-        expect(result.current.formState.password.value).toEqual('');
-        expect(result.current.formState.password.hasErr.length).toBe(1);
-        expect(result.current.formState.password.touched).toBeTruthy()
-    });
+    it('should true when the form data is all valid and specifically checked', () => {
+        const username = JSON.parse(JSON.stringify(loginFormConfig['username']));
+        const password = JSON.parse(JSON.stringify(loginFormConfig['password']));
 
-    it('should true when the form data is all valid anc specifically checked', () => {
-        const username = loginFormConfig['username'];
-        const password = loginFormConfig['password'];
-
-        username.isValid = true;
-        password.isValid = true;
+        username.value = 'testtest';
+        password.value = 'testtest';
 
         const { result } = renderHook(() => useFormHook({ username, password }))
         act(() => {
@@ -41,16 +30,46 @@ describe('useFormHook test suite', () => {
         });
     });
 
-    it('should false when the form data is all valid anc specifically checked', () => {
-        const username = loginFormConfig['username'];
-        const password = loginFormConfig['password'];
 
-        username.isValid = true;
-        password.isValid = false;
+    
+    it('should return false when the form data is all valid anc specifically checked', () => {
+        const username = JSON.parse(JSON.stringify(loginFormConfig['username']));
+        const password = JSON.parse(JSON.stringify(loginFormConfig['password']));
+
+        username.value = '';
+        password.value = 'dsa';
 
         const { result } = renderHook(() => useFormHook({ username, password }))
         act(() => {
             expect(result.current.completeCheck()).toBeFalsy();
         });
     });
+
+    it('should clear the form', ()=>{
+        const username = JSON.parse(JSON.stringify(loginFormConfig['username']));
+        const password = JSON.parse(JSON.stringify(loginFormConfig['password']));
+
+        const { result } = renderHook(() => useFormHook({ username, password }))
+        act(() => {
+            result.current.manageState(testValue, 'password');
+            result.current.manageState(testValue, 'username');
+
+        });
+        expect(result.current.formState.username.value).toEqual(testValue.target.value);
+        expect(result.current.formState.password.value).toEqual(testValue.target.value);
+
+        act(()=>{
+            result.current.clearForm()
+        });
+
+        expect(result.current.formState.username.value).toEqual('');
+        expect(result.current.formState.username.touched).toBeFalsy()
+        expect(result.current.formState.username.isValid).toBeFalsy()
+        
+        expect(result.current.formState.password.value).toEqual('');
+        expect(result.current.formState.password.touched).toBeFalsy();
+        expect(result.current.formState.password.isValid).toBeFalsy();
+
+    })
+
 })

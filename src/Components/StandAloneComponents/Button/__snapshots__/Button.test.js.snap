@@ -3,7 +3,7 @@
 exports[`Button component test suite snapshot test suite matches danger snapshot 1`] = `
 <button
   className="button button__danger"
-  isDisabled={true}
+  disabled={false}
   onClick={[Function]}
 >
   Test label
@@ -13,7 +13,7 @@ exports[`Button component test suite snapshot test suite matches danger snapshot
 exports[`Button component test suite snapshot test suite matches default snapshot 1`] = `
 <button
   className="button button__default"
-  isDisabled={true}
+  disabled={false}
   onClick={[Function]}
 >
   Test label
@@ -23,7 +23,7 @@ exports[`Button component test suite snapshot test suite matches default snapsho
 exports[`Button component test suite snapshot test suite matches warning snapshot 1`] = `
 <button
   className="button button__warning"
-  isDisabled={true}
+  disabled={false}
   onClick={[Function]}
 >
   Test label

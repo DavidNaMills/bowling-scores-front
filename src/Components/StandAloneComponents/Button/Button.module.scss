@@ -8,6 +8,10 @@
     min-width: 100px;
     font-weight: 550;
 
+    &__disabled{
+        background-color: $btn_disabled;
+    }
+
     &__default{
         background-color: $btn_default_bkg;
         color: $btn_font_clr;
