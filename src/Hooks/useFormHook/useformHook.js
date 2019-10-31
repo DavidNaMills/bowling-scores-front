@@ -13,6 +13,14 @@ function useFormHook(defaultState) {
         setFormState(defaultState);
     }
 
+    const buildForm = ()=>{
+        const temp = {};
+        for(let key in formState){
+            temp[key] = formState[key].value
+        }
+        return temp;
+    }
+
     const completeCheck = () => {
         let tempValid = true;
         let temp = JSON.parse(JSON.stringify(formState));
@@ -51,7 +59,8 @@ function useFormHook(defaultState) {
         manageState,
         formState,
         completeCheck,
-        clearForm
+        clearForm,
+        buildForm
     }
 };
 

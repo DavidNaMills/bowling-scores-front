@@ -5,6 +5,8 @@ import Button from './Components/StandAloneComponents/Button/Button'
 import Input from './Components/Form/elements/Input/Input';
 import AccessContainer from './Containers/AccessContainer/AccessContainer';
 
+import {LOGIN, SIGNUP} from './Axios/URLS';
+
 import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
 
@@ -15,8 +17,8 @@ function App() {
 
   return (
     <div>
-      <AccessContainer formConfig={loginFormConfig} title='Login'  />
-      {/* <AccessContainer formConfig={signupFormConfig} title='Signup'  /> */}
+      {/* <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN}/> */}
+      <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP}/>
     </div>
   );
 }

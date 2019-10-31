@@ -69,7 +69,23 @@ describe('useFormHook test suite', () => {
         expect(result.current.formState.password.value).toEqual('');
         expect(result.current.formState.password.touched).toBeFalsy();
         expect(result.current.formState.password.isValid).toBeFalsy();
+    });
 
+    it('should create a postable object', ()=>{
+        const usr = 'testUsername';
+        const pass = 'testPassword';
+
+        const username = JSON.parse(JSON.stringify(loginFormConfig['username']));
+        const password = JSON.parse(JSON.stringify(loginFormConfig['password']));
+        
+        username.value = usr;
+        password.value = pass;
+
+        const { result } = renderHook(() => useFormHook({ username, password }));
+        const res = result.current.buildForm();
+        expect(Object.keys(res).length).toBe(2);
+        expect(res.password).toEqual(pass);
+        expect(res.username).toEqual(usr);
     })
 
 })
