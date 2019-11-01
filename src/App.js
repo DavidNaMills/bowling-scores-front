@@ -1,42 +1,53 @@
 import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Title from './Components/StandAloneComponents/Title/Title';
-import Button from './Components/StandAloneComponents/Button/Button'
-import Input from './Components/Form/elements/Input/Input';
+// import Title from './Components/StandAloneComponents/Title/Title';
+// import Button from './Components/StandAloneComponents/Button/Button'
+// import Input from './Components/Form/elements/Input/Input';
 import AccessContainer from './Containers/AccessContainer/AccessContainer';
 
-import {LOGIN, SIGNUP} from './Axios/URLS';
+import { LOGIN, SIGNUP } from './Axios/URLS';
 
+import Navigation from './HOC/Navigation/Navigation';
+
+import Landing from './Containers/Landing/Landing';
 import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
+import Game from './Containers/Game/Game'
 
-const testLabel = 'Bowling Scores';
+
 
 
 function App() {
 
   return (
     <div>
-      {/* <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN}/> */}
-      <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP}/>
+      <Switch>
+        <Navigation>
+          <Route path='/signup' exact exact component={() => <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP} />} />
+          <Route path='/login' exact component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
+          <Route path='/game' exact component={Game} />
+          <Route path='/' exact component={Landing} />
+        </Navigation>
+      </Switch>
     </div>
   );
 }
 
 
-    // <div>
-    //     <Title label={testLabel} ttlType='main'/>
-    //     <Title label={testLabel} ttlType='section'/>
-    //     <Title label={testLabel} ttlType='sub'/>
-    //   <br/>
-    //     <Button label='Test'/>
-    //     <Button label='Test' type='warning'/>
-    //     <Button label='Test' type='danger'/>
-    //   <br/>
-    //     <Input id='test' changed={()=>{}} icon label='hello world' />
-    //     <Input id='test' changed={()=>{}} icon label='hello world' isRequired />
-    //     <Input id='test' changed={()=>{}} icon label='hello world' isRequired isValid/>
-    //     <Input id='test' changed={()=>{}} icon label='hello world' error={['sdfa', 'fdsa']}/>
-    // </div>
+// <div>
+//     <Title label={testLabel} ttlType='main'/>
+//     <Title label={testLabel} ttlType='section'/>
+//     <Title label={testLabel} ttlType='sub'/>
+//   <br/>
+//     <Button label='Test'/>
+//     <Button label='Test' type='warning'/>
+//     <Button label='Test' type='danger'/>
+//   <br/>
+//     <Input id='test' changed={()=>{}} icon label='hello world' />
+//     <Input id='test' changed={()=>{}} icon label='hello world' isRequired />
+//     <Input id='test' changed={()=>{}} icon label='hello world' isRequired isValid/>
+//     <Input id='test' changed={()=>{}} icon label='hello world' error={['sdfa', 'fdsa']}/>
+// </div>
 
 export default App;

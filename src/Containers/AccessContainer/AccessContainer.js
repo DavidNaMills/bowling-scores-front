@@ -17,7 +17,7 @@ const AccessContainer = (props) => {
     const { isLoading, result, makeCall, resetData } = useFetchHook();
 
     useEffect(() => {
-
+        console.log(result);
     }, [result]);
 
     const submit = (e) => {
@@ -47,9 +47,9 @@ const AccessContainer = (props) => {
                                 changed={manageState}
                             />, 0)
                     }
-                    <Button label='Login' type='default' click={submit} isDisabled={isLoading} />
+                    <Button label='Login' type='default' click={submit} isFull isDisabled={isLoading} />
                 </form>
-                <Button label='Clear' type='danger' click={clear} isDisabled={isLoading} />
+                <Button label='Clear' type='danger' click={clear} isFull isDisabled={isLoading} />
             </div>
         </div>
     )

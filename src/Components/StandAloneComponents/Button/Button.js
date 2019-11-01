@@ -3,9 +3,12 @@ import classes from './Button.module.scss';
 
 
 
-const Button = ({ click = () => { }, label, isDisabled = false, type = 'default' }) => {
+const Button = ({ click = () => { }, label, isDisabled = false, type = 'default', isFull=false}) => {
     let style = [classes.button];
 
+    if(isFull){
+        style = style.concat(classes.button__isFull);
+    }
     if (isDisabled) {
         style = style.concat(classes.button__disabled);
     } else {

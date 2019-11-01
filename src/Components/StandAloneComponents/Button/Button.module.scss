@@ -11,6 +11,10 @@
     &__disabled{
         background-color: $btn_disabled;
     }
+    
+    &__isFull{
+        width: 100%;
+    }
 
     &__default{
         background-color: $btn_default_bkg;

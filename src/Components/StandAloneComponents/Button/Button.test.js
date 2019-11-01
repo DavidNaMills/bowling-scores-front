@@ -16,6 +16,12 @@ describe('Button component test suite', () => {
             expect(app).toMatchSnapshot();   
         });
         
+        test('matches default snapshot with full width', ()=>{
+            const component = renderer.create(<Button type='default' label={testLabel} isFull/>);
+            const app = component.toJSON();
+            expect(app).toMatchSnapshot();   
+        });
+        
         test('matches warning snapshot', ()=>{
             const component = renderer.create(<Button type='warning' label={testLabel} />);
             const app = component.toJSON();
@@ -60,6 +66,13 @@ describe('Button component test suite', () => {
 
             expect(btn.hasClass('button__disabled')).toBe(true);
             expect(btn.props().disabled).toBeTruthy();
+        })
+
+        it('should apply full width to the button', ()=>{
+            const wrapper = shallow(<Button label={testLabel} type='danger' isFull/>);
+            const btn = wrapper.find('button');
+
+            expect(btn.hasClass('button__isFull')).toBeTruthy();
         })
 
     });

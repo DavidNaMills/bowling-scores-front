@@ -20,6 +20,16 @@ exports[`Button component test suite snapshot test suite matches default snapsho
 </button>
 `;
 
+exports[`Button component test suite snapshot test suite matches default snapshot with full width 1`] = `
+<button
+  className="button button__isFull button__default"
+  disabled={false}
+  onClick={[Function]}
+>
+  Test label
+</button>
+`;
+
 exports[`Button component test suite snapshot test suite matches warning snapshot 1`] = `
 <button
   className="button button__warning"
