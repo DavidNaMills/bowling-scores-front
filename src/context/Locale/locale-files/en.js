@@ -1,7 +1,8 @@
-import { MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD } from '../consts/formRestrictions';
+import { MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD } from '../../../consts/formRestrictions';
 
 
 export default {
+    lang: 'en',
     user_name: 'Username',
     user_pass: 'Password',
     user_alley: 'Bowling alley name',
