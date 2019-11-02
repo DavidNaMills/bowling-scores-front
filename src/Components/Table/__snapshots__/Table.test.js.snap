@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Table /> test suite Snapshot test suite matches snapshot with default values 1`] = `
+<div>
+  
+  <table
+    className="table"
+  >
+    <thead>
+      <th>
+        name
+      </th>
+      <th>
+        Average
+      </th>
+      <th>
+        Pinfall
+      </th>
+      <th>
+        Rank
+      </th>
+    </thead>
+    <tbody>
+      <tr
+        className=""
+        onClick={[Function]}
+        style={Object {}}
+      >
+        <td>
+          david
+        </td>
+        <td>
+          135
+        </td>
+        <td>
+          2445
+        </td>
+        <td>
+          + 2
+        </td>
+      </tr>
+      <tr
+        className=""
+        onClick={[Function]}
+        style={Object {}}
+      >
+        <td>
+          alan
+        </td>
+        <td>
+          189
+        </td>
+        <td>
+          2222
+        </td>
+        <td>
+          -2
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<Table /> test suite Snapshot test suite matches snapshot with optional features added 1`] = `
+<div>
+  
+  <table
+    className="table"
+  >
+    <thead>
+      <th />
+      <th>
+        name
+      </th>
+      <th>
+        Average
+      </th>
+      <th>
+        Pinfall
+      </th>
+      <th>
+        Rank
+      </th>
+    </thead>
+    <tbody>
+      <tr
+        className="testRowClass"
+        onClick={[Function]}
+        style={Object {}}
+      >
+        <td>
+          1
+        </td>
+        <td>
+          david
+        </td>
+        <td>
+          135
+        </td>
+        <td>
+          2445
+        </td>
+        <td>
+          + 2
+        </td>
+      </tr>
+      <tr
+        className=""
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "red",
+          }
+        }
+      >
+        <td>
+          2
+        </td>
+        <td>
+          alan
+        </td>
+        <td>
+          189
+        </td>
+        <td>
+          2222
+        </td>
+        <td>
+          -2
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

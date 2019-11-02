@@ -1,0 +1,37 @@
+.table{
+    width: 100%;
+    border: solid black 1px;
+    border-collapse: collapse;
+    color: black;
+    
+
+    thead {
+        
+        background: rgb(255,255,255);
+        background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 37%, rgba(201,201,201,1) 100%);
+        background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 37%, rgba(201,201,201,1) 100%);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 37%, rgba(201,201,201,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#c9c9c9",GradientType=1);
+    }
+
+    th{
+        font-size: 16px;
+        border: solid rgb(111, 111, 111) 1px;
+        color: black;
+        padding: 5px;
+    }
+    
+    td{
+        font-size: 14px;
+        border: solid rgb(111, 111, 111) 1px;
+        padding: 5px;
+        text-align: center;
+    }  
+}
+
+.caption{
+    font-size: 14px;
+    padding:0;
+    margin-top:15px;
+    margin-bottom:5px;
+}

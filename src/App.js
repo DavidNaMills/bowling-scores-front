@@ -1,15 +1,11 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-// import Title from './Components/StandAloneComponents/Title/Title';
-// import Button from './Components/StandAloneComponents/Button/Button'
-// import Input from './Components/Form/elements/Input/Input';
-import AccessContainer from './Containers/AccessContainer/AccessContainer';
-
 import { LOGIN, SIGNUP } from './Axios/URLS';
 
 import Navigation from './HOC/Navigation/Navigation';
 
+import AccessContainer from './Containers/AccessContainer/AccessContainer';
 import Landing from './Containers/Landing/Landing';
 import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
@@ -28,6 +24,7 @@ function App() {
           <Route path='/login' exact component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
           <Route path='/game' exact component={Game} />
           <Route path='/' exact component={Landing} />
+          {/* <Redirect to='/' /> */}
         </Navigation>
       </Switch>
     </div>
