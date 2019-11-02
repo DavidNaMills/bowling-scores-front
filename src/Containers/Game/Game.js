@@ -6,24 +6,28 @@ import Table from '../../Components/Table/Table';
 
 import classes from './Game.module.scss';
 
-const tHeaders = ['Player', 'Average', 'Pinfall', 'Rank'];
-const tData = [
-    {
-        id: '',
-        values: ['david', 135, 2445, '+2'],
-    },
-    {
-        id: 'supertestdogman',
-        values: ['alan', 189, 2222, '-2'],
-    },
-    {
-        values: ['bear', 300, 7777, '+2']
-    }
-];
+import realData from '../../helpers/tableGamesDataModifier/testData';
+import tableParser from '../../helpers/tableGamesDataModifier/tableGamesDataModifier';
+
+
+const tHeaders = ['Player', 'Average', 'Pinfall'];
+// const tData = [
+//     {
+//         id: '',
+//         values: ['david', 135, 2445, '+2'],
+//     },
+//     {
+//         id: 'supertestdogman',
+//         values: ['alan', 189, 2222, '-2'],
+//     },
+//     {
+//         values: ['bear', 300, 7777, '+2']
+//     }
+// ];
 
 const testData = {
     headers: tHeaders,
-    rows: tData
+    rows: tableParser (realData)
 }
 
 

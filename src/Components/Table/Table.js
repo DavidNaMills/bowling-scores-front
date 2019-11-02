@@ -1,10 +1,9 @@
 import React from 'react';
 import classes from './Table.module.scss';
 
-const Table = ({caption='', tableClass = classes.table, data, showRowNum = false, selectRow = () => { }, ...rest }) => {
-    return (
-        <div>
-            {caption&&<p className={classes.caption}>{caption}</p>}
+const Table = ({ caption = '', tableClass = classes.table, data, showRowNum = false, selectRow = () => { }, ...rest }) => (
+    <div>
+        {caption && <p className={classes.caption}>{caption}</p>}
         <table className={tableClass}>
             <thead>
                 {showRowNum && <th></th>}
@@ -19,8 +18,8 @@ const Table = ({caption='', tableClass = classes.table, data, showRowNum = false
                     data.rows.map((x, i) =>
                         <tr
                             key={i}
-                            className={x.style && typeof (x.style.tr) === 'string' ? x.style.tr : ''}
-                            style={x.style && typeof (x.style.tr) === 'object' ? x.style.tr : {}}
+                            className={x.style && typeof (x.style.trow) === 'string' ? x.style.trow : ''}
+                            style={x.style && typeof (x.style.trow) === 'object' ? x.style.trow : {}}
                             onClick={() => selectRow(x.id ? x.id : i + 1)}
                         >
                             {showRowNum && <td key={`${i}0`}>{i + 1}</td>}
@@ -36,10 +35,8 @@ const Table = ({caption='', tableClass = classes.table, data, showRowNum = false
                 }
             </tbody>
         </table>
-        </div>
-
-    )
-}
+    </div>
+)
 
 export default Table;
 
@@ -53,6 +50,6 @@ export default Table;
 //     {
 //         id: '5vd5f3d5cvx3cv5xz53xcz',
 //         values: ['alan', 189, 2222, '-2'],
-//         style: { tr: { color: 'red' } }  //optional
+//         style: { trow: { color: 'red' } }  //optional
 //     }
 // ];

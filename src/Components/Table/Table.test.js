@@ -25,12 +25,12 @@ const tData = [
     {
         id: '',
         values: ['david', 135, 2445, '+ 2'],
-        style: { tr: classes.testRowClass }
+        style: { trow: classes.testRowClass }
     },
     {
         id: '5vd5f3d5cvx3cv5xz53xcz',
         values: ['alan', 189, 2222, '-2'],
-        style: { tr: { color: 'red' } }
+        style: { trow: { color: 'red' } }
     }
 ];
 
