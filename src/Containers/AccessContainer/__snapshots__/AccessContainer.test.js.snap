@@ -16,7 +16,7 @@ exports[`<AccessContainer/> test suite Snapshot test suite should match the snap
       onSubmit={[Function]}
     >
       <button
-        className="button button__default"
+        className="button button__isFull button__default"
         disabled={false}
         onClick={[Function]}
       >
@@ -24,7 +24,7 @@ exports[`<AccessContainer/> test suite Snapshot test suite should match the snap
       </button>
     </form>
     <button
-      className="button button__danger"
+      className="button button__isFull button__danger"
       disabled={false}
       onClick={[Function]}
     >

@@ -8,41 +8,38 @@ import classes from './Game.module.scss';
 
 import realData from '../../helpers/tableGamesDataModifier/testData';
 import tableParser from '../../helpers/tableGamesDataModifier/tableGamesDataModifier';
-
+import chartParser from '../../helpers/chartDataModifier/chartDataModifier';
 
 const tHeaders = ['Player', 'Average', 'Pinfall'];
-// const tData = [
-//     {
-//         id: '',
-//         values: ['david', 135, 2445, '+2'],
-//     },
-//     {
-//         id: 'supertestdogman',
-//         values: ['alan', 189, 2222, '-2'],
-//     },
-//     {
-//         values: ['bear', 300, 7777, '+2']
-//     }
-// ];
+
 
 const testData = {
     headers: tHeaders,
-    rows: tableParser (realData)
+    rows: tableParser(realData)
 }
 
 
-const Game = () =>{
+const Game = (props) => {
 
-    const onClick=(id)=>{
-        alert(`clicked on ${id}`);
+    const onClick = (id) => {
+        props.history.push({
+            pathname: '/player',
+            state: { 
+                id,
+                gameData: realData
+             }
+          })
     }
 
     return (
         <div>
-            <Title ttlType='section' label='Play'/>
+            <Title ttlType='section' label='Play' />
             <p>
-                <GameChart />
-                <Table 
+                <GameChart
+                    players={realData.players}
+                    data={chartParser(realData)}
+                />
+                <Table
                     data={testData}
                     showRowNum
                     selectRow={onClick}

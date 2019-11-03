@@ -20,6 +20,8 @@ export const stats = {
     }
 }
 
+export const davidScores = [156, 144, 200];
+
 /**
  * STRUCTURE FOR SAVING GAME DETAILS
  */

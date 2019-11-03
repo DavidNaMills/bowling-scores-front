@@ -11,7 +11,7 @@ import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
 import Game from './Containers/Game/Game'
 
-
+import PlayerGameDetails from './Containers/PlayerGameDetails/PlayerGameDetails';
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
         <Navigation>
           <Route path='/signup' exact exact component={() => <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP} />} />
           <Route path='/login' exact component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
+          <Route path='/player' exact component={PlayerGameDetails} />
           <Route path='/game' exact component={Game} />
           <Route path='/' exact component={Landing} />
           {/* <Redirect to='/' /> */}
