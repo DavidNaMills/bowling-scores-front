@@ -3,7 +3,7 @@ import {
     LOAD_GAME,
     ADD_PLAYER,
     REMOVE_PLAYER,
-    UPDATE_ALL_SCORES,
+    ADD_NEW_GAME,
     UPDATE_INDIVIDUAL_SCORE
 } from '../liveGameActionTypes';
 
@@ -32,8 +32,8 @@ export const removePlayer = (playerId) =>({
 });
 
 
-export const updateAllScores = (newGame) =>({
-    type: UPDATE_ALL_SCORES,
+export const addNewGame = (newGame) =>({
+    type: ADD_NEW_GAME,
     payload: newGame
 });
 

@@ -4,7 +4,7 @@ import {
     LOAD_GAME,
     ADD_PLAYER,
     REMOVE_PLAYER,
-    UPDATE_ALL_SCORES,
+    ADD_NEW_GAME,
     UPDATE_INDIVIDUAL_SCORE
 } from '../liveGameActionTypes';
 
@@ -14,7 +14,7 @@ import {
     loadGame,
     addPlayer,
     removePlayer,
-    updateAllScores,
+    addNewGame,
     updateIndividualScore
 } from './liveGameActions';
 
@@ -83,9 +83,9 @@ describe('liveGameActions test suite', () => {
             }
         };
 
-        const action = updateAllScores(newGame);
+        const action = addNewGame(newGame);
 
-        expect(action.type).toEqual(UPDATE_ALL_SCORES);
+        expect(action.type).toEqual(ADD_NEW_GAME);
         expect(action.payload).toEqual(newGame);
     });
 
