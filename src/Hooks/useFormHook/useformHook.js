@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import formValidate from '../../helpers/formValidation/formValidation'
 
-function useFormHook(defaultState) {
+function useFormHook(defaultState={}) {
 
     const [formState, setFormState] = useState();
 
