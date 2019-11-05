@@ -5,7 +5,6 @@ import scoreFormCreator from '../../helpers/scoreFormCreator/scoreFormCreator';
 const useScoreInput = (players) =>{
     const [values, setValues] = useState(null);
 
-    console.log(players);
     useEffect(()=>{
         const t = scoreFormCreator(players)
         setValues(t);

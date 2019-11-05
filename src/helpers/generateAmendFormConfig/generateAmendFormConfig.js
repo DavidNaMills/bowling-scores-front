@@ -3,7 +3,7 @@ const generateAmendFormConfig = (data) =>{
     const tempObj = {};
 
     data.forEach((x, i)=>{
-        tempObj[i] ={
+        tempObj[i+1] ={
             elementtype: 'input',
             elementConfig: {
                 type: 'number',

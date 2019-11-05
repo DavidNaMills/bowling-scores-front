@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import useFormHook from '../../../Hooks/useFormHook/useformHook';
 import * as actions from '../../../store/allActions';
 
 import Title from '../../../Components/StandAloneComponents/Title/Title';
@@ -15,6 +15,7 @@ import singlePlayerScores from '../../../helpers/singlePlayerScores/singlePlayer
 import generateForm from '../../../helpers/generateAmendFormConfig/generateAmendFormConfig';
 import objectToArray from '../../../helpers/objectToArray/objectToArray';
 
+import updatesScoresModifier from '../../../helpers/updatesScoresModifier/updatesScoresModifier';
 
 const tHeaders = ['Average', 'Pinfall']
 const tHeaders2 = ['Score']
@@ -24,9 +25,11 @@ const PlayerGameDetails = (props) => {
     const dispatch = useDispatch();
     const removePlayerDispatch = (id) => dispatch(actions.removePlayer(id));
     const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data))
-
     const gameData = useSelector(state=>state.liveGame);
+
+    
     const id = useMemo(() => props.location.state.id);
+    const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
     const isLoading = false;
     const [showEdit, setShowEdit] = useState(false);
 
@@ -41,14 +44,16 @@ const PlayerGameDetails = (props) => {
     }));
 
 
-    const updateScores = () => {
-        /* {
-            id:
-            scores:{
-                1: 45,
-                3: 123
-            }
-        }*/
+    const updateScores = (e) => {
+        e.preventDefault();
+    
+        const res = buildForm();
+        const finalDetails = updatesScoresModifier(res)
+        updateScoresDispatch({
+            id,
+            scores: finalDetails
+        });
+        setShowEdit(prev=>!prev);
     }
 
     const removePlayerLocal = () => {
@@ -63,27 +68,28 @@ const PlayerGameDetails = (props) => {
             showRowNum
         />
     )
-console.log(scoreData);
-    const buildEditForm = () => (
+
+
+    const buildEditForm = () => {
+    return (
         <div>
             <form onSubmit={updateScores}>
                 {
-                    objectToArray(generateForm(scoreData.rows)).map((x, i) =>
+                    objectToArray(formState).map((x, i) =>
                         <InputFactory
                             key={i}
                             config={x.config}
                             id={x.id}
-                            changed={updateScores}
+                            changed={manageState}
                             type='number'
-                            min={0}
-                            max={300}
                         />, 0)
                 }
-                <Button label='Update' type='default' click={()=>{}} isFull isDisabled={isLoading} />
+                <Button label='Update' type='default' click={()=>{}} isFull/>
             </form>
             <Button label='Close' type='danger' click={() => setShowEdit(prev => !prev)} isFull isDisabled={isLoading} />
         </div>
     )
+            }
 
     return (
         <div>
