@@ -27,7 +27,7 @@ export const davidScores = [156, 144, 200];
  */
 export default {
     players: {
-        [david.id]:{
+        [david.id]: {
             name: david.name,
             color: '18, 255, 235'
         },

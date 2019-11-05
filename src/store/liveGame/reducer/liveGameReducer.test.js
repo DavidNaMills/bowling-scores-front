@@ -137,11 +137,11 @@ describe('liveGameReducer test suite', () => {
                 3: 0
             }
         };
-        const state = gameReducer(toLoad, {type: UPDATE_INDIVIDUAL_SCORE, payload: updatedGame});
+        const state = gameReducer(toLoad, { type: UPDATE_INDIVIDUAL_SCORE, payload: updatedGame });
 
         expect(state.games[1][id].score).toEqual(updatedGame.scores[1]);
         expect(state.games[2][id].score).toEqual(updatedGame.scores[2]);
-        expect(state.games[3][id]).toBeFalsy();        
+        expect(state.games[3][id]).toBeFalsy();
     });
 
 });

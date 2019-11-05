@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-const rootReducer = combineReducers({
+import liveGameReducer from './liveGame/reducer/liveGameReducer';
 
+const rootReducer = combineReducers({
+    liveGame: liveGameReducer
 });
 
 export default rootReducer;

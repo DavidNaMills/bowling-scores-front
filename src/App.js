@@ -11,7 +11,7 @@ import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
 import Game from './Containers/Game/Game'
 
-import PlayerGameDetails from './Containers/PlayerGameDetails/PlayerGameDetails';
+import PlayerGameDetails from './Containers/Game/PlayerGameDetails/PlayerGameDetails';
 
 
 function App() {

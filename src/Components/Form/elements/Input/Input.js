@@ -5,7 +5,7 @@ import { CreateSharp, ErrorSharp } from '@material-ui/icons'
 const iconOk = [classes.icon, classes.icon__required];
 const iconErr = [classes.icon, classes.icon__error];
 
-const Input = ({ value, changed, id, type = 'text', label = null, placeholder = '', error = [], isValid = false, isRequired = false }) => {
+const Input = ({ value, changed, id, type = 'text', label = null, placeholder = '', error = [], isValid = false, isRequired = false, ...rest }) => {
     let styles = [classes.input, classes.input__default]
 
     if (isValid) {
@@ -27,6 +27,7 @@ const Input = ({ value, changed, id, type = 'text', label = null, placeholder = 
                     onChange={e => changed(e, id)}
                     placeholder={placeholder}
                     value={value}
+                    {...rest}
                 />
 
                 {

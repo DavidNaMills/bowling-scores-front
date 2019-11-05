@@ -41,7 +41,7 @@ describe('liveGameActions test suite', () => {
         expect(action.payload.players[456].color).toEqual(playerData[456].color);
     });
 
-    it('creates an action to load a previously started game', ()=>{
+    it('creates an action to load a previously started game', () => {
         const action = loadGame(prevGame);
         expect(action.type).toEqual(LOAD_GAME);
         expect(action.payload).toEqual(prevGame);
@@ -90,7 +90,7 @@ describe('liveGameActions test suite', () => {
     });
 
 
-    it('creates an action to update a single players scores', ()=>{
+    it('creates an action to update a single players scores', () => {
         const updatedScores = {
             id: 123,
             scores: {
@@ -101,7 +101,7 @@ describe('liveGameActions test suite', () => {
         };
 
         const action = updateIndividualScore(updatedScores);
-        
+
         expect(action.type).toEqual(UPDATE_INDIVIDUAL_SCORE);
         expect(action.payload).toEqual(updatedScores);
     });

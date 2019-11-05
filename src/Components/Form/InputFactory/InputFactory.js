@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from '../elements/Input/Input';
 
-const Inputfactory = ({ config, id, changed }) => {
+const Inputfactory = ({ config, id, changed, ...rest }) => {
     let element = null;
 
     switch (config.elementtype.toLowerCase()) {
@@ -15,6 +15,7 @@ const Inputfactory = ({ config, id, changed }) => {
                 value={config.value}
                 error={config.hasErr}
                 isRequired={config.shouldValidate}
+                {...rest}
             />
             break;
         default:

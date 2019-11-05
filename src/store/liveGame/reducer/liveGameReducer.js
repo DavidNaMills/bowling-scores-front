@@ -10,7 +10,11 @@ import {
 } from '../liveGameActionTypes';
 
 
-const liveGameReducer = (state = {}, action) => {
+import tempState from '../../../helpers/tableGamesDataModifier/testData';
+
+const defaultState = tempState;
+
+const liveGameReducer = (state = defaultState, action) => {
     const tempState = JSON.parse(JSON.stringify(state));
 
     switch (action.type) {
@@ -40,7 +44,7 @@ const liveGameReducer = (state = {}, action) => {
 
             delete tempPlayers[action.payload];
 
-            for(let k in tempGames){
+            for (let k in tempGames) {
                 delete tempGames[k][action.payload]
             }
 
@@ -51,18 +55,28 @@ const liveGameReducer = (state = {}, action) => {
 
 
         case ADD_NEW_GAME:
+            const tempScore = JSON.parse(JSON.stringify(action.payload));
+
+            for(let k in tempScore){
+                if(+tempScore[k].score>0){
+                    tempScore[k].score = +tempScore[k].score;
+                } else {
+                    delete tempScore[k];
+                }
+            }
+
             const key = +Object.keys(tempState.games).length + 1;
-            tempState.games[`${key}`] = action.payload;
+            tempState.games[`${key}`] = tempScore;
             return tempState;
 
 
         case UPDATE_INDIVIDUAL_SCORE:
-            for(let key in action.payload.scores){
-                if(+action.payload.scores[key]===0){
+            for (let key in action.payload.scores) {
+                if (+action.payload.scores[key] === 0) {
                     delete tempState.games[key][action.payload.id]
                 } else {
-                    tempState.games[key][action.payload.id].score 
-                    = action.payload.scores[key];
+                    tempState.games[key][action.payload.id].score
+                        = action.payload.scores[key];
                 }
             }
             return tempState;
