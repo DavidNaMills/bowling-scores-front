@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SwatchesPicker } from 'react-color';
 
 import Button from '../../../Components/StandAloneComponents/Button/Button';

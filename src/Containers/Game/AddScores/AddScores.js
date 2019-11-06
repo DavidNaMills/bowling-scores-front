@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import CombinedInput from './CombinedInput/CombinedInput';
 import objectToArray from '../../../helpers/objectToArray/objectToArray'
 import Button from '../../../Components/StandAloneComponents/Button/Button';
@@ -11,8 +11,17 @@ const AddScores = ({ players, addGame, close }) => {
 
     const updateScore = (e) => {
         e.preventDefault();
-        addGame(values);
-        close();
+        let touched = false;
+
+        for (let k in values) {
+            if (values[k].score > 0) touched = true;
+        }
+        if (touched) {
+            addGame(values);
+            close();
+        } else {
+            alert('must add at least 1 score')
+        }
     }
 
     useEffect(() => { }, [values]);
@@ -20,15 +29,14 @@ const AddScores = ({ players, addGame, close }) => {
     return (
         <div>
             <Title label='Add Scores' ttlType='sub' />
-
             {
                 values ?
                     <React.Fragment>
-
                         <form onSubmit={updateScore}>
                             {
-                                objectToArray(players).map(x =>
+                                objectToArray(players).map((x, i) =>
                                     <CombinedInput
+                                        key={i}
                                         name={x.config.name}
                                         color={x.config.color}
                                         updateScore={addValue}

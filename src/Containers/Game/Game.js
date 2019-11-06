@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../store/allActions';
@@ -9,7 +9,7 @@ import AddPlayersForm from './AddPlayersForm/AddPlayersForm';
 
 import Title from '../../Components/StandAloneComponents/Title/Title';
 
-import classes from './Game.module.scss';
+// import classes from './Game.module.scss';
 
 
 const showDefault = {
@@ -19,18 +19,14 @@ const showDefault = {
 }
 
 const Game = (props) => {
-    console.log('[Game]');
-
     const dispatch = useDispatch();
     const liveGame = useSelector(state => state.liveGame);
 
-    const createNewGame = () => dispatch(actions.initGame());
+    // const createNewGame = () => dispatch(actions.initGame());
     const addNewPlayerDispatch = (data) => dispatch(actions.addPlayer(data));
     const addNewGameDispatch = (data) => dispatch(actions.addNewGame(data));
 
     const [showWhich, setWhich] = useState(showDefault);
-
-    // useEffect(() => { }, [liveGame])
 
     const playerSelect = (id) => {
         setWhich(showDefault);
@@ -94,30 +90,5 @@ const Game = (props) => {
         </div>
     )
 }
-{/* <GameDetails
-    addNewPlayers={addNewPlayers}
-    liveGame={liveGame}
-    playerSelect={playerSelect}
-    onClose={onClose}
-/> */}
 
 export default Game;
-
-
-/**
- * <Button click={startNewGame} label='New Game'/>
-
-            <GameChart
-                players={liveGame.players}
-                data={chartParser(liveGame)}
-            />
-            <Table
-                data={{
-                    headers: tHeaders,
-                    rows: tableParser(liveGame)
-                }}
-                showRowNum
-                selectRow={onClick}
-                caption='Click player for more details'
-            />
- */

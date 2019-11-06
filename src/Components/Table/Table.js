@@ -6,12 +6,14 @@ const Table = ({ caption = '', tableClass = classes.table, data, showRowNum = fa
         {caption && <p className={classes.caption}>{caption}</p>}
         <table className={tableClass}>
             <thead>
+                <tr>
                 {showRowNum && <th></th>}
                 {data.headers.map((x, i) =>
-                    <th key={i}>
+                    <td key={i}>
                         {x}
-                    </th>
+                    </td>
                     , 0)}
+                </tr>
             </thead>
             <tbody>
                 {

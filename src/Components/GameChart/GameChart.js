@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip
 } from 'recharts';
 
 
@@ -21,8 +21,8 @@ const GameChart = ({players, data}) => {
                 <YAxis width={40}/>
                 <Tooltip />
                 {
-                    data.players.map(x=>
-                        <Line type="monotone" dataKey={players[x].name} stroke={`rgb(${players[x].color})`} fill={`rgb(${players[x].color})`} activeDot={{ r: 9 }} />
+                    data.players.map((x,i)=>
+                        <Line key={i} type="monotone" dataKey={players[x].name} stroke={`rgb(${players[x].color})`} fill={`rgb(${players[x].color})`} activeDot={{ r: 9 }} />
                     )
                 }
             </LineChart>

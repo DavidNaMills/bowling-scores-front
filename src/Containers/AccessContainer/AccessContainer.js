@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import axios from '../../Axios/axiosConfig';
 
@@ -14,11 +14,8 @@ import objectToArray from '../../helpers/objectToArray/objectToArray';
 const AccessContainer = (props) => {
 
     const { manageState, formState, completeCheck, clearForm, buildForm } = useFormHook(props.formConfig);
-    const { isLoading, result, makeCall, resetData } = useFetchHook();
-
-    useEffect(() => {
-        console.log(result);
-    }, [result]);
+    const { isLoading, makeCall } = useFetchHook();
+    // const { isLoading, result, makeCall, resetData } = useFetchHook();
 
     const submit = (e) => {
         e.preventDefault();

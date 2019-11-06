@@ -28,7 +28,7 @@ const PlayerGameDetails = (props) => {
     const gameData = useSelector(state=>state.liveGame);
 
     
-    const id = useMemo(() => props.location.state.id);
+    const id = props.location.state.id;
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
     const isLoading = false;
     const [showEdit, setShowEdit] = useState(false);
@@ -36,12 +36,12 @@ const PlayerGameDetails = (props) => {
     const table1 = useMemo(() => ({
         headers: tHeaders,
         rows: tableModifier(gameData, id)
-    }));
+    }), [gameData, id]);
 
     const scoreData = useMemo(() => ({
         headers: tHeaders2,
         rows: singlePlayerScores(gameData, id)
-    }));
+    }), [gameData, id]);
 
 
     const updateScores = (e) => {
