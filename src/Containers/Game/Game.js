@@ -61,6 +61,8 @@ const Game = (props) => {
             liveGame={{}}
             playerSelect={playerSelect}
             onClose={() => setWhich(showDefault)}
+            isNew
+            close = {()=>changeFromGame('gameDetails')}
         />
     )
 

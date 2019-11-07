@@ -7,10 +7,12 @@ const useDispatchHook = () =>{
 
     const addNewPlayerDispatch = (data) => dispatch(actions.addPlayer(data));
     const addNewGameDispatch = (data) => dispatch(actions.addNewGame(data));
-    
+    const initGameDispatch = (data) => dispatch(actions.initGame(data));
+
     return {
         addNewPlayerDispatch,
-        addNewGameDispatch
+        addNewGameDispatch,
+        initGameDispatch
     }
 }
 

@@ -2,5 +2,5 @@ export const INIT_GAME = 'INIT_GAME';
 export const LOAD_GAME = 'LOAD_GAME';
 export const ADD_PLAYER = 'ADD_PLAYER';
 export const REMOVE_PLAYER = 'REMOVE_PLAYER';
-export const ADD_NEW_GAME = 'UPDATE_ALL_SCORES';
+export const ADD_NEW_GAME = 'ADD_NEW_GAME';
 export const UPDATE_INDIVIDUAL_SCORE = 'UPDATE_INDIVIDUAL_SCORE';

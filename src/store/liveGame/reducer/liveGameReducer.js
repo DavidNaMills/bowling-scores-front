@@ -19,11 +19,7 @@ const liveGameReducer = (state = defaultState, action) => {
 
     switch (action.type) {
         case INIT_GAME:
-            return {
-                players: action.payload,
-                games: {}
-            }
-
+            return action.payload;
 
         case LOAD_GAME:
             return action.payload;
@@ -56,7 +52,6 @@ const liveGameReducer = (state = defaultState, action) => {
 
         case ADD_NEW_GAME:
             const tempScore = JSON.parse(JSON.stringify(action.payload));
-
             for(let k in tempScore){
                 if(+tempScore[k].score>0){
                     tempScore[k].score = +tempScore[k].score;
@@ -68,6 +63,7 @@ const liveGameReducer = (state = defaultState, action) => {
             const key = +Object.keys(tempState.games).length + 1;
             tempState.games[`${key}`] = tempScore;
             return tempState;
+
 
 
         case UPDATE_INDIVIDUAL_SCORE:

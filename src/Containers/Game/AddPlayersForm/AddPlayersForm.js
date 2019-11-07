@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+// import { useSelector } from 'react-redux';
 import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Table from '../../../Components/Table/Table';
 import Input from '../../../Components/Form/elements/Input/Input';
@@ -15,15 +15,23 @@ const tHeaders = ['Player', 'Average', 'Pinfall'];
 
 
 
-const AddPlayersForm = ({ title, liveGame, playerSelect, onClose }) => {
-    const {newPlayer, setName, addPlayer, addColor} = useAddPlayer();
-    const {color, randomColor, showColorPickerComponent} = useColorSelection();
-    
+const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close=()=>{}}) => {
+    // const liveGame = useSelector(state => state.liveGame);
+    const {
+        liveGame,   //temp structure
+        newPlayer,
+        setName,    //only sets player name
+        addColor,    //sets color
+        addPlayer,
+        commitGame,
+    } = useAddPlayer(isNew);
+
+    const { color, randomColor, showColorPickerComponent } = useColorSelection();
     const [showSelect, setShowSelect] = useState(false);
 
 
-    useEffect(()=>{
-        if(color){
+    useEffect(() => {
+        if (color) {
             addColor(color);
         }
     }, [color]);
@@ -31,7 +39,7 @@ const AddPlayersForm = ({ title, liveGame, playerSelect, onClose }) => {
 
     return (
         <div>
-            <Title label={title} ttlType='sub'/>
+            <Title label={title} ttlType='sub' />
             <Input
                 value={newPlayer.name}
                 id='name'
@@ -41,7 +49,7 @@ const AddPlayersForm = ({ title, liveGame, playerSelect, onClose }) => {
 
             {
                 showSelect && showColorPickerComponent()
-                
+
             }
             <Button label={showSelect ? 'Close' : 'Select Color'} click={() => setShowSelect(prev => !prev)} />
             <Button label='Random Colour' click={randomColor} />
@@ -57,10 +65,8 @@ const AddPlayersForm = ({ title, liveGame, playerSelect, onClose }) => {
                 >{newPlayer.name}</div>}
 
 
-            <Button
-                label='Add Player'
-                click={addPlayer}
-            />
+            <Button label='Add Player' click={addPlayer} />
+            <Button label='Start Game' click={()=>commitGame(close)} />
 
             <Table
                 data={{
