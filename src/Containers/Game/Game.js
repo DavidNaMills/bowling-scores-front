@@ -8,6 +8,7 @@ import GameDetails from './GameDetails/GameDetails';
 import AddScores from './AddScores/AddScores';
 import AddPlayersForm from './AddPlayersForm/AddPlayersForm';
 
+import Popup from '../../Components/StandAloneComponents/Popup/Popup';
 import Title from '../../Components/StandAloneComponents/Title/Title';
 
 // import classes from './Game.module.scss';
@@ -104,6 +105,14 @@ const Game = (props) => {
     return (
         <div>
             <Title ttlType='section' label='Play' />
+            <Popup
+                title={{
+                    label: 'Test title',
+                    ttlType: 'sub'
+                }}
+                message = 'This is a very long message. it doesnt need t be this long though'
+                action1={}
+            />
             {showWhich.gameDetails && buildGameDetails()}
             {showWhich.newGame && buildNewGame()}
             {showWhich.addPlayers && buildAddPlayersForm()}
