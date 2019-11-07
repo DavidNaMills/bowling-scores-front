@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
+import useLocalStorage from '../../Hooks/useLocalStorage/useLocalStorage';
+import useDispatchHook from '../../Hooks/useDispatchHook/useDispatchHook';
 
 import GameDetails from './GameDetails/GameDetails';
 import AddScores from './AddScores/AddScores';
@@ -21,7 +23,24 @@ const showDefault = {
 const Game = (props) => {
     const liveGame = useSelector(state => state.liveGame);
 
+    const { readFromLocalStorage, writeToLocalStorage } = useLocalStorage();
+    const { initGameDispatch } = useDispatchHook();
+
     const [showWhich, setWhich] = useState(showDefault);
+
+
+    useEffect(() => {
+        const hasExistingGame = readFromLocalStorage();
+        if (hasExistingGame) {
+            initGameDispatch(JSON.parse(hasExistingGame));
+        }
+    }, []);
+
+    useEffect(() => {
+        writeToLocalStorage(liveGame);
+    }, [liveGame]);
+
+
 
     const playerSelect = (id) => {
         setWhich(showDefault);
@@ -62,7 +81,7 @@ const Game = (props) => {
             playerSelect={playerSelect}
             onClose={() => setWhich(showDefault)}
             isNew
-            close = {()=>changeFromGame('gameDetails')}
+            close={() => changeFromGame('gameDetails')}
         />
     )
 

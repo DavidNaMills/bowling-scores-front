@@ -21,7 +21,7 @@ const useAddPlayer = (isNew) => {
     const { addNewPlayerDispatch, initGameDispatch } = useDispatchHook();
 
     const [newPlayer, setPlayer] = useState(defaultPlayer);
-    const [liveGame, setliveGame] = useState(isNew ? defaultGameStructure : tempLiveGame);
+    const [liveGame, setliveGame] = useState(isNew ? defaultGameStructure : tempLiveGame);  //set full game from store or create from new game object
     
     useEffect(()=>{
         if(!isNew){
@@ -46,42 +46,34 @@ const useAddPlayer = (isNew) => {
 
 
     const addPlayer = () => {
-        console.log(isNew);
         const tempPlayer =  JSON.parse(JSON.stringify(liveGame));
 
-        console.log(liveGame);
-        console.log(tempPlayer);
-        
         if (newPlayer.name) {
-            if (!newPlayer.id) {
+            if (!newPlayer.id) {        //assign an id
                 newPlayer.id = uuid();
             }
 
-            if (!newPlayer.color) {
+            if (!newPlayer.color) {     //assign random colour if not chosen one
                 newPlayer.color = getRandomColor()
             }
 
             if (isNew) {
                 tempPlayer.players[newPlayer.id] = newPlayer;
-
-                console.log(tempPlayer);
-                setPlayer(defaultPlayer);   //reset local state
-                setliveGame(tempPlayer);
+                setliveGame(tempPlayer);    //initialise a new game
             } else {
-                setPlayer(defaultPlayer);   //reset local state
-                addNewPlayerDispatch(newPlayer)
+                addNewPlayerDispatch(newPlayer);    //update existing game in store
             }
+            setPlayer(defaultPlayer);   //reset local state
 
         } else {
             alert('you fucked up');
         }
     }
 
-    const commitGame = (cb) => {
+    const commitGame = (cb=()=>{}) => {
         if (isNew) {
-            console.log(liveGame);
-            initGameDispatch(liveGame.players);
-            cb();
+            initGameDispatch(liveGame);
+            cb();   //optional callback. used in this case to change back to game view
         }
     };
 

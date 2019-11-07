@@ -20,6 +20,7 @@ const AddScores = ({ players, close }) => {
         }
         if (touched) {
             addNewGameDispatch(values);
+            console.log(values);
             close();
         } else {
             alert('must add at least 1 score')

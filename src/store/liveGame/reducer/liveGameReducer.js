@@ -12,13 +12,18 @@ import {
 
 import tempState from '../../../helpers/tableGamesDataModifier/testData';
 
-const defaultState = tempState;
+const defaultState = {
+    players: {},
+    games: {}
+};
+// const defaultState = tempState;
 
 const liveGameReducer = (state = defaultState, action) => {
     const tempState = JSON.parse(JSON.stringify(state));
 
     switch (action.type) {
         case INIT_GAME:
+            console.log(action.payload);
             return action.payload;
 
         case LOAD_GAME:
@@ -52,8 +57,8 @@ const liveGameReducer = (state = defaultState, action) => {
 
         case ADD_NEW_GAME:
             const tempScore = JSON.parse(JSON.stringify(action.payload));
-            for(let k in tempScore){
-                if(+tempScore[k].score>0){
+            for (let k in tempScore) {
+                if (+tempScore[k].score > 0) {
                     tempScore[k].score = +tempScore[k].score;
                 } else {
                     delete tempScore[k];

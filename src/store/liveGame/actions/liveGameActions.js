@@ -9,10 +9,11 @@ import {
 
 export const initGame = (playerData) => ({
     type: INIT_GAME,
-    payload: {
-        players: playerData,
-        games: {}
-    }
+    payload: playerData
+    // payload: {
+    //     players: playerData,
+    //     games: {}
+    // }
 });
 
 export const loadGame = (prevGame) => ({

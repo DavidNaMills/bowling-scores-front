@@ -6,8 +6,9 @@ const useLocalStorage = (file=defaultFileName) => {
 
     const writeToLocalStorage = (data) => {
         try{
-            localStorage.removeItem(file);
-            localStorage.setItem(file, data);
+            console.log('writing to local storage');
+            localStorage.clear(file);
+            localStorage.setItem(file, JSON.stringify(data));
         }catch(err){
             console.log(err);
         }
@@ -16,7 +17,9 @@ const useLocalStorage = (file=defaultFileName) => {
     
     const readFromLocalStorage = () => {
         try{
-            return localStorage.getItem(file);
+            const temp = localStorage.getItem(file);
+            console.log(temp);
+            return temp;
         }catch(err){
             return null;
             console.log(err);

@@ -15,7 +15,7 @@ const tHeaders = ['Player', 'Average', 'Pinfall'];
 
 
 
-const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close=()=>{}}) => {
+const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = () => { } }) => {
     // const liveGame = useSelector(state => state.liveGame);
     const {
         liveGame,   //temp structure
@@ -66,8 +66,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close=()=
 
 
             <Button label='Add Player' click={addPlayer} />
-            <Button label='Start Game' click={()=>commitGame(close)} />
-
+            {isNew && <Button label='Start Game' click={() => commitGame(close)} />}
             <Table
                 data={{
                     headers: tHeaders,
