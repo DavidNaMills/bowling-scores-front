@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../store/allActions';
+import { useSelector } from 'react-redux';
 
 import GameDetails from './GameDetails/GameDetails';
 import AddScores from './AddScores/AddScores';
@@ -15,16 +14,12 @@ import Title from '../../Components/StandAloneComponents/Title/Title';
 const showDefault = {
     gameDetails: true,
     addPlayers: false,
-    addscores: false
+    addscores: false,
+    newGame: false
 }
 
 const Game = (props) => {
-    const dispatch = useDispatch();
     const liveGame = useSelector(state => state.liveGame);
-
-    // const createNewGame = () => dispatch(actions.initGame());
-    const addNewPlayerDispatch = (data) => dispatch(actions.addPlayer(data));
-    const addNewGameDispatch = (data) => dispatch(actions.addNewGame(data));
 
     const [showWhich, setWhich] = useState(showDefault);
 
@@ -50,22 +45,28 @@ const Game = (props) => {
         })
     }
 
-    const addNewGame = (data) => {
-        addNewGameDispatch(data)
-    }
-
     const buildGameDetails = () => (
         <GameDetails
             liveGame={liveGame}
             addNewPlayers={() => changeFromGame('addPlayers')}
             playerSelect={playerSelect}
             addScores={() => changeFromGame('addscores')}
+            newGame={() => changeFromGame('newGame')}
+        />
+    )
+
+    const buildNewGame = () => (
+        <AddPlayersForm
+            title='Create New Game'
+            liveGame={{}}
+            playerSelect={playerSelect}
+            onClose={() => setWhich(showDefault)}
         />
     )
 
     const buildAddPlayersForm = () => (
         <AddPlayersForm
-            addNewPlayer={addNewPlayerDispatch}
+            title='Add Player'
             liveGame={liveGame}
             playerSelect={playerSelect}
             onClose={() => setWhich(showDefault)}
@@ -75,7 +76,6 @@ const Game = (props) => {
     const buildAddScores = () => (
         <AddScores
             players={liveGame.players}
-            addGame={addNewGame}
             close={() => setWhich(showDefault)}
         />
     )
@@ -84,6 +84,7 @@ const Game = (props) => {
         <div>
             <Title ttlType='section' label='Play' />
             {showWhich.gameDetails && buildGameDetails()}
+            {showWhich.newGame && buildNewGame()}
             {showWhich.addPlayers && buildAddPlayersForm()}
             {showWhich.addscores && buildAddScores()}
 

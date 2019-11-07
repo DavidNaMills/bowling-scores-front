@@ -5,9 +5,11 @@ import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Title from '../../../Components/StandAloneComponents/Title/Title';
 
 import useScoreInput from '../../../Hooks/useScoreInput/useScoreInput';
+import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
-const AddScores = ({ players, addGame, close }) => {
+const AddScores = ({ players, close }) => {
     const { values, addValue } = useScoreInput(players);
+    const {addNewGameDispatch} = useDispatchHook();
 
     const updateScore = (e) => {
         e.preventDefault();
@@ -17,7 +19,7 @@ const AddScores = ({ players, addGame, close }) => {
             if (values[k].score > 0) touched = true;
         }
         if (touched) {
-            addGame(values);
+            addNewGameDispatch(values);
             close();
         } else {
             alert('must add at least 1 score')

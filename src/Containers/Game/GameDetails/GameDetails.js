@@ -8,9 +8,10 @@ import chartParser from '../../../helpers/chartDataModifier/chartDataModifier';
 
 const tHeaders = ['Player', 'Average', 'Pinfall'];
 
-const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores }) => {
+const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame }) => {
     return (
         <div>
+            <Button click={newGame} label='Start new game' />
             <Button click={addScores} label='Add Scores' />
 
             <GameChart

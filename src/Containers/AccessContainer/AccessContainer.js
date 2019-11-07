@@ -15,7 +15,6 @@ const AccessContainer = (props) => {
 
     const { manageState, formState, completeCheck, clearForm, buildForm } = useFormHook(props.formConfig);
     const { isLoading, makeCall } = useFetchHook();
-    // const { isLoading, result, makeCall, resetData } = useFetchHook();
 
     const submit = (e) => {
         e.preventDefault();
