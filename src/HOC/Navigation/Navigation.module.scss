@@ -1,0 +1,30 @@
+@import '../../styles/colors.scss';
+
+.navigation{
+    background-color: $navigation_background ;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid $popup_color 2px;
+
+    &_section{
+        width: 120px;
+        display:flex;
+        justify-content: space-between;
+    }
+
+    &__link{
+        color: $btn_font_clr;
+        text-decoration: none;
+
+        &:hover{
+            color: rgb(28, 75, 135);
+            font-weight: bold;
+        }
+        
+        &_active{
+            color: green;
+            font-weight: bold;
+        }
+    }
+}

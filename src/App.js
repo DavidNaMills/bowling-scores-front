@@ -20,11 +20,11 @@ function App() {
     <div>
       <Switch>
         <Navigation>
+          <Route path='/' exact component={Landing} />
           <Route path='/signup' exact component={() => <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP} />} />
           <Route path='/login' exact component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
           <Route path='/player' exact component={PlayerGameDetails} />
           <Route path='/game' exact component={Game} />
-          <Route path='/' exact component={Landing} />
           {/* <Redirect to='/' /> */}
         </Navigation>
       </Switch>

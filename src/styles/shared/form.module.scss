@@ -1,0 +1,25 @@
+@import '../colors.scss';
+
+.form{
+
+    &__container{
+        display: flex;
+        justify-content: center;
+
+    }
+
+    &__form{
+        width: 80vw;
+        max-width: 400px;
+        padding: 10px;
+
+        -webkit-box-shadow: -14px 13px 16px -6px $shadow_color;
+        -moz-box-shadow: -14px 13px 16px -6px $shadow_color;
+        box-shadow: -14px 13px 16px -6px $shadow_color;
+
+        // -webkit-box-shadow: 10px 10px 17px -6px $shadow_color;
+        // -moz-box-shadow: 10px 10px 17px -6px $shadow_color;
+        // box-shadow: 10px 10px 17px -6px $shadow_color;
+
+    }
+}

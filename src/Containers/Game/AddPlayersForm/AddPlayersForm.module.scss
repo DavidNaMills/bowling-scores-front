@@ -1,0 +1,14 @@
+.addPlayers{
+    &__halfBtn{
+        width: 50%;
+    }
+
+    &__fullBtn{
+        width: 100%;
+    }
+
+    &__inline{
+        display: flex;
+        justify-content: space-between;
+    }
+}

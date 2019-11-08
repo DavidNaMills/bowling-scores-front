@@ -34,7 +34,7 @@ const Game = (props) => {
     useEffect(() => {
         const hasExistingGame = readFromLocalStorage();
         if (hasExistingGame) {
-            setPopup(true);
+            // setPopup(true);
             initGameDispatch(JSON.parse(hasExistingGame));
         }
     }, []);

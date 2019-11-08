@@ -1,0 +1,9 @@
+@import '../../../styles/colors.scss';
+
+.addScores{
+    &__form{
+        width: 75vw;
+        max-width: 400px;
+        border: solid $popup_color 2px;
+    }
+}

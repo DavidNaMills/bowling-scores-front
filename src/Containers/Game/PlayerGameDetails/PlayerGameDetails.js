@@ -1,5 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import body from '../../../styles/shared/container.module.scss';
+import form from '../../../styles/shared/form.module.scss';
+import spacing from '../GameDetails/GameDetails.module.scss';
+
 import useFormHook from '../../../Hooks/useFormHook/useformHook';
 import * as actions from '../../../store/allActions';
 
@@ -25,9 +30,9 @@ const PlayerGameDetails = (props) => {
     const dispatch = useDispatch();
     const removePlayerDispatch = (id) => dispatch(actions.removePlayer(id));
     const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data))
-    const gameData = useSelector(state=>state.liveGame);
+    const gameData = useSelector(state => state.liveGame);
 
-    
+
     const id = props.location.state.id;
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
     const isLoading = false;
@@ -46,14 +51,14 @@ const PlayerGameDetails = (props) => {
 
     const updateScores = (e) => {
         e.preventDefault();
-    
+
         const res = buildForm();
         const finalDetails = updatesScoresModifier(res)
         updateScoresDispatch({
             id,
             scores: finalDetails
         });
-        setShowEdit(prev=>!prev);
+        setShowEdit(prev => !prev);
     }
 
     const removePlayerLocal = () => {
@@ -63,62 +68,81 @@ const PlayerGameDetails = (props) => {
 
 
     const buildTable = () => (
-        <Table
-            data={scoreData}
-            showRowNum
-        />
+        <div className={spacing.gameDetails__extra}>
+            <Table
+                data={scoreData}
+                showRowNum
+            />
+        </div>
     )
 
 
     const buildEditForm = () => {
-    return (
-        <div>
-            <form onSubmit={updateScores}>
-                {
-                    objectToArray(formState).map((x, i) =>
-                        <InputFactory
-                            key={i}
-                            config={x.config}
-                            id={x.id}
-                            changed={manageState}
-                            type='number'
-                        />, 0)
-                }
-                <Button label='Update' type='default' click={()=>{}} isFull/>
-            </form>
-            <Button label='Close' type='danger' click={() => setShowEdit(prev => !prev)} isFull isDisabled={isLoading} />
+        return (
+            <div className={[spacing.gameDetails__extra, form.form__container].join(' ')}>
+                <form onSubmit={updateScores} className={form.form__form}>
+                    {
+                        objectToArray(formState).map((x, i) =>
+                            <InputFactory
+                                key={i}
+                                config={x.config}
+                                id={x.id}
+                                changed={manageState}
+                                type='number'
+                            />, 0)
+                    }
+                    <div className={spacing.gameDetails__largeExtra}>
+                        <Button label='Update' type='default' click={() => { }} isFull />
+                    </div>
+                </form>
+            </div>
+        )
+    }
+
+    const buildBackButton = () => (
+        <div className={spacing.gameDetails__smallExtra}>
+            <Button isFull label='Back' type='default' click={() => { props.history.goBack() }} />
         </div>
     )
-            }
 
     return (
-        <div>
+        <div className={body.contentContainer}>
+            {buildBackButton()}
             <Title label={gameData.players[id].name} ttlType='section' />
-            <Table
-                data={table1}
-            />
+            <div className={spacing.gameDetails__extra}>
+                <Table data={table1} />
+            </div>
 
-            <GameChart
-                players={gameData.players}
-                data={chartParser(gameData, id)}
-            />
+            <div className={spacing.gameDetails__extra}>
+                <GameChart
+                    players={gameData.players}
+                    data={chartParser(gameData, id)}
+                />
+            </div>
 
             {
                 showEdit
-                    ? buildEditForm()
+                    ?
+                    <React.Fragment>
+                        {buildEditForm()}
+                        <div className={spacing.gameDetails__largeExtra}>
+                            <Button label='Close' type='danger' click={() => setShowEdit(prev => !prev)} isFull isDisabled={isLoading} />
+                        </div>
+                    </React.Fragment>
                     : buildTable()
-
             }
             {
                 !showEdit &&
                 <React.Fragment>
+                    <div className={spacing.gameDetails__extra}>
+                        <Button isFull label={showEdit ? 'Close' : 'Edit scores'} type='warning' click={() => { setShowEdit(prev => !prev) }} />
+                    </div>
 
-                    <br />
-                    <Button isFull label={showEdit ? 'Close' : 'Edit scores'} type='warning' click={() => { setShowEdit(prev => !prev) }} />
-                    <br />
-                    <Button isFull label='Back' type='default' click={() => { props.history.goBack() }} />
-                    <br />
-                    <Button isFull label='Remove Player' type='danger' click={removePlayerLocal} />
+                    {buildBackButton()}
+
+                    <div className={spacing.gameDetails__superLarge}>
+                        <Button isFull label='Remove Player' type='danger' click={removePlayerLocal} />
+                    </div>
                 </React.Fragment>
             }
         </div>

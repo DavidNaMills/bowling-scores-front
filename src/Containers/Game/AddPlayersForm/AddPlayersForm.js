@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
+
+import body from '../../../styles/shared/container.module.scss';
+import form from '../../../styles/shared/form.module.scss';
+import classes from './AddPlayersForm.module.scss';
+import spacing from '../GameDetails/GameDetails.module.scss';
+
 import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Table from '../../../Components/Table/Table';
 import Input from '../../../Components/Form/elements/Input/Input';
@@ -16,7 +21,6 @@ const tHeaders = ['Player', 'Average', 'Pinfall'];
 
 
 const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = () => { } }) => {
-    // const liveGame = useSelector(state => state.liveGame);
     const {
         liveGame,   //temp structure
         newPlayer,
@@ -36,47 +40,79 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
         }
     }, [color]);
 
+    const addPlayerProxy = () =>{
+        setShowSelect(false);
+        addPlayer();
+    }
 
     return (
-        <div>
+        <div className={body.contentContainer}>
             <Title label={title} ttlType='sub' />
-            <Input
-                value={newPlayer.name}
-                id='name'
-                label='Players Name'
-                changed={setName}
-            />
 
-            {
-                showSelect && showColorPickerComponent()
+            <div className={form.form__container}>
+                <div className={form.form__form}>
 
+                    <Input
+                        value={newPlayer.name}
+                        id='name'
+                        label='Players Name'
+                        changed={setName}
+                    />
+
+
+                    {
+                        showSelect && showColorPickerComponent()
+
+                    }
+
+                    <div className={[classes.addPlayers__inline, spacing.gameDetails__extra].join(' ')}>
+                        <div className={showSelect ? classes.addPlayers__fullBtn : classes.addPlayers__halfBtn}>
+                            <Button isFull type={showSelect ? 'warning' : 'default'} label={showSelect ? 'Close' : 'Select Color'} click={() => setShowSelect(prev => !prev)} />
+                        </div>
+                        {!showSelect &&
+                            <div className={classes.addPlayers__halfBtn}>
+                                <Button isFull label='Random Colour' click={randomColor} />
+                            </div>}
+                    </div>
+
+                    {newPlayer.color &&
+                        <div
+                            className={spacing.gameDetails__largeExtra}
+                            style={{
+                                marginTop: '10px',
+                                marginBottom: '10px',
+                                height: '30px',
+                                textAlign: 'center',
+                                ...playerTableStyle(newPlayer.color)
+                            }}
+                        >{newPlayer.name}</div>}
+                    <div className={spacing.gameDetails__largeExtra}>
+                        <Button isFull label='Add Player' click={addPlayerProxy} />
+                    </div>
+                </div>
+            </div>
+
+
+            {isNew &&
+                <div className={spacing.gameDetails__largeExtra}>
+                    <Button isFull label='Start Game' click={() => commitGame(close)} />
+                </div>
             }
-            <Button label={showSelect ? 'Close' : 'Select Color'} click={() => setShowSelect(prev => !prev)} />
-            <Button label='Random Colour' click={randomColor} />
-            {newPlayer.color &&
-                <div
-                    style={{
-                        marginTop: '10px',
-                        marginBottom: '10px',
-                        height: '30px',
-                        textAlign: 'center',
-                        ...playerTableStyle(newPlayer.color)
+
+            <div className={spacing.gameDetails__largeExtra}>
+                <Table
+                    data={{
+                        headers: tHeaders,
+                        rows: tableParser(liveGame)
                     }}
-                >{newPlayer.name}</div>}
-
-
-            <Button label='Add Player' click={addPlayer} />
-            {isNew && <Button label='Start Game' click={() => commitGame(close)} />}
-            <Table
-                data={{
-                    headers: tHeaders,
-                    rows: tableParser(liveGame)
-                }}
-                selectRow={playerSelect}
-                showRowNum
-                caption='Click player for more details'
-            />
-            <Button label='Close' click={onClose} />
+                    selectRow={playerSelect}
+                    showRowNum
+                    caption='Click player for more details'
+                />
+            </div>
+            <div className={spacing.gameDetails__largeExtra}>
+                <Button isFull type={'warning'} label={isNew ? 'Cancel' : 'Close'} click={onClose} />
+            </div>
         </div>
     )
 }

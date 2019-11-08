@@ -23,7 +23,6 @@ const liveGameReducer = (state = defaultState, action) => {
 
     switch (action.type) {
         case INIT_GAME:
-            console.log(action.payload);
             return action.payload;
 
         case LOAD_GAME:

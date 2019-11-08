@@ -1,4 +1,9 @@
 import React, { useEffect } from 'react';
+
+import body from '../../../styles/shared/container.module.scss';
+import form from '../../../styles/shared/form.module.scss';
+import classes from '../GameDetails/GameDetails.module.scss';
+
 import CombinedInput from './CombinedInput/CombinedInput';
 import objectToArray from '../../../helpers/objectToArray/objectToArray'
 import Button from '../../../Components/StandAloneComponents/Button/Button';
@@ -9,7 +14,7 @@ import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
 const AddScores = ({ players, close }) => {
     const { values, addValue } = useScoreInput(players);
-    const {addNewGameDispatch} = useDispatchHook();
+    const { addNewGameDispatch } = useDispatchHook();
 
     const updateScore = (e) => {
         e.preventDefault();
@@ -30,27 +35,31 @@ const AddScores = ({ players, close }) => {
     useEffect(() => { }, [values]);
 
     return (
-        <div>
+        <div className={body.contentContainer}>
             <Title label='Add Scores' ttlType='sub' />
             {
                 values ?
                     <React.Fragment>
-                        <form onSubmit={updateScore}>
-                            {
-                                objectToArray(players).map((x, i) =>
-                                    <CombinedInput
-                                        key={i}
-                                        name={x.config.name}
-                                        color={x.config.color}
-                                        updateScore={addValue}
-                                        id={x.id}
-                                        value={values[x.id].score}
-                                    />
-                                )}
-                            <Button click={() => { }} isFull label='Save Scores' />
-                        </form>
+                        <div className={form.form__container}>
 
-                        <div>
+                            <form onSubmit={updateScore} className={form.form__form}>
+                                {
+                                    objectToArray(players).map((x, i) =>
+                                        <CombinedInput
+                                            key={i}
+                                            name={x.config.name}
+                                            color={x.config.color}
+                                            updateScore={addValue}
+                                            id={x.id}
+                                            value={values[x.id].score}
+                                        />
+                                    )}
+                                <div className={classes.gameDetails__largeExtra}>
+                                    <Button click={() => { }} isFull label='Save Scores' />
+                                </div>
+                            </form>
+                        </div>
+                        <div className={classes.gameDetails__largeExtra}>
                             <Button isFull click={close} label='Close' />
                         </div>
                     </React.Fragment>
