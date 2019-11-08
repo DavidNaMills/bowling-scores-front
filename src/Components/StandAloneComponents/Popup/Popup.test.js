@@ -63,8 +63,8 @@ describe('<Popup /> test suite', () => {
         it('displays the message with no optional extras', () => {
             const testMesg = 'This is a test message';
             const wrapper = mount(<Popup message={testMesg} />);
-            expect(wrapper.find('p').length).toBe(2);
-            expect(wrapper.find('p').at(1).text()).toEqual(testMesg);
+            expect(wrapper.find('p').length).toBe(1);
+            expect(wrapper.find('p').at(0).text()).toEqual(testMesg);
             expect(wrapper.find(Title).length).toBe(0);
             expect(wrapper.find(Button).length).toBe(0);
         });
@@ -88,8 +88,8 @@ describe('<Popup /> test suite', () => {
             const testMsg = 'This is a test message';
             const wrapper = mount(<Popup message={testMsg} />)
             const msg = wrapper.find('p');
-            expect(msg.at(1).length).toBe(1);
-            expect(msg.at(1).text()).toEqual(testMsg);
+            expect(msg.at(0).length).toBe(1);
+            expect(msg.at(0).text()).toEqual(testMsg);
             expect(wrapper.find('.popup__message').length).toBe(1);
         });
 
@@ -103,20 +103,22 @@ describe('<Popup /> test suite', () => {
         });
 
         it('contains a <p> tag with text CLOSE ', () => {
-            const wrapper = mount(<Popup />);
+            const wrapper = mount(<Popup close={()=>{}}/>);
             const cls = wrapper.find('p');
             expect(cls.length).toBe(2);
             expect(cls.at(0).text()).toEqual('CLOSE');
             expect(wrapper.find('.popup__closeBar').length).toBe(1);
             expect(wrapper.find('.popup__closeBar_cls').length).toBe(1);
         });
+    
+        it(' CLOSE is not rendered if no close function is provided ', () => {
+            const wrapper = mount(<Popup />);
+            const cls = wrapper.find('p');
+            expect(cls.length).toBe(1);
+        });
     });
 
     describe('behavioural test suite', () => {
-        // close button is clicked
-        //action1 is clicked
-        //action2 is clicked
-
         it('fires the close function', () => {
             const closeMk = jest.fn();
             const wrapper = mount(<Popup close={closeMk} />);

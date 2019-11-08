@@ -28,11 +28,13 @@ const Game = (props) => {
     const { initGameDispatch } = useDispatchHook();
 
     const [showWhich, setWhich] = useState(showDefault);
+    const [showPopup, setPopup] = useState(false);
 
 
     useEffect(() => {
         const hasExistingGame = readFromLocalStorage();
         if (hasExistingGame) {
+            setPopup(true);
             initGameDispatch(JSON.parse(hasExistingGame));
         }
     }, []);
@@ -57,8 +59,9 @@ const Game = (props) => {
         const base = {
             gameDetails: false,
             addPlayers: false,
-            addscores: false
-        };
+            addscores: false,
+            newGame: false
+        }
         setWhich({
             ...base,
             [id]: true
@@ -102,17 +105,31 @@ const Game = (props) => {
         />
     )
 
+    const buildPopup = () => (
+        <Popup
+            title={{
+                label: 'Game in Progress',
+                ttlType: 'sub'
+            }}
+            message='Hey!!! you have already started a game. would you like to continue or start a new game?'
+            action1={{
+                label: 'Start New Game',
+                type: 'confirm',
+                click: () => {changeFromGame('newGame'); setPopup(false)}
+            }}
+            action2={{
+                label: 'Continue',
+                type: 'warning',
+                click: () => setPopup(false)
+            }}
+            // close={() => setPopup(false)}
+        />
+    )
+
     return (
         <div>
             <Title ttlType='section' label='Play' />
-            <Popup
-                title={{
-                    label: 'Test title',
-                    ttlType: 'sub'
-                }}
-                message = 'This is a very long message. it doesnt need t be this long though'
-                action1={}
-            />
+            {showPopup && buildPopup()}
             {showWhich.gameDetails && buildGameDetails()}
             {showWhich.newGame && buildNewGame()}
             {showWhich.addPlayers && buildAddPlayersForm()}
