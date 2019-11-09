@@ -33,7 +33,10 @@ const Game = (props) => {
 
     useEffect(() => {
         const hasExistingGame = readFromLocalStorage();
-        if (hasExistingGame) {
+        const plr = Object.keys(liveGame.players).length;
+        const gms = Object.keys(liveGame.games).length;
+
+        if (hasExistingGame && plr===0 && gms===0) {
             // setPopup(true);
             initGameDispatch(JSON.parse(hasExistingGame));
         }
