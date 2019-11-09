@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
@@ -30,8 +30,6 @@ const AddScores = ({ players, close }) => {
             alert('must add at least 1 score')
         }
     }
-
-    useEffect(() => { }, [values]);
 
     return (
         <div className={body.contentContainer}>

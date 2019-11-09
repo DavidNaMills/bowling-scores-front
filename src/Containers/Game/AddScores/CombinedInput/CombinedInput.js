@@ -4,11 +4,9 @@ import classes from './CombinedInput.module.scss';
 import Input from '../../../../Components/Form/elements/Input/Input';
 import { playerTableStyle } from '../../playerTableStyle';
 
-//Avatar when built
-
 const CombinedInput = ({ name, color, value, updateScore, id }) => {
 
-    // <div style={playerTableStyle()}>
+    console.log(value);
     return (
         <div style={playerTableStyle(color)} className={classes.combinedInput}>
             <div className={[classes.combinedInput__name, classes.combinedInput].join(' ')}>

@@ -10,13 +10,10 @@ import {
 } from '../liveGameActionTypes';
 
 
-import tempState from '../../../helpers/tableGamesDataModifier/testData';
-
 const defaultState = {
     players: {},
     games: {}
 };
-// const defaultState = tempState;
 
 const liveGameReducer = (state = defaultState, action) => {
     const tempState = JSON.parse(JSON.stringify(state));
@@ -64,7 +61,7 @@ const liveGameReducer = (state = defaultState, action) => {
                 }
             }
 
-            const key = +Object.keys(tempState.games).length + 1;
+            const key = Object.keys(tempState.games).length + 1;
             tempState.games[`${key}`] = tempScore;
             return tempState;
 

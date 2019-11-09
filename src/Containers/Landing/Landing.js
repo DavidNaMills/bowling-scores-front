@@ -9,6 +9,7 @@ const Landing = () =>{
             <Title ttlType='main' label='Bowling Scores'/>
             <p>
                 Landing page
+                v0.2
             </p>
         </div>
     )

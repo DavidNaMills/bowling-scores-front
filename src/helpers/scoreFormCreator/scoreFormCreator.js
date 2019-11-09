@@ -4,7 +4,7 @@ const scoreFormCreator = (data) =>{
     for(let key in data){
         temp[key] = {
             name: data[key].name,
-            score: 0
+            score: ''
         }
     }
 
@@ -12,8 +12,3 @@ const scoreFormCreator = (data) =>{
 }
 
 export default scoreFormCreator;
-
-//[playerId]{
-    //name: ''
-    //sore: 0
-//}
