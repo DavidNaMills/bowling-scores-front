@@ -122,7 +122,7 @@ const Game = (props) => {
                 type: 'warning',
                 click: () => setPopup(false)
             }}
-            // close={() => setPopup(false)}
+            close={() => setPopup(false)}
         />
     )
 

@@ -6,6 +6,7 @@ import form from '../../../styles/shared/form.module.scss';
 import spacing from '../../../styles/shared/spacing.module.scss';
 
 import useFormHook from '../../../Hooks/useFormHook/useformHook';
+import useForceScroll from '../../../Hooks/useForceScroll/useForceScroll';
 import * as actions from '../../../store/allActions';
 
 import Title from '../../../Components/StandAloneComponents/Title/Title';
@@ -13,6 +14,8 @@ import Button from '../../../Components/StandAloneComponents/Button/Button';
 import GameChart from '../../../Components/GameChart/GameChart';
 import Table from '../../../Components/Table/Table';
 import InputFactory from '../../../Components/Form/InputFactory/InputFactory';
+import Popup from '../../../Components/StandAloneComponents/Popup/Popup';
+
 
 import tableModifier from '../../../helpers/tableGamesDataModifier/tableGamesDataModifier';
 import chartParser from '../../../helpers/chartDataModifier/chartDataModifier';
@@ -26,17 +29,21 @@ const tHeaders = ['Average', 'Pinfall']
 const tHeaders2 = ['Score']
 
 
+//TODO: bring in the useDispatch hook to deal with dispatches here
+
 const PlayerGameDetails = (props) => {
     const dispatch = useDispatch();
     const removePlayerDispatch = (id) => dispatch(actions.removePlayer(id));
     const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data))
     const gameData = useSelector(state => state.liveGame);
 
-
     const id = props.location.state.id;
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
+    const forceScroll = useForceScroll();
+
     const isLoading = false;
     const [showEdit, setShowEdit] = useState(false);
+    const [showPopup, setPopup] = useState(false);
 
     const table1 = useMemo(() => ({
         headers: tHeaders,
@@ -59,15 +66,13 @@ const PlayerGameDetails = (props) => {
             scores: finalDetails
         });
         setShowEdit(prev => !prev);
-        console.log(finalDetails);
     }
-
-
 
     const removePlayerLocal = () => {
-        props.history.push('/game');
         removePlayerDispatch(id);
+        props.history.push('/game');
     }
+
 
 
     const buildTable = () => (
@@ -78,7 +83,6 @@ const PlayerGameDetails = (props) => {
             />
         </div>
     )
-
 
     const buildEditForm = () => {
         return (
@@ -106,10 +110,31 @@ const PlayerGameDetails = (props) => {
         <div className={spacing.smallExtra}>
             <Button isFull label='Back' type='default' click={() => { props.history.goBack() }} />
         </div>
+    );
+
+    const buildPopup = () => (
+        <Popup
+            title={{
+                label: 'Are you sure?',
+                ttlType: 'sub'
+            }}
+            message={`You will totally remove ${gameData.players[id].name} from this game. are you sure?`}
+            action1={{
+                label: 'Remove',
+                type: 'danger',
+                click: () => { removePlayerLocal() }
+            }}
+            action2={{
+                label: 'Cancel',
+                type: 'confirm',
+                click: () => setPopup(false)
+            }}
+        />
     )
 
     return (
         <div className={body.contentContainer}>
+            {showPopup && buildPopup()}
             {buildBackButton()}
             <Title label={gameData.players[id].name} ttlType='section' />
             <div className={spacing.extra}>
@@ -144,7 +169,7 @@ const PlayerGameDetails = (props) => {
                     {buildBackButton()}
 
                     <div className={spacing.superLarge}>
-                        <Button isFull label='Remove Player' type='danger' click={removePlayerLocal} />
+                        <Button isFull label='Remove Player' type='danger' click={() => setPopup(true)} />
                     </div>
                 </React.Fragment>
             }
