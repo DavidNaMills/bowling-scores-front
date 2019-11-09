@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
+import spacing from '../../../styles/shared/spacing.module.scss';
 import classes from './AddPlayersForm.module.scss';
-import spacing from '../GameDetails/GameDetails.module.scss';
 
 import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Table from '../../../Components/Table/Table';
@@ -65,7 +65,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
 
                     }
 
-                    <div className={[classes.addPlayers__inline, spacing.gameDetails__extra].join(' ')}>
+                    <div className={[classes.addPlayers__inline, spacing.extra].join(' ')}>
                         <div className={showSelect ? classes.addPlayers__fullBtn : classes.addPlayers__halfBtn}>
                             <Button isFull type={showSelect ? 'warning' : 'default'} label={showSelect ? 'Close' : 'Select Color'} click={() => setShowSelect(prev => !prev)} />
                         </div>
@@ -77,7 +77,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
 
                     {newPlayer.color &&
                         <div
-                            className={spacing.gameDetails__largeExtra}
+                            className={spacing.largeExtra}
                             style={{
                                 marginTop: '10px',
                                 marginBottom: '10px',
@@ -86,7 +86,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                                 ...playerTableStyle(newPlayer.color)
                             }}
                         >{newPlayer.name}</div>}
-                    <div className={spacing.gameDetails__largeExtra}>
+                    <div className={spacing.largeExtra}>
                         <Button isFull label='Add Player' click={addPlayerProxy} />
                     </div>
                 </div>
@@ -94,12 +94,12 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
 
 
             {isNew &&
-                <div className={spacing.gameDetails__largeExtra}>
+                <div className={spacing.largeExtra}>
                     <Button isFull label='Start Game' click={() => commitGame(close)} />
                 </div>
             }
 
-            <div className={spacing.gameDetails__largeExtra}>
+            <div className={spacing.largeExtra}>
                 <Table
                     data={{
                         headers: tHeaders,
@@ -110,7 +110,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                     caption='Click player for more details'
                 />
             </div>
-            <div className={spacing.gameDetails__largeExtra}>
+            <div className={spacing.largeExtra}>
                 <Button isFull type={'warning'} label={isNew ? 'Cancel' : 'Close'} click={onClose} />
             </div>
         </div>

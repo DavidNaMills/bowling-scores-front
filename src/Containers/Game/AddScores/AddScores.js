@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
-import classes from '../GameDetails/GameDetails.module.scss';
+import spacing from '../../../styles/shared/spacing.module.scss';
 
 import CombinedInput from './CombinedInput/CombinedInput';
 import objectToArray from '../../../helpers/objectToArray/objectToArray'
@@ -25,7 +25,6 @@ const AddScores = ({ players, close }) => {
         }
         if (touched) {
             addNewGameDispatch(values);
-            console.log(values);
             close();
         } else {
             alert('must add at least 1 score')
@@ -54,12 +53,12 @@ const AddScores = ({ players, close }) => {
                                             value={values[x.id].score}
                                         />
                                     )}
-                                <div className={classes.gameDetails__largeExtra}>
+                                <div className={spacing.largeExtra}>
                                     <Button click={() => { }} isFull label='Save Scores' />
                                 </div>
                             </form>
                         </div>
-                        <div className={classes.gameDetails__largeExtra}>
+                        <div className={spacing.largeExtra}>
                             <Button isFull click={close} label='Close' />
                         </div>
                     </React.Fragment>

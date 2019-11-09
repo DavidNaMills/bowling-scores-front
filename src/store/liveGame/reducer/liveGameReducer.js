@@ -71,22 +71,16 @@ const liveGameReducer = (state = defaultState, action) => {
 
 
         case UPDATE_INDIVIDUAL_SCORE:
-            const tempId = +action.payload.id;      //TODO: may need to remove in production
-
+            const tempId = action.payload.id;      //TODO: may need to remove in production
             for (let key in action.payload.scores) {
                 if (+action.payload.scores[key] === 0) {        //TODO: test this part
                     delete tempState.games[key][tempId]
                 } else {
-                    console.log(action);
-                    console.log(key);
-                    console.log(tempState.games[key]);
-                    console.log(tempState.games[key][tempId]);
                     tempState.games[key][tempId].score
-                        = action.payload.scores[key];
+                        = +action.payload.scores[key];
                 }
             }
             return tempState;
-
 
         default:
             return state;

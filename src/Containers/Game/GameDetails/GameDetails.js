@@ -1,7 +1,7 @@
 import React from 'react';
 
 import body from '../../../styles/shared/container.module.scss';
-import classes from './GameDetails.module.scss';
+import spacing from '../../../styles/shared/spacing.module.scss';
 
 import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Table from '../../../Components/Table/Table';
@@ -15,7 +15,7 @@ const tHeaders = ['Player', 'Average', 'Pinfall'];
 
 const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame }) => (
     <div className={[body.contentContainer].join(' ')}>
-        <div className={classes.gameDetails__btns}>
+        <div className={spacing.btns}>
             <Button isFull click={addScores} label='Add Scores' />
         </div>
 
@@ -23,7 +23,7 @@ const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame
             players={liveGame.players}
             data={chartParser(liveGame)}
         />
-        <div className={classes.gameDetails__btns}>
+        <div className={spacing.btns}>
 
             <Table
                 data={{
@@ -36,10 +36,10 @@ const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame
             />
         </div>
 
-        <div className={classes.gameDetails__largeExtra}>
+        <div className={spacing.largeExtra}>
             <Button isFull click={addNewPlayers} label='Add Players' />
 
-            <div className={classes.gameDetails__extra}>
+            <div className={spacing.extra}>
             <Button type='danger' click={newGame} label='Start new game' />
             </div>
         </div>

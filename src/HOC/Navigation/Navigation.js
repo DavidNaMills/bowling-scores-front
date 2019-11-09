@@ -9,7 +9,7 @@ const Navigation = (props) => {
         <header>
             <div className={classes.navigation}>
                 <div className={classes.navigation_section}>
-                    <NavLink className={classes.navigation__link} activeClassName={classes.navigation__link_active} to='/'>Home</NavLink>
+                    <NavLink exact className={classes.navigation__link} activeClassName={classes.navigation__link_active} to='/'>Home</NavLink>
                     <NavLink className={classes.navigation__link} activeClassName={classes.navigation__link_active}  to='/game'>Game</NavLink>
                 </div>
                 <div className={classes.navigation_section}>

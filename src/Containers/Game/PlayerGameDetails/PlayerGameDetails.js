@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
-import spacing from '../GameDetails/GameDetails.module.scss';
+import spacing from '../../../styles/shared/spacing.module.scss';
 
 import useFormHook from '../../../Hooks/useFormHook/useformHook';
 import * as actions from '../../../store/allActions';
@@ -59,7 +59,10 @@ const PlayerGameDetails = (props) => {
             scores: finalDetails
         });
         setShowEdit(prev => !prev);
+        console.log(finalDetails);
     }
+
+
 
     const removePlayerLocal = () => {
         props.history.push('/game');
@@ -79,7 +82,7 @@ const PlayerGameDetails = (props) => {
 
     const buildEditForm = () => {
         return (
-            <div className={[spacing.gameDetails__extra, form.form__container].join(' ')}>
+            <div className={[spacing.extra, form.form__container].join(' ')}>
                 <form onSubmit={updateScores} className={form.form__form}>
                     {
                         objectToArray(formState).map((x, i) =>
@@ -91,7 +94,7 @@ const PlayerGameDetails = (props) => {
                                 type='number'
                             />, 0)
                     }
-                    <div className={spacing.gameDetails__largeExtra}>
+                    <div className={spacing.largeExtra}>
                         <Button label='Update' type='default' click={() => { }} isFull />
                     </div>
                 </form>
@@ -100,7 +103,7 @@ const PlayerGameDetails = (props) => {
     }
 
     const buildBackButton = () => (
-        <div className={spacing.gameDetails__smallExtra}>
+        <div className={spacing.smallExtra}>
             <Button isFull label='Back' type='default' click={() => { props.history.goBack() }} />
         </div>
     )
@@ -109,11 +112,11 @@ const PlayerGameDetails = (props) => {
         <div className={body.contentContainer}>
             {buildBackButton()}
             <Title label={gameData.players[id].name} ttlType='section' />
-            <div className={spacing.gameDetails__extra}>
+            <div className={spacing.extra}>
                 <Table data={table1} />
             </div>
 
-            <div className={spacing.gameDetails__extra}>
+            <div className={spacing.extra}>
                 <GameChart
                     players={gameData.players}
                     data={chartParser(gameData, id)}
@@ -125,7 +128,7 @@ const PlayerGameDetails = (props) => {
                     ?
                     <React.Fragment>
                         {buildEditForm()}
-                        <div className={spacing.gameDetails__largeExtra}>
+                        <div className={spacing.largeExtra}>
                             <Button label='Close' type='danger' click={() => setShowEdit(prev => !prev)} isFull isDisabled={isLoading} />
                         </div>
                     </React.Fragment>
@@ -134,13 +137,13 @@ const PlayerGameDetails = (props) => {
             {
                 !showEdit &&
                 <React.Fragment>
-                    <div className={spacing.gameDetails__extra}>
+                    <div className={spacing.extra}>
                         <Button isFull label={showEdit ? 'Close' : 'Edit scores'} type='warning' click={() => { setShowEdit(prev => !prev) }} />
                     </div>
 
                     {buildBackButton()}
 
-                    <div className={spacing.gameDetails__superLarge}>
+                    <div className={spacing.superLarge}>
                         <Button isFull label='Remove Player' type='danger' click={removePlayerLocal} />
                     </div>
                 </React.Fragment>

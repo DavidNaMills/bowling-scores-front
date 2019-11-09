@@ -1,5 +1,9 @@
 import React from 'react';
 
+import form from '../../styles/shared/form.module.scss';
+import body from '../../styles/shared/container.module.scss';
+import spacing from '../../styles/shared/spacing.module.scss';
+
 import axios from '../../Axios/axiosConfig';
 
 import useFetchHook from '../../Hooks/useFetchHook/useFetchHook';
@@ -32,20 +36,27 @@ const AccessContainer = (props) => {
         <div>
             <Title label={props.title} ttlType='section' />
 
-            <div>
-                <form onSubmit={submit}>
-                    {
-                        objectToArray(formState).map((x, i) =>
-                            <InputFactory
-                                key={i}
-                                config={x.config}
-                                id={x.id}
-                                changed={manageState}
-                            />, 0)
-                    }
-                    <Button label='Login' type='default' click={submit} isFull isDisabled={isLoading} />
-                </form>
-                <Button label='Clear' type='danger' click={clear} isFull isDisabled={isLoading} />
+            <div className={body.contentContainer}>
+                <div className={form.form__container}>
+                    <form onSubmit={submit} className={form.form__form}>
+                        {
+                            objectToArray(formState).map((x, i) =>
+                                <InputFactory
+                                    key={i}
+                                    config={x.config}
+                                    id={x.id}
+                                    changed={manageState}
+                                />, 0)
+                        }
+                        <div className={spacing.largeExtra}>
+
+                            <Button label='Login' type='default' click={submit} isFull isDisabled={isLoading} />
+                            <div className={spacing.extra}>
+                                <Button label='Clear' type='danger' click={clear} isFull isDisabled={isLoading} />
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )
