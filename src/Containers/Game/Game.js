@@ -37,7 +37,7 @@ const Game = (props) => {
         const gms = Object.keys(liveGame.games).length;
 
         if (hasExistingGame && plr===0 && gms===0) {
-            // setPopup(true);
+            setPopup(true);
             initGameDispatch(JSON.parse(hasExistingGame));
         }
     }, []);
@@ -117,12 +117,12 @@ const Game = (props) => {
             message='Hey!!! you have already started a game. would you like to continue or start a new game?'
             action1={{
                 label: 'Start New Game',
-                type: 'confirm',
+                type: 'default',
                 click: () => {changeFromGame('newGame'); setPopup(false)}
             }}
             action2={{
                 label: 'Continue',
-                type: 'warning',
+                type: 'blue',
                 click: () => setPopup(false)
             }}
             close={() => setPopup(false)}

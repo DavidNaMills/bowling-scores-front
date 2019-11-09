@@ -57,7 +57,7 @@ const AddScores = ({ players, close }) => {
                             </form>
                         </div>
                         <div className={spacing.largeExtra}>
-                            <Button isFull click={close} label='Close' />
+                            <Button isFull click={close} type='warning' label='Close' />
                         </div>
                     </React.Fragment>
                     : <p>Please wait</p>

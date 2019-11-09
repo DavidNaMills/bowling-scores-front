@@ -14,6 +14,27 @@ const Button = ({ click = () => { }, label, isDisabled = false, type = 'default'
     } else {
 
         switch (type.toLowerCase()) {
+            case 'lightgreen':
+                style = style.concat(classes.button__lightGreen);
+                break;
+            case 'darkgreen':
+                style = style.concat(classes.button__darkGreen);
+                break;
+            case 'blue':
+                style = style.concat(classes.button__blue);
+                break;
+            case 'lightblue':
+                style = style.concat(classes.button__lightBlue);
+                break;
+            case 'darkblue':
+                style = style.concat(classes.button__darkBlue);
+                break;
+            case 'lightred':
+                style = style.concat(classes.button__lightRed);
+                break;
+            case 'lightyellow':
+                style = style.concat(classes.button__lightYellow);
+                break;
             case 'warning':
                 style = style.concat(classes.button__warning);
                 break;

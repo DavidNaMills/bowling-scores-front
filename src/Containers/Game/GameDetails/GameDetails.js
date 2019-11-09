@@ -16,7 +16,7 @@ const tHeaders = ['Player', 'Average', 'Pinfall'];
 const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame }) => (
     <div className={[body.contentContainer].join(' ')}>
         <div className={spacing.btns}>
-            <Button isFull click={addScores} label='Add Scores' />
+            <Button isFull click={addScores} type='blue' label='Add Scores' />
         </div>
 
         <GameChart
@@ -37,10 +37,10 @@ const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame
         </div>
 
         <div className={spacing.largeExtra}>
-            <Button isFull click={addNewPlayers} label='Add Players' />
+            <Button isFull type='blue' click={addNewPlayers} label='Add Players' />
 
             <div className={spacing.extra}>
-            <Button type='danger' click={newGame} label='Start new game' />
+            <Button type='darkgreen' click={newGame} label='Start new game' />
             </div>
         </div>
     </div>

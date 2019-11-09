@@ -18,7 +18,7 @@
 
     &__default{
         background-color: $btn_default_bkg;
-        color: $btn_font_clr;
+        color: $btn_font_clr_light;
         
         &:hover{
             background-color: $btn_default_bkg_active_hover;
@@ -51,5 +51,93 @@
             background-color: $btn_danger_bkg_active;
         }    
     }
+
+    &__lightGreen{
+        background-color: $btn_lightGreen_bkg;
+        color: $btn_font_clr;
+        
+        &:hover{
+            background-color: $btn_lightGreen_bkg_active;
+        }
+        &:active{
+            background-color: $btn_lightGreen_bkg_active_hover;
+        }    
+    }
+
+    &__darkGreen{
+        background-color: $btn_darkGreen_bkg;
+        color: $btn_font_clr_light;
+        
+        &:hover{
+            background-color: $btn_darkGreen_bkg_active;
+        }
+        &:active{
+            background-color: $btn_darkGreen_bkg_active_hover;
+        }    
+    }
+
+    &__blue{
+        background-color: $btn_blue_bkg;
+        color: $btn_font_clr_light;
+        
+        &:hover{
+            background-color: $btn_blue_bkg_active;
+        }
+        &:active{
+            background-color: $btn_blue_bkg_active_hover;
+        }    
+    }
+
+    &__lightBlue{
+        background-color: $btn_lightBlue_bkg;
+        color: $btn_font_clr;
+        
+        &:hover{
+            background-color: $btn_lightBlue_bkg_active;
+        }
+        &:active{
+            background-color: $btn_lightBlue_bkg_active_hover;
+        }    
+    }
+
+    &__darkBlue{
+        background-color: $btn_darkBlue_bkg;
+        color: $btn_font_clr_light;
+        
+        &:hover{
+            background-color: $btn_darkBlue_bkg_active;
+        }
+        &:active{
+            background-color: $btn_darkBlue_bkg_active_hover;
+        }    
+    }
+
+    &__lightRed{
+        background-color: $btn_lightRed_bkg;
+        color: $btn_font_clr;
+        
+        &:hover{
+            color: $btn_font_clr_light;
+            background-color: $btn_lightRed_bkg_active;
+        }
+        &:active{
+            background-color: $btn_lightRed_bkg_active_hover;
+        }    
+    }
+
+    &__lightYellow{
+        background-color: $btn_lightYellow_bkg;
+        color: $btn_font_clr;
+        
+        &:hover{
+            color: $btn_font_clr_light;
+            background-color: $btn_lightYellow_bkg_active;
+        }
+        &:active{
+            background-color: $btn_lightYellow_bkg_active_hover;
+        }    
+    }
+
+
 
 }

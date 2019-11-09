@@ -52,7 +52,7 @@ const AccessContainer = (props) => {
 
                             <Button label='Login' type='default' click={submit} isFull isDisabled={isLoading} />
                             <div className={spacing.extra}>
-                                <Button label='Clear' type='danger' click={clear} isFull isDisabled={isLoading} />
+                                <Button label='Clear' type='lightred' click={clear} isFull isDisabled={isLoading} />
                             </div>
                         </div>
                     </form>

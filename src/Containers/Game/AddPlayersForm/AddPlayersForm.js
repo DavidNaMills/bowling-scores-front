@@ -45,6 +45,14 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
         addPlayer();
     }
 
+    const checkDisabled = () =>{
+        if(Object.keys(liveGame.players).length===0 && isNew){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     return (
         <div className={body.contentContainer}>
             <Title label={title} ttlType='sub' />
@@ -67,11 +75,11 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
 
                     <div className={[classes.addPlayers__inline, spacing.extra].join(' ')}>
                         <div className={showSelect ? classes.addPlayers__fullBtn : classes.addPlayers__halfBtn}>
-                            <Button isFull type={showSelect ? 'warning' : 'default'} label={showSelect ? 'Close' : 'Select Color'} click={() => setShowSelect(prev => !prev)} />
+                            <Button isFull type={showSelect ? 'warning' : 'lightblue'} label={showSelect ? 'Close' : 'Select Color'} click={() => setShowSelect(prev => !prev)} />
                         </div>
                         {!showSelect &&
                             <div className={classes.addPlayers__halfBtn}>
-                                <Button isFull label='Random Colour' click={randomColor} />
+                                <Button isFull type='lightgreen' label='Random Colour' click={randomColor} />
                             </div>}
                     </div>
 
@@ -87,7 +95,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                             }}
                         >{newPlayer.name}</div>}
                     <div className={spacing.largeExtra}>
-                        <Button isFull label='Add Player' click={addPlayerProxy} />
+                        <Button isFull label='Add Player' type='blue' click={addPlayerProxy} />
                     </div>
                 </div>
             </div>
@@ -95,7 +103,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
 
             {isNew &&
                 <div className={spacing.largeExtra}>
-                    <Button isFull label='Start Game' click={() => commitGame(close)} />
+                    <Button isFull label='Start Game' click={() => commitGame(close)} isDisabled={checkDisabled()}/>
                 </div>
             }
 
@@ -111,7 +119,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                 />
             </div>
             <div className={spacing.largeExtra}>
-                <Button isFull type={'warning'} label={isNew ? 'Cancel' : 'Close'} click={onClose} />
+                <Button isFull type={'lightred'} label={isNew ? 'Cancel' : 'Close'} click={onClose} />
             </div>
         </div>
     )
