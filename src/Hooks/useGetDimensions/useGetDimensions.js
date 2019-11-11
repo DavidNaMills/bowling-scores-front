@@ -8,11 +8,13 @@ const useGetDimensions = () => {
 
 
     const setSize = () =>{
-        console.log('changed');
-        const { innerWidth: width, innerHeight: height } = window;
+        // console.log('changed');
+        // console.log(window.innerWidth);
+        // const { innerWidth: width, innerHeight: height } = window;
+
         setDimensions({
-            width,
-            height
+            width: window.innerWidth,
+            height: window.innerHeight
         })
     };
 
@@ -21,8 +23,8 @@ const useGetDimensions = () => {
             setSize();
         }
 
-        window.addEventListener('resize', setSize);
-        return () => window.removeEventListener('resize', setSize);
+        // window.addEventListener('resize', setSize);
+        // return () => window.removeEventListener('resize', setSize);
       }, []);
 
     return {
