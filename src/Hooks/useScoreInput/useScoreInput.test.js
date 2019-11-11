@@ -4,8 +4,10 @@ import scoreFormCreator from '../../helpers/scoreFormCreator/scoreFormCreator';
 import testData from '../../helpers/tableGamesDataModifier/testData';
 
 describe('useScoreInput test suite', ()=>{
-    it('values should be of object type and populated', ()=>{
-        const {result} = renderHook(()=> useScoreInput(scoreFormCreator(testData.players)));
+    it('values should be of object type and populated', async()=>{
+        const data = await scoreFormCreator(testData.players);
+        const {result} = renderHook(()=> useScoreInput(data));
+        // const {result} = renderHook(()=> useScoreInput(scoreFormCreator(testData.players)));
 
         const values = result.current.values;
 
@@ -15,13 +17,14 @@ describe('useScoreInput test suite', ()=>{
 
         for(let key in values){
             expect(values[key].name).toEqual(testData.players[key].name);
-            expect(values[key].score).toBe(0);
+            expect(values[key].score).toBe('');
         }
     });
     
     
-    it('accepts a starting structure', ()=>{
-        const {result} = renderHook(()=> useScoreInput(scoreFormCreator(testData.players)));
+    it('accepts a starting structure', async()=>{
+        const data = await scoreFormCreator(testData.players);
+        const {result} = renderHook(()=> useScoreInput(data));
         const addObj = {
             id: 123,
             data: 158

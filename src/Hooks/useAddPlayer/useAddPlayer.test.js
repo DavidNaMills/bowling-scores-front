@@ -30,8 +30,4 @@ describe('useAddPlayer hook', ()=>{
 
     //     expect(result.current.newPlayer).toEqual(testData);
     // });
-
-    it('placeholder', ()=>{
-        expect(true).toBeTruthy();
-    });
 });

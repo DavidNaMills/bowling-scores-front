@@ -12,15 +12,21 @@ import gameReducer from './liveGameReducer';
 import toLoad from '../../../helpers/tableGamesDataModifier/testData';
 
 const playerData = {
+    players:{
     123: { name: 'david', color: 'red' },
     456: { name: 'paul', color: 'blue' }
+    },
+    games:{}
 }
 
 
 describe('liveGameReducer test suite', () => {
     it('should initialise the default state', () => {
         const state = gameReducer(undefined, { type: '@@INIT' })
-        expect(state).toEqual({});
+        expect(state).toEqual({
+            games: {},
+            players: {}
+        });
     });
 
 
@@ -30,7 +36,7 @@ describe('liveGameReducer test suite', () => {
         expect(Object.keys(state.games).length).toBe(0);
 
         for (let k in state.players) {
-            expect(state.players[k]).toEqual(playerData[k]);
+            expect(state.players[k]).toEqual(playerData.players[k]);
         }
     });
 

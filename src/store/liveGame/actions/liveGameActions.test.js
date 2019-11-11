@@ -20,8 +20,11 @@ import {
 
 
 const playerData = {
-    123: { name: 'david', color: 'red' },
-    456: { name: 'paul', color: 'blue' }
+    players: {
+        123: { name: 'david', color: 'red' },
+        456: { name: 'paul', color: 'blue' }
+    },
+    games: {}
 }
 
 describe('liveGameActions test suite', () => {
@@ -34,11 +37,11 @@ describe('liveGameActions test suite', () => {
         expect(Object.keys(action.payload.players).length).toBe(2);
         expect(Object.keys(action.payload.games).length).toBe(0);
 
-        expect(action.payload.players[123].name).toEqual(playerData[123].name);
-        expect(action.payload.players[123].color).toEqual(playerData[123].color);
+        expect(action.payload.players[123].name).toEqual(playerData.players[123].name);
+        expect(action.payload.players[123].color).toEqual(playerData.players[123].color);
 
-        expect(action.payload.players[456].name).toEqual(playerData[456].name);
-        expect(action.payload.players[456].color).toEqual(playerData[456].color);
+        expect(action.payload.players[456].name).toEqual(playerData.players[456].name);
+        expect(action.payload.players[456].color).toEqual(playerData.players[456].color);
     });
 
     it('creates an action to load a previously started game', () => {
