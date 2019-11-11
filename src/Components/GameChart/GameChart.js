@@ -5,13 +5,13 @@ import {
 
 
 
-const GameChart = ({players, data}) => {
+const GameChart = ({players, data, width=380, height=350}) => {
 
     return (
         <div>
             <LineChart
-                width={380}
-                height={350}
+                width={width-25}
+                height={height}
                 data={data.data}
                 margin={{
                     top: 5, right: 5, left: 0, bottom: 0,

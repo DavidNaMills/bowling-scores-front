@@ -28,9 +28,9 @@ const allPlayers = (data) => {
         players = players.concat(ply);
     }
 
-    console.log(data);
-    console.log(tempArray);
-    console.log(players);
+    // console.log(data);
+    // console.log(tempArray);
+    // console.log(players);
 
     return {
         data: tempArray,

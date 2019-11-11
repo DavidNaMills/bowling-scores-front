@@ -37,8 +37,8 @@ const Game = (props) => {
         const gms = Object.keys(liveGame.games).length;
 
         if (hasExistingGame && plr===0 && gms===0) {
-            setPopup(true);
             initGameDispatch(JSON.parse(hasExistingGame));
+            setPopup(true);
         }
     }, []);
 

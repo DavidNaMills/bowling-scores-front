@@ -12,6 +12,15 @@ import Title from '../../../Components/StandAloneComponents/Title/Title';
 import useScoreInput from '../../../Hooks/useScoreInput/useScoreInput';
 import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
+
+const isDisabled = (values) =>{
+    let disabled = true
+    for (let k in values) {
+        if (values[k].score > 0) {disabled = false};
+    }
+    return disabled
+}
+
 const AddScores = ({ players, close }) => {
     const { values, addValue } = useScoreInput(players);
     const { addNewGameDispatch } = useDispatchHook();
@@ -20,15 +29,15 @@ const AddScores = ({ players, close }) => {
         e.preventDefault();
         let touched = false;
 
-        for (let k in values) {
-            if (values[k].score > 0) touched = true;
-        }
-        if (touched) {
+        // for (let k in values) {
+        //     if (values[k].score > 0) touched = true;
+        // }
+        // if (touched) {
             addNewGameDispatch(values);
             close();
-        } else {
-            alert('must add at least 1 score')
-        }
+        // } else {
+            // alert('must add at least 1 score')
+        // }
     }
 
     return (
@@ -52,12 +61,12 @@ const AddScores = ({ players, close }) => {
                                         />
                                     )}
                                 <div className={spacing.largeExtra}>
-                                    <Button click={() => { }} isFull label='Save Scores' />
+                                    <Button click={() => { }} isFull label='Save Scores'  isDisabled={isDisabled(values)} />
                                 </div>
                             </form>
                         </div>
                         <div className={spacing.largeExtra}>
-                            <Button isFull click={close} type='warning' label='Close' />
+                            <Button isFull click={close} type='warning' label='Close'/>
                         </div>
                     </React.Fragment>
                     : <p>Please wait</p>

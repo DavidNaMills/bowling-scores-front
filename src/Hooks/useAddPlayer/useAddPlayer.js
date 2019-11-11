@@ -4,6 +4,7 @@ import uuid from 'uuid';
 
 import { getRandomColor } from '../useColorSelection/useColorSelection';
 import useDispatchHook from '../useDispatchHook/useDispatchHook';
+import useTime from '../useTime/useTime';
 
 const defaultPlayer = {
     name: '',
@@ -19,6 +20,7 @@ const defaultGameStructure = {
 const useAddPlayer = (isNew) => {
     const tempLiveGame = useSelector(state => state.liveGame);
     const { addNewPlayerDispatch, initGameDispatch } = useDispatchHook();
+    const {getTime} = useTime();
 
     const [newPlayer, setPlayer] = useState(defaultPlayer);
     const [liveGame, setliveGame] = useState(isNew ? defaultGameStructure : tempLiveGame);  //set full game from store or create from new game object
@@ -58,6 +60,7 @@ const useAddPlayer = (isNew) => {
             }
 
             if (isNew) {
+                tempPlayer['date'] = getTime();
                 tempPlayer.players[newPlayer.id] = newPlayer;
                 setliveGame(tempPlayer);    //initialise a new game
             } else {
@@ -66,7 +69,7 @@ const useAddPlayer = (isNew) => {
             setPlayer(defaultPlayer);   //reset local state
 
         } else {
-            alert('you fucked up');
+            return true;
         }
     }
 

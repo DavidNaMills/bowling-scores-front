@@ -33,30 +33,27 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
     const { color, randomColor, showColorPickerComponent } = useColorSelection();
     const [showSelect, setShowSelect] = useState(false);
 
-
     useEffect(() => {
         if (color) {
             addColor(color);
         }
     }, [color]);
 
-    const addPlayerProxy = () =>{
+    const addPlayerProxy = () => {
         setShowSelect(false);
         addPlayer();
     }
 
-    const checkDisabled = () =>{
-        if(Object.keys(liveGame.players).length===0 && isNew){
+    const checkDisabled = () => {
+        if (Object.keys(liveGame.players).length === 0 && isNew) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
-
     return (
         <div className={body.contentContainer}>
             <Title label={title} ttlType='sub' />
-
             <div className={form.form__container}>
                 <div className={form.form__form}>
 
@@ -95,7 +92,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                             }}
                         >{newPlayer.name}</div>}
                     <div className={spacing.largeExtra}>
-                        <Button isFull label='Add Player' type='blue' click={addPlayerProxy} />
+                        <Button isFull label='Add Player' type='blue' click={addPlayerProxy} isDisabled={newPlayer.name.length>0?false:true}/>
                     </div>
                 </div>
             </div>
@@ -103,7 +100,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
 
             {isNew &&
                 <div className={spacing.largeExtra}>
-                    <Button isFull label='Start Game' click={() => commitGame(close)} isDisabled={checkDisabled()}/>
+                    <Button isFull label='Start Game' click={() => commitGame(close)} isDisabled={checkDisabled()} />
                 </div>
             }
 

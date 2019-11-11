@@ -7,44 +7,52 @@ import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Table from '../../../Components/Table/Table';
 import GameChart from '../../../Components/GameChart/GameChart';
 
+import useGetDimensions from '../../../Hooks/useGetDimensions/useGetDimensions';
+
 import tableParser from '../../../helpers/tableGamesDataModifier/tableGamesDataModifier';
 import chartParser from '../../../helpers/chartDataModifier/chartDataModifier';
 import pinfallSort from '../../../helpers/pinfallSort/pinfallSort';
 
 const tHeaders = ['Player', 'Average', 'Pinfall'];
 
-const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame }) => (
-    <div className={[body.contentContainer].join(' ')}>
-        <div className={spacing.btns}>
-            <Button isFull click={addScores} type='blue' label='Add Scores' />
-        </div>
+const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame }) => {
+    const { dimensions } = useGetDimensions();
+    console.log(dimensions);
 
-        <GameChart
-            players={liveGame.players}
-            data={chartParser(liveGame)}
-        />
-        <div className={spacing.btns}>
+    return (
+        <div className={[body.contentContainer].join(' ')}>
+            <div className={spacing.btns}>
+                <Button isFull click={addScores} type='blue' label='Add Scores' />
+            </div>
 
-            <Table
-                data={{
-                    headers: tHeaders,
-                    rows: pinfallSort(tableParser(liveGame))
-                }}
-                showRowNum
-                selectRow={playerSelect}
-                caption='Click player for more details'
+            <GameChart
+                players={liveGame.players}
+                data={chartParser(liveGame)}
+                width={dimensions.width}
             />
-        </div>
+            <div className={spacing.btns}>
 
-        <div className={spacing.largeExtra}>
-            <Button isFull type='blue' click={addNewPlayers} label='Add Players' />
+                <Table
+                    data={{
+                        headers: tHeaders,
+                        rows: pinfallSort(tableParser(liveGame))
+                    }}
+                    showRowNum
+                    selectRow={playerSelect}
+                    caption='Click player for more details'
+                />
+            </div>
 
-            <div className={spacing.extra}>
-            <Button type='darkgreen' click={newGame} label='Start new game' />
+            <div className={spacing.largeExtra}>
+                <Button isFull type='blue' click={addNewPlayers} label='Add Players' />
+
+                <div className={spacing.extra}>
+                    <Button type='darkgreen' click={newGame} label='Start new game' />
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
+}
 
 
 
