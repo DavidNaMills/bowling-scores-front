@@ -1,4 +1,5 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
 import Popup from './Popup';
@@ -59,6 +60,15 @@ const buttonTest = [
 ]
 
 describe('<Popup /> test suite', () => {
+    describe('snapshot test', ()=>{
+        test('matches default snapshot', () => {
+            const testMesg = 'This is a test message';
+            const component = renderer.create(<Popup message={testMesg} />);
+            const app = component.toJSON();
+            expect(app).toMatchSnapshot();
+        });
+    });
+
     describe('styling test suite', () => {
         it('displays the message with no optional extras', () => {
             const testMesg = 'This is a test message';

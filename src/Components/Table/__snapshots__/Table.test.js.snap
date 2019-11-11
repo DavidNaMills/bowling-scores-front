@@ -7,18 +7,20 @@ exports[`<Table /> test suite Snapshot test suite matches snapshot with default 
     className="table"
   >
     <thead>
-      <th>
-        name
-      </th>
-      <th>
-        Average
-      </th>
-      <th>
-        Pinfall
-      </th>
-      <th>
-        Rank
-      </th>
+      <tr>
+        <td>
+          name
+        </td>
+        <td>
+          Average
+        </td>
+        <td>
+          Pinfall
+        </td>
+        <td>
+          Rank
+        </td>
+      </tr>
     </thead>
     <tbody>
       <tr
@@ -69,19 +71,21 @@ exports[`<Table /> test suite Snapshot test suite matches snapshot with optional
     className="table"
   >
     <thead>
-      <th />
-      <th>
-        name
-      </th>
-      <th>
-        Average
-      </th>
-      <th>
-        Pinfall
-      </th>
-      <th>
-        Rank
-      </th>
+      <tr>
+        <td />
+        <td>
+          name
+        </td>
+        <td>
+          Average
+        </td>
+        <td>
+          Pinfall
+        </td>
+        <td>
+          Rank
+        </td>
+      </tr>
     </thead>
     <tbody>
       <tr

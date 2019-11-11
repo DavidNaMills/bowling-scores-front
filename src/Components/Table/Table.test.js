@@ -74,7 +74,7 @@ describe('<Table /> test suite', () => {
         });
 
         it('creates 5 headings', () => {
-            const hdr = wrapper.find('th');
+            const hdr = wrapper.find('thead').find('td');
             const tr = wrapper.find('thead');
 
             expect(wrapper.find('p').length).toBe(0);
@@ -88,8 +88,8 @@ describe('<Table /> test suite', () => {
 
         it('creates 2 rows of table data', () => {
             const tbody = wrapper.find('tbody');
-            const tr = wrapper.find('tr');
-            const td = wrapper.find('td');
+            const tr = wrapper.find('tbody').find('tr');
+            const td = wrapper.find('tbody').find('td');
 
             expect(tbody.length).toBe(1);
             expect(tr.length).toBe(2);
@@ -115,14 +115,14 @@ describe('<Table /> test suite', () => {
         it('adds a custom className <string> to a specific row', () => {
             const wrapper = shallow(<Table data={testData} />);
             const tr = wrapper.find('tr');
-            expect(tr.at(0).find(`.${classes.testRowClass}`).length).toBe(1);
+            expect(tr.at(1).find(`.${classes.testRowClass}`).length).toBe(1);
 
         });
 
         it('adds a custom inline style to a specific row', () => {
             const wrapper = shallow(<Table data={testData} />);
             const tr = wrapper.find('tr');
-            expect(tr.at(1).prop('style')).toHaveProperty('color', 'red');
+            expect(tr.at(2).prop('style')).toHaveProperty('color', 'red');
         });
 
     });
@@ -137,10 +137,8 @@ describe('<Table /> test suite', () => {
 
         it('should display the row number starting at 0', () => {
             const wrapper = shallow(<Table data={testData} showRowNum />);
-            const th = wrapper.find('th');
-            const td = wrapper.find('td');
+            const td = wrapper.find('tbody').find('td');
 
-            expect(th.length).toBe(tHeaders.length + 1);
             expect(td.length).toBe(10);
             expect(td.at(0).text()).toEqual('1');
             expect(td.at(5).text()).toEqual('2');
@@ -150,7 +148,7 @@ describe('<Table /> test suite', () => {
             const mockFn = jest.fn();
             mockFn.mockReturnValue(testData.rows[0].id ? testData.rows[0].id : 1);
             const wrapper = shallow(<Table data={testData} selectRow={mockFn} />);
-            wrapper.find('tr').at(0).simulate('click');
+            wrapper.find('tbody').find('tr').at(0).simulate('click');
             expect(mockFn).toHaveBeenCalled();
             expect(mockFn.mock.results[0].value).toBe(1);
         });
@@ -159,7 +157,7 @@ describe('<Table /> test suite', () => {
             const mockFn = jest.fn();
             const wrapper = shallow(<Table data={testData} selectRow={mockFn} />);
             mockFn.mockReturnValue(testData.rows[1].id ? testData.rows[1].id : 1);
-            wrapper.find('tr').at(1).simulate('click');
+            wrapper.find('tbody').find('tr').at(1).simulate('click');
             expect(mockFn).toHaveBeenCalled();
             expect(mockFn.mock.results[0].value).toBe(testData.rows[1].id);
         });

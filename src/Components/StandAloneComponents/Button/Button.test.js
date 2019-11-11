@@ -2,9 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Button from './Button';
-import { tsNamespaceExportDeclaration } from '@babel/types';
-
-//TODO: isDisabled
 
 
 describe('Button component test suite', () => {

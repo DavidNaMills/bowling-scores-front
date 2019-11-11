@@ -7,7 +7,7 @@ const Table = ({ caption = '', tableClass = classes.table, data, showRowNum = fa
         <table className={tableClass}>
             <thead>
                 <tr>
-                {showRowNum && <th></th>}
+                {showRowNum && <td></td>}
                 {data.headers.map((x, i) =>
                     <td key={i}>
                         {x}

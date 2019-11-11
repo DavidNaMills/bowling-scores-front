@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Popup /> test suite snapshot test matches default snapshot 1`] = `
+<div
+  className="popup__container"
+>
+  <div
+    className="popup__module"
+  >
+    <div>
+      <p
+        className="popup__message"
+      >
+        This is a test message
+      </p>
+      <div
+        className="popup__btnContainer"
+      />
+    </div>
+  </div>
+</div>
+`;
