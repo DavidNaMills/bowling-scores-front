@@ -50,7 +50,7 @@ describe('useLocalStorage test suite', () => {
         act(() => {
             result.current.writeToLocalStorage(testData);
         });
-        expect(localStorage.setItem).toHaveBeenCalledWith(defaultFileName, testData);
+        expect(localStorage.setItem).toHaveBeenCalledWith(defaultFileName, JSON.stringify(testData));
     });
 
 
@@ -59,7 +59,7 @@ describe('useLocalStorage test suite', () => {
         act(() => {
             result.current.writeToLocalStorage(testData);
         });
-        expect(localStorage.setItem).toHaveBeenCalledWith(testFilename, testData);
+        expect(localStorage.setItem).toHaveBeenCalledWith(testFilename, JSON.stringify(testData));
     });
 
 
@@ -68,11 +68,11 @@ describe('useLocalStorage test suite', () => {
         act(() => {
             result.current.writeToLocalStorage(testData);
         });
-
+        let returned=null;
         act(() => {
             result.current.readFromLocalStorage(testData);
         });
-        expect(localStorage.setItem).toHaveBeenCalledWith(defaultFileName, testData);
+        expect(localStorage.getItem).toHaveBeenCalled();
     });
 
 
@@ -86,7 +86,7 @@ describe('useLocalStorage test suite', () => {
             result.current.removeFromLocalStorage(testData);
         });
         expect(localStorage.removeItem).toHaveBeenCalledWith(defaultFileName, testData);
-        expect(localStorage.removeItem).toHaveBeenCalledWith(defaultFileName);
+        expect(localStorage.removeItem).toHaveBeenCalled();
     });
 
 });

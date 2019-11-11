@@ -55,7 +55,6 @@ describe('parserForTableGames test suite', () => {
 
         it('should have populated the array correctly', () => {
             const res = gameParser(testData, id);
-            console.log(res);
             expect(res.length).toBe(1);
             expect(res[0].values[0]).toBe(stats[id].ave);
             expect(res[0].values[1]).toBe(stats[id].pinfall);

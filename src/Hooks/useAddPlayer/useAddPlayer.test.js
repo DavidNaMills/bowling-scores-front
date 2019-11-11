@@ -5,6 +5,10 @@ import configureStore from 'redux-mock-store'
 import useAddPlayer from './useAddPlayer';
 
 describe('useAddPlayer hook', ()=>{
+    it('placeholder', ()=>{
+        expect(true).toBeTruthy();
+    });
+
     // const initialState = {players:null}
     // const mockStore = configureStore();
     // let store;

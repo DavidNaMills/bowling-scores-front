@@ -30,7 +30,6 @@ describe('chartDataModifier test suite', () => {
             expect(res).toHaveProperty('data');
             expect(res).toHaveProperty('players');
 
-            console.log(res);
             expect(res.data.length).toBe(3);
             expect(res.players.length).toBe(1);
         });

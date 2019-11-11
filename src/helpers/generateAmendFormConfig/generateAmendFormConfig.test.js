@@ -14,7 +14,7 @@ describe('generateAmendFormConfig test suite', ()=>{
         for(let key in res){
             expect(res[key].elementtype).toEqual('input');
             expect(res[key].elementConfig.type).toEqual('number');
-            expect(res[key].elementConfig.placeholder).toEqual(`Game ${+key+1}`);
+            expect(res[key].elementConfig.placeholder).toEqual(`Game ${+key}`);
             expect(res[key].elementConfig.min).toBe(0);
             expect(res[key].elementConfig.max).toBe(300);
             expect(res[key].value).toEqual(temp[t].values[0]);

@@ -54,11 +54,4 @@ describe('formValidation test suite', ()=>{
         expect(result.errorMsg.length).toBe(1);
         expect(result.errorMsg[0]).toEqual(signupFormConfig.passwordConfirm.validation.isSame.errMsg);
     })
-
-
-    //TODO: update for strings and numbers
-    //TODO: add isRequired - differentiate between is required and minlength
-
-    
-
 });

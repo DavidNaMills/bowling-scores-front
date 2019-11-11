@@ -11,7 +11,7 @@ describe('basicInputControlInit control suite', ()=>{
         for(let key in testData.players){
             expect(typeof(res[key])).toBe('object');
             expect(res[key].name).toEqual(testData.players[key].name);
-            expect(res[key].score).toBe(0);
+            expect(res[key].score).toBe('');
         };
     })
 });

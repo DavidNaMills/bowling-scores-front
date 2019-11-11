@@ -1,13 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
 import spacing from '../../../styles/shared/spacing.module.scss';
 
 import useFormHook from '../../../Hooks/useFormHook/useformHook';
-import useForceScroll from '../../../Hooks/useForceScroll/useForceScroll';
-import * as actions from '../../../store/allActions';
+import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
 import Title from '../../../Components/StandAloneComponents/Title/Title';
 import Button from '../../../Components/StandAloneComponents/Button/Button';
@@ -29,17 +28,14 @@ const tHeaders = ['Average', 'Pinfall']
 const tHeaders2 = ['Score']
 
 
-//TODO: bring in the useDispatch hook to deal with dispatches here
 
 const PlayerGameDetails = (props) => {
-    const dispatch = useDispatch();
-    const removePlayerDispatch = (id) => dispatch(actions.removePlayer(id));
-    const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data))
+    const {removePlayerDispatch, updateScoresDispatch} = useDispatchHook();
+    // const gameData = props.gameData;
     const gameData = useSelector(state => state.liveGame);
-
+// console.log(gameData);
     const id = props.location.state.id;
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
-    const forceScroll = useForceScroll();
 
     const isLoading = false;
     const [showEdit, setShowEdit] = useState(false);
@@ -178,7 +174,3 @@ const PlayerGameDetails = (props) => {
 }
 
 export default PlayerGameDetails;
-
-/**
- *
- */
