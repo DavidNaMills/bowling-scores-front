@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CombinedInput /> test suite snapshot tests matches default snapshot 1`] = `
+<div
+  className="combinedInput"
+  style={
+    Object {
+      "background": "linear-gradient(180deg, rgba(255,255,255,1) 37%, rgba(123, 123, 123,1) 100%)",
+    }
+  }
+>
+  <div
+    className="combinedInput__name combinedInput"
+  >
+    <p>
+      David
+    </p>
+  </div>
+  <div
+    className="combinedInput__input combinedInput"
+  >
+    <div
+      className="input__label"
+    >
+      <div>
+        <input
+          className="input input__default"
+          id="f2d3fd3ds"
+          max={300}
+          min={0}
+          onChange={[Function]}
+          placeholder=""
+          type="number"
+          value={123}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

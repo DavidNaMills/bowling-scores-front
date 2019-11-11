@@ -11,25 +11,40 @@ exports[`<AccessContainer/> test suite Snapshot test suite should match the snap
       Test Title
     </h2>
   </div>
-  <div>
-    <form
-      onSubmit={[Function]}
+  <div
+    className="contentContainer"
+  >
+    <div
+      className="form__container"
     >
-      <button
-        className="button button__isFull button__default"
-        disabled={false}
-        onClick={[Function]}
+      <form
+        className="form__form"
+        onSubmit={[Function]}
       >
-        Login
-      </button>
-    </form>
-    <button
-      className="button button__isFull button__danger"
-      disabled={false}
-      onClick={[Function]}
-    >
-      Clear
-    </button>
+        <div
+          className="largeExtra"
+        >
+          <button
+            className="button button__isFull button__default"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Login
+          </button>
+          <div
+            className="extra"
+          >
+            <button
+              className="button button__isFull button__lightRed"
+              disabled={false}
+              onClick={[Function]}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 `;
