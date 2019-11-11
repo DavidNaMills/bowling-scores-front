@@ -6,7 +6,6 @@ import {
 
 
 const GameChart = ({players, data, width=380, height=350}) => {
-
     return (
         <div>
             <LineChart
