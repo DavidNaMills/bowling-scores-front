@@ -4,14 +4,17 @@ import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
 import spacing from '../../../styles/shared/spacing.module.scss';
 
-import CombinedInput from './CombinedInput/CombinedInput';
 import objectToArray from '../../../helpers/objectToArray/objectToArray'
+
+import CombinedInput from './CombinedInput/CombinedInput';
 import Button from '../../../Components/StandAloneComponents/Button/Button';
 import Title from '../../../Components/StandAloneComponents/Title/Title';
 
 import useScoreInput from '../../../Hooks/useScoreInput/useScoreInput';
 import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
+
+// const addNewGameDispatch = () =>{};
 
 const isDisabled = (values) =>{
     let disabled = true
@@ -24,20 +27,10 @@ const isDisabled = (values) =>{
 const AddScores = ({ players, close }) => {
     const { values, addValue } = useScoreInput(players);
     const { addNewGameDispatch } = useDispatchHook();
-
     const updateScore = (e) => {
         e.preventDefault();
-        let touched = false;
-
-        // for (let k in values) {
-        //     if (values[k].score > 0) touched = true;
-        // }
-        // if (touched) {
-            addNewGameDispatch(values);
-            close();
-        // } else {
-            // alert('must add at least 1 score')
-        // }
+        addNewGameDispatch(values);
+        close();
     }
 
     return (
