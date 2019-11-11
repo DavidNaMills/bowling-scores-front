@@ -34,7 +34,7 @@ const AccessContainer = (props) => {
 
     return (
         <div>
-            <Title label={props.title} ttlType='section' />
+            <Title label={`Bowling Scores: ${props.title}`} ttlType='section' />
 
             <div className={body.contentContainer}>
                 <div className={form.form__container}>

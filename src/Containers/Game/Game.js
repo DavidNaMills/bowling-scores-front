@@ -131,7 +131,7 @@ const Game = (props) => {
 
     return (
         <div>
-            <Title ttlType='section' label='Play' />
+            <Title ttlType='section' label='Bowling Scores: Play' />
             {showPopup && buildPopup()}
             {showWhich.gameDetails && buildGameDetails()}
             {showWhich.newGame && buildNewGame()}

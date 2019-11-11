@@ -1,0 +1,35 @@
+@import '../../styles/colors.scss';
+
+.landing{
+    padding: 10px;
+    // width: 75vw;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 30px;
+    
+
+    &__prof{
+        background-color: $btn_lightBlue_bkg;
+        border-bottom: solid $btn_blue_bkg 2px;
+    }
+    
+    &__casual{
+        background-color: $btn_lightGreen_bkg;
+        border-bottom: solid $btn_darkGreen_bkg 2px;
+    }
+
+    &__soon{
+        background-color: $btn_lightYellow_bkg;
+        border-bottom: solid $btn_lightYellow_bkg_active_hover 2px;
+    }
+
+
+    &__btn{
+        display: flex;
+
+        &_container{
+            width:50%;
+        }
+    }
+}

@@ -33,8 +33,10 @@ const PlayerGameDetails = (props) => {
     const {removePlayerDispatch, updateScoresDispatch} = useDispatchHook();
     // const gameData = props.gameData;
     const gameData = useSelector(state => state.liveGame);
-// console.log(gameData);
+    
     const id = props.location.state.id;
+
+    
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
 
     const isLoading = false;
