@@ -17,7 +17,6 @@ const tHeaders = ['Player', 'Average', 'Pinfall'];
 
 const GameDetails = ({ liveGame, addNewPlayers, playerSelect, addScores, newGame }) => {
     const { dimensions } = useGetDimensions();
-    console.log(dimensions);
 
     return (
         <div className={[body.contentContainer].join(' ')}>
