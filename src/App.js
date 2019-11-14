@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { LOGIN, SIGNUP } from './Axios/URLS';
 
@@ -10,11 +11,18 @@ import Landing from './Containers/Landing/Landing';
 import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
 import Game from './Containers/Game/Game'
-
 import PlayerGameDetails from './Containers/Game/PlayerGameDetails/PlayerGameDetails';
+import Dashboard from './Containers/Dashboard/Dashboard';
+
+import SecureRoute from './HOC/SecureRoute/SecureRoute';
 
 
-function App() {
+const App = (props) => {
+  const token = useSelector(state => state.user.token);
+
+  useEffect(() => {
+    props.history.push('/dashboard');
+  }, [token]);
 
   return (
     <div>
@@ -25,6 +33,8 @@ function App() {
           <Route path='/login' component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
           <Route path='/player' component={PlayerGameDetails} />
           <Route path='/game' component={Game} />
+
+          <SecureRoute path='/dashboard' component={Dashboard} />
           {/* <Redirect to='/' /> */}
         </Navigation>
       </Switch>
@@ -48,4 +58,4 @@ function App() {
 //     <Input id='test' changed={()=>{}} icon label='hello world' error={['sdfa', 'fdsa']}/>
 // </div>
 
-export default App;
+export default withRouter(App);

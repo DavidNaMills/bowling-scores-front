@@ -8,7 +8,6 @@ export {
 } from './liveGame/actions/liveGameActions';
 
 export {
-    USER_LOGIN,
-    USER_LOGOUT,
-    USER_INIT_GAMES
-} from './user/userActionTypes';
+    userLogin,
+    userLogout
+} from './user/actions/userActions';

@@ -9,6 +9,7 @@ import withAxiosErrors from '../../HOC/withAxiosErrors/withAxiosErrors';
 
 import useFetchHook from '../../Hooks/useFetchHook/useFetchHook';
 import useFormHook from '../../Hooks/useFormHook/useformHook';
+import useDispatchHook from '../../Hooks/useDispatchHook/useDispatchHook';
 
 import Title from '../../Components/StandAloneComponents/Title/Title';
 import InputFactory from '../../Components/Form/InputFactory/InputFactory'
@@ -17,13 +18,17 @@ import Button from '../../Components/StandAloneComponents/Button/Button'
 import objectToArray from '../../helpers/objectToArray/objectToArray';
 
 const AccessContainer = (props) => {
-
+    const { loginUserDispatch } = useDispatchHook();
     const { manageState, formState, completeCheck, clearForm, buildForm } = useFormHook(props.formConfig);
     const { isLoading, makeCall, result } = useFetchHook();
 
     useEffect(() => {
         if (result.error) {
             clearForm();
+        }
+
+        if (result.data) {
+            loginUserDispatch(result.data);
         }
     }, [result])
 
