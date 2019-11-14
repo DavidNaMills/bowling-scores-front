@@ -1,0 +1,25 @@
+@import '../../../styles/colors.scss';
+
+.errorMessage{
+    border: solid $btn_lightRed_bkg_active_hover 3px;
+    background: $btn_lightRed_bkg_active;
+
+
+    &__msg{
+        text-align: center;
+        color: $btn_font_clr;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    &__closeBar{
+        padding:0;
+        display: flex;
+        justify-content: left;
+        
+        &_cls{
+            font-size: 12px;
+            color: $btn_danger_bkg_active_hover;
+        }
+    }
+}

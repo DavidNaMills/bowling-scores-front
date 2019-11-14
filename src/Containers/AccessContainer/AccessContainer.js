@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import form from '../../styles/shared/form.module.scss';
 import body from '../../styles/shared/container.module.scss';
 import spacing from '../../styles/shared/spacing.module.scss';
 
 import axios from '../../Axios/axiosConfig';
+import withAxiosErrors from '../../HOC/withAxiosErrors/withAxiosErrors';
 
 import useFetchHook from '../../Hooks/useFetchHook/useFetchHook';
 import useFormHook from '../../Hooks/useFormHook/useformHook';
@@ -18,7 +19,13 @@ import objectToArray from '../../helpers/objectToArray/objectToArray';
 const AccessContainer = (props) => {
 
     const { manageState, formState, completeCheck, clearForm, buildForm } = useFormHook(props.formConfig);
-    const { isLoading, makeCall } = useFetchHook();
+    const { isLoading, makeCall, result } = useFetchHook();
+
+    useEffect(() => {
+        if (result.error) {
+            clearForm();
+        }
+    }, [result])
 
     const submit = (e) => {
         e.preventDefault();
@@ -62,4 +69,4 @@ const AccessContainer = (props) => {
     )
 };
 
-export default AccessContainer;
+export default withAxiosErrors(AccessContainer, axios);

@@ -22,16 +22,28 @@ const useFetchHook = () => {
         setLoading(true);
         axios(config)
             .then(res => {
-                setResult({
-                    data: res.data,
-                    error: false
-                });
+
+                console.log(res);
+
+                if (res.data === 'Unauthorized') {
+                    setResult({
+                        data: null,
+                        error: true
+                    });
+                } else {
+
+                    setResult({
+                        data: res.data,
+                        error: false
+                    });
+                }
                 setLoading(false);
             })
             .catch(err => {
+                console.log(err);
                 setResult({
                     data: null,
-                    error: err.error
+                    error: true
                 });
                 setLoading(false);
             })

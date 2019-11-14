@@ -1,6 +1,28 @@
 import { MIN_LENGTH, MAX_LENGTH, MAX_LENGTH_2, MIN_LENGTH_PASSWORD } from '../consts/formRestrictions';
 
 export default {
+    name: {
+        elementtype: 'input',
+        elementConfig: {
+            type: 'text',
+            placeholder: 'name'
+        },
+        value: '',
+        validation: {
+            minLength: {
+                req: MIN_LENGTH,
+                errMsg: 'too_short'
+            },
+            maxLength: {
+                req: MAX_LENGTH,
+                errMsg: 'too_long'
+            }
+        },
+        touched: false,
+        isValid: false,
+        shouldValidate: true,
+        hasErr: []
+    },
     username: {
         elementtype: 'input',
         elementConfig: {
@@ -62,24 +84,5 @@ export default {
         isValid: false,
         shouldValidate: true,
         hasErr: []
-    },
-    alleyName: {
-        elementtype: 'input',
-        elementConfig: {
-            type: 'text',
-            placeholder: 'user_alley'
-        },
-        value: '',
-        validation: {
-            maxLength: {
-                req: MAX_LENGTH_2,
-                errMsg: 'max_length_2'
-            }
-        },
-        touched: false,
-        isValid: true,
-        shouldValidate: true,
-        hasErr: []
     }
-
 }

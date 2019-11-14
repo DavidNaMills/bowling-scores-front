@@ -8,7 +8,7 @@ exports[`<AccessContainer/> test suite Snapshot test suite should match the snap
     <h2
       className="title__section"
     >
-      Test Title
+      Bowling Scores: Test Title
     </h2>
   </div>
   <div
