@@ -1,50 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Navigation /> test suite snapshot tests should match the snapshot 1`] = `
+exports[`<Navigation /> test suite snapshot tests should match the snapshot <LoggedInNavigation/> 1`] = `
 <header>
-  <div
-    className="navigation"
-  >
+  <div>
     <div
-      className="navigation_section"
+      className="navigation"
     >
-      <a
-        aria-current="page"
-        className="navigation__link navigation__link_active"
-        href="/"
-        onClick={[Function]}
-        style={Object {}}
+      <div
+        className="navigation_section"
       >
-        Home
-      </a>
-      <a
-        aria-current={null}
-        className="navigation__link"
-        href="/game"
-        onClick={[Function]}
+        <a
+          aria-current="page"
+          className="navigation__link navigation__link_active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Home
+        </a>
+        <a
+          aria-current={null}
+          className="navigation__link"
+          href="/game"
+          onClick={[Function]}
+        >
+          Game
+        </a>
+      </div>
+      <div
+        className="navigation_section"
       >
-        Game
-      </a>
+        <p>
+          david
+        </p>
+        <a
+          aria-current={null}
+          className="navigation__link"
+          href="/logout"
+          onClick={[Function]}
+        >
+          Logout
+        </a>
+      </div>
     </div>
+  </div>
+</header>
+`;
+
+exports[`<Navigation /> test suite snapshot tests should match the snapshot <UnLoggedInNavigation/> 1`] = `
+<header>
+  <div>
     <div
-      className="navigation_section"
+      className="navigation"
     >
-      <a
-        aria-current={null}
-        className="navigation__link"
-        href="/login"
-        onClick={[Function]}
+      <div
+        className="navigation_section"
       >
-        Login
-      </a>
-      <a
-        aria-current={null}
-        className="navigation__link"
-        href="/signup"
-        onClick={[Function]}
+        <a
+          aria-current="page"
+          className="navigation__link navigation__link_active"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Home
+        </a>
+        <a
+          aria-current={null}
+          className="navigation__link"
+          href="/game"
+          onClick={[Function]}
+        >
+          Game
+        </a>
+      </div>
+      <div
+        className="navigation_section"
       >
-        Signup
-      </a>
+        <a
+          aria-current={null}
+          className="navigation__link"
+          href="/login"
+          onClick={[Function]}
+        >
+          Login
+        </a>
+        <a
+          aria-current={null}
+          className="navigation__link"
+          href="/signup"
+          onClick={[Function]}
+        >
+          Signup
+        </a>
+      </div>
     </div>
   </div>
 </header>

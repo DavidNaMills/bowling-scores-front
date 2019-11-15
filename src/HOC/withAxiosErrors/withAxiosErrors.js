@@ -16,7 +16,7 @@ const withAxiosErrors = (WrappedComponent, axios) => {
                 const cutStr = error.response.config.url.slice(error.config.url.lastIndexOf('/')+1, error.response.config.url.length);
 
                 if(status===401 && cutStr==='login'){
-                    setMsg('Wrong Username or Password');
+                    setMsg('Invalid Username or Password');
                 }
                 else if(status === 401){
                     setMsg('Unauthorized');

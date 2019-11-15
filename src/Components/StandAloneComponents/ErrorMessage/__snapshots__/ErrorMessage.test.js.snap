@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorMessage /> test suite snapshot test 1`] = `
+<div
+  className="errorMessage"
+>
+  <p
+    className="errorMessage__msg"
+  >
+    I am a long test message
+  </p>
+</div>
+`;

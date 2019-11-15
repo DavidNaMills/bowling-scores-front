@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnLoggedInNavigation/> test suite should match the snapshot 1`] = `
+<div
+  className="navigation"
+>
+  <div
+    className="navigation_section"
+  >
+    <a
+      aria-current="page"
+      className="navigation__link navigation__link_active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      Home
+    </a>
+    <a
+      aria-current={null}
+      className="navigation__link"
+      href="/game"
+      onClick={[Function]}
+    >
+      Game
+    </a>
+  </div>
+  <div
+    className="navigation_section"
+  >
+    <a
+      aria-current={null}
+      className="navigation__link"
+      href="/login"
+      onClick={[Function]}
+    >
+      Login
+    </a>
+    <a
+      aria-current={null}
+      className="navigation__link"
+      href="/signup"
+      onClick={[Function]}
+    >
+      Signup
+    </a>
+  </div>
+</div>
+`;

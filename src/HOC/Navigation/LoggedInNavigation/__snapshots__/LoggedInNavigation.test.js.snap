@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoggedIn /> test suite snapshot test 1`] = `
+<div
+  className="navigation"
+>
+  <div
+    className="navigation_section"
+  >
+    <a
+      aria-current="page"
+      className="navigation__link navigation__link_active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      Home
+    </a>
+    <a
+      aria-current={null}
+      className="navigation__link"
+      href="/game"
+      onClick={[Function]}
+    >
+      Game
+    </a>
+  </div>
+  <div
+    className="navigation_section"
+  >
+    <p
+      className="navigation__username"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      test test
+    </p>
+    <a
+      aria-current={null}
+      className="navigation__link"
+      href="/logout"
+      onClick={[Function]}
+    >
+      Logout
+    </a>
+  </div>
+</div>
+`;

@@ -18,16 +18,16 @@ import SecureRoute from './HOC/SecureRoute/SecureRoute';
 
 
 const App = (props) => {
-  const token = useSelector(state => state.user.token);
+  const user = useSelector(state => state.user);
 
   useEffect(() => {
     props.history.push('/dashboard');
-  }, [token]);
+  }, [user]);
 
   return (
     <div>
       <Switch>
-        <Navigation>
+        <Navigation user={user}>
           <Route path='/' exact={true} component={Landing} />
           <Route path='/signup' component={() => <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP} />} />
           <Route path='/login' component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />

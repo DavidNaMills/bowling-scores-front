@@ -9,6 +9,12 @@ describe('<ErrorMessage /> test suite', () => {
     const testMsg = 'I am a long test message';
     const mockClose = jest.fn();
 
+    it('snapshot test', ()=>{
+        const component = renderer.create(<ErrorMessage msg={testMsg} />);
+        const app = component.toJSON();
+        expect(app).toMatchSnapshot();
+    });
+
     it('renders a message', () => {
         const wrapper = shallow(<ErrorMessage msg={testMsg} />)
         expect(wrapper.find('.errorMessage').length).toBe(1);
