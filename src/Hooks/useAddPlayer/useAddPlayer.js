@@ -19,14 +19,14 @@ const defaultGameStructure = {
 
 const useAddPlayer = (isNew) => {
     const tempLiveGame = useSelector(state => state.liveGame);
-    const { addNewPlayerDispatch, initGameDispatch } = useDispatchHook();
-    const {getTime} = useTime();
+    const { addNewPlayerDispatch, initGameDispatch, commitNewGameDispatch } = useDispatchHook();
+    const { getTime } = useTime();
 
     const [newPlayer, setPlayer] = useState(defaultPlayer);
     const [liveGame, setliveGame] = useState(isNew ? defaultGameStructure : tempLiveGame);  //set full game from store or create from new game object
-    
-    useEffect(()=>{
-        if(!isNew){
+
+    useEffect(() => {
+        if (!isNew) {
             setliveGame(tempLiveGame);
         }
     }, [tempLiveGame])
@@ -48,7 +48,7 @@ const useAddPlayer = (isNew) => {
 
 
     const addPlayer = () => {
-        const tempPlayer =  JSON.parse(JSON.stringify(liveGame));
+        const tempPlayer = JSON.parse(JSON.stringify(liveGame));
 
         if (newPlayer.name) {
             if (!newPlayer.id) {        //assign an id
@@ -73,9 +73,9 @@ const useAddPlayer = (isNew) => {
         }
     }
 
-    const commitGame = (cb=()=>{}) => {
+    const commitGame = (cb = () => { }) => {
         if (isNew) {
-            initGameDispatch(liveGame);
+            commitNewGameDispatch(liveGame);
             cb();   //optional callback. used in this case to change back to game view
         }
     };

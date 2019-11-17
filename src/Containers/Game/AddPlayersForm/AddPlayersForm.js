@@ -10,6 +10,9 @@ import Table from '../../../Components/Table/Table';
 import Input from '../../../Components/Form/elements/Input/Input';
 import Title from '../../../Components/StandAloneComponents/Title/Title';
 
+import withAxiosErrors from '../../../HOC/withAxiosErrors/withAxiosErrors';
+import axios from '../../../Axios/axiosConfig';
+
 import { playerTableStyle } from '../playerTableStyle';
 import tableParser from '../../../helpers/tableGamesDataModifier/tableGamesDataModifier';
 
@@ -122,4 +125,4 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
     )
 }
 
-export default AddPlayersForm;
+export default withAxiosErrors(AddPlayersForm, axios);

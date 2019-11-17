@@ -1,5 +1,3 @@
-import uuid from 'uuid';
-
 import {
     INIT_GAME,
     LOAD_GAME,
@@ -27,8 +25,9 @@ const liveGameReducer = (state = defaultState, action) => {
 
 
         case ADD_PLAYER:
-            const id = action.payload.id ? action.payload.id : uuid();
-            tempState.players[id] = {
+            // const _id = action.payload._id ? action.payload._id : uuid();
+            const _id = action.payload._id;
+            tempState.players[_id] = {
                 name: action.payload.name,
                 color: action.payload.color
             }
@@ -52,7 +51,7 @@ const liveGameReducer = (state = defaultState, action) => {
 
 
         case ADD_NEW_GAME:
-            const tempScore = JSON.parse(JSON.stringify(action.payload));
+            const tempScore = JSON.parse(JSON.stringify(action.payload.data));
             for (let k in tempScore) {
                 if (+tempScore[k].score > 0) {
                     tempScore[k].score = +tempScore[k].score;
@@ -61,8 +60,8 @@ const liveGameReducer = (state = defaultState, action) => {
                 }
             }
 
-            const key = Object.keys(tempState.games).length + 1;
-            tempState.games[`${key}`] = tempScore;
+            // const key = Object.keys(tempState.games).length + 1;
+            tempState.games[`${action.payload.key}`] = tempScore;
             return tempState;
 
 

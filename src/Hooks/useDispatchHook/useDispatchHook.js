@@ -9,6 +9,8 @@ const useDispatchHook = () =>{
     const addNewPlayerDispatch = (data) => dispatch(actions.addPlayer(data));
     const addNewGameDispatch = (data) => dispatch(actions.addNewGame(data));
     const initGameDispatch = (data) => dispatch(actions.initGame(data));
+    const commitNewGameDispatch = (data) => dispatch(actions.commitNewGame(data));
+
     const removePlayerDispatch = (id) => dispatch(actions.removePlayer(id));
     const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data))
 
@@ -20,6 +22,8 @@ const useDispatchHook = () =>{
         addNewPlayerDispatch,
         addNewGameDispatch,
         initGameDispatch,
+        commitNewGameDispatch,
+        
         removePlayerDispatch,
         updateScoresDispatch,
 

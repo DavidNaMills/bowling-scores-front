@@ -1,5 +1,6 @@
 export {
     initGame,
+    commitNewGame,      //no local action
     loadGame,
     addPlayer,
     removePlayer,

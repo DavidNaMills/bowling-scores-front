@@ -1,3 +1,4 @@
+import {setAuthorizationToken} from '../../../Axios/axiosConfig';
 import {
     USER_LOGIN,
     USER_LOGOUT,
@@ -5,11 +6,15 @@ import {
 } from '../userActionTypes';
 
 
-export const userLogin = (data) => ({
+export const userLoginLocal = (data) => ({
     type: USER_LOGIN,
     payload: data
 });
 
+export const userLogin = (data) => (dispatch)=>{
+    setAuthorizationToken(data.token);
+    dispatch(userLoginLocal(data));
+}
 
 export const userLogout = () => ({
     type: USER_LOGOUT

@@ -14,7 +14,7 @@ import {
     loadGame,
     addPlayer,
     removePlayer,
-    addNewGame,
+    addNewGameLocal,
     updateIndividualScore
 } from './liveGameActions';
 
@@ -86,7 +86,7 @@ describe('liveGameActions test suite', () => {
             }
         };
 
-        const action = addNewGame(newGame);
+        const action = addNewGameLocal(newGame);
 
         expect(action.type).toEqual(ADD_NEW_GAME);
         expect(action.payload).toEqual(newGame);

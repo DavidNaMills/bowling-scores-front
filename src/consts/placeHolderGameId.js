@@ -1,0 +1,1 @@
+export const PLACEHOLDER_ID = '123789456123abc';
