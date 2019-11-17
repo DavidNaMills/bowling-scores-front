@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import useDispatchHook from '../../Hooks/useDispatchHook/useDispatchHook';
 
 const Logout = () =>{
-    const {logoutUserDispatch} = useDispatch();
+    const {logoutUserDispatch} = useDispatchHook();
 
     useEffect(()=>{
         logoutUserDispatch();
