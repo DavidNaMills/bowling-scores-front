@@ -13,6 +13,7 @@ import signupFormConfig from './formConfigs/signupFormConfig';
 import Game from './Containers/Game/Game'
 import PlayerGameDetails from './Containers/Game/PlayerGameDetails/PlayerGameDetails';
 import Dashboard from './Containers/Dashboard/Dashboard';
+import Logout from './Containers/Logout/Logout';
 
 import SecureRoute from './HOC/SecureRoute/SecureRoute';
 
@@ -35,7 +36,7 @@ const App = (props) => {
           <Route path='/game' component={Game} />
 
           <SecureRoute path='/dashboard' component={Dashboard} />
-          {/* <Redirect to='/' /> */}
+          <Route path='/logout' component={Logout} />
         </Navigation>
       </Switch>
     </div>

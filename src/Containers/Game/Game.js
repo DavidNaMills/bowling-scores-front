@@ -11,6 +11,8 @@ import AddPlayersForm from './AddPlayersForm/AddPlayersForm';
 import Popup from '../../Components/StandAloneComponents/Popup/Popup';
 import Title from '../../Components/StandAloneComponents/Title/Title';
 
+import PLACEHOLDER_ID from '../../consts/formRestrictions';
+
 // import classes from './Game.module.scss';
 
 
@@ -36,7 +38,7 @@ const Game = (props) => {
         const plr = Object.keys(liveGame.players).length;
         const gms = Object.keys(liveGame.games).length;
 
-        if (hasExistingGame && plr===0 && gms===0) {
+        if (hasExistingGame && plr>0 || gms>0) {
             initGameDispatch(JSON.parse(hasExistingGame));
             setPopup(true);
         }

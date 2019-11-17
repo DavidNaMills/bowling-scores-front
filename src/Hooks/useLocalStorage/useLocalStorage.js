@@ -5,6 +5,7 @@ const defaultFileName = 'bowling-scores-temp'
 const useLocalStorage = (file=defaultFileName) => {
 
     const writeToLocalStorage = (data) => {
+        console.log(data);
         try{
             localStorage.clear(file);
             localStorage.setItem(file, JSON.stringify(data));
