@@ -19,6 +19,8 @@ const defaultGameStructure = {
 
 const useAddPlayer = (isNew) => {
     const tempLiveGame = useSelector(state => state.liveGame);
+    const loggedInUser = useSelector(state => state.user.user);
+
     const { addNewPlayerDispatch, initGameDispatch, commitNewGameDispatch } = useDispatchHook();
     const { getTime } = useTime();
 
@@ -29,7 +31,20 @@ const useAddPlayer = (isNew) => {
         if (!isNew) {
             setliveGame(tempLiveGame);
         }
-    }, [tempLiveGame])
+    }, [tempLiveGame]);
+
+
+    useEffect(()=>{
+        if(isNew && loggedInUser ){
+            const tempPlayer = JSON.parse(JSON.stringify(liveGame));
+            const newPlayer = {};
+            newPlayer.name=loggedInUser.username;
+            newPlayer.color=loggedInUser.color;
+            tempPlayer.players[loggedInUser._id] = newPlayer;
+            setliveGame(tempPlayer);
+        }
+    }, [isNew]);
+
 
     const setName = (e) => {
         const name = e.target.value;
