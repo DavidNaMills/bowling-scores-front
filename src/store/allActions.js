@@ -5,7 +5,8 @@ export {
     addPlayer,
     removePlayer,
     addNewGame,
-    updateIndividualScore
+    updateIndividualScore,
+    resetLiveGame
 } from './liveGame/actions/liveGameActions';
 
 export {

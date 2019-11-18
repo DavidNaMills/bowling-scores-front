@@ -7,7 +7,7 @@ const LoggedInNavigation = (props) => {
     return (
         <div className={classes.navigation}>
             <div className={classes.navigation_section}>
-                <NavLink exact className={classes.navigation__link} activeClassName={classes.navigation__link_active} to='/'>Home</NavLink>
+                <NavLink exact className={classes.navigation__link} activeClassName={classes.navigation__link_active} to='/dashboard'>Home</NavLink>
                 <NavLink className={classes.navigation__link} activeClassName={classes.navigation__link_active} to='/game'>Game</NavLink>
             </div>
             <div className={classes.navigation_section}>

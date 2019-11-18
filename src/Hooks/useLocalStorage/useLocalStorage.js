@@ -1,43 +1,27 @@
 import {useEffect} from 'react';
+import {writeToLocalStorage, readFromLocalStorage, removeFromLocalStorage} from '../../helpers/localStorage/localStorage';
+import {LOCAL_STORAGE_FILE} from '../../consts/localStorageFilename';
 
-const defaultFileName = 'bowling-scores-temp'
+const useLocalStorage = (file=LOCAL_STORAGE_FILE) => {
 
-const useLocalStorage = (file=defaultFileName) => {
-
-    const writeToLocalStorage = (data) => {
-        console.log(data);
-        try{
-            localStorage.clear(file);
-            localStorage.setItem(file, JSON.stringify(data));
-        }catch(err){
-            console.log(err);
-        }
+    const writeToStorage = (data) => {
+        writeToLocalStorage(file, data);
     }
     
     
-    const readFromLocalStorage = () => {
-        try{
-            const temp = localStorage.getItem(file);
-            return temp;
-        }catch(err){
-            return null;
-        }
+    const readFromStorage = () => {
+        return readFromLocalStorage(file);
     }
     
-    const removeFromLocalStorage = (data) =>{
-        try{
-            localStorage.removeItem(file, data);
-        }catch(err){
-            return null;
-            console.log(err);
-        }
+    const removeFromStorage = (data) =>{
+        removeFromLocalStorage(file, data);
     }
 
 
     return {
-        writeToLocalStorage,
-        readFromLocalStorage,
-        removeFromLocalStorage
+        writeToStorage,
+        readFromStorage,
+        removeFromStorage
     }
 };
 

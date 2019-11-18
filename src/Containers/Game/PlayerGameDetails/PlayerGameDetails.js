@@ -31,12 +31,15 @@ const tHeaders2 = ['Score']
 
 const PlayerGameDetails = (props) => {
     const {removePlayerDispatch, updateScoresDispatch} = useDispatchHook();
-    // const gameData = props.gameData;
     const gameData = useSelector(state => state.liveGame);
+    const user = useSelector(state => state.user);
     
     const id = props.location.state.id;
+    let userId= null;
+    if(user.token){
+        userId = user.user._id;
+    } 
 
-    
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
 
     const isLoading = false;
@@ -130,6 +133,12 @@ const PlayerGameDetails = (props) => {
         />
     )
 
+    const buildDeleteButton = () =>(
+        <div className={spacing.superLarge}>
+            <Button isFull label='Remove Player' type='danger' click={() => setPopup(true)} />
+        </div>
+    )
+
     return (
         <div className={body.contentContainer}>
             {showPopup && buildPopup()}
@@ -165,10 +174,7 @@ const PlayerGameDetails = (props) => {
                     </div>
 
                     {buildBackButton()}
-
-                    <div className={spacing.superLarge}>
-                        <Button isFull label='Remove Player' type='danger' click={() => setPopup(true)} />
-                    </div>
+                    {userId !== id && buildDeleteButton()}
                 </React.Fragment>
             }
         </div>

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginPrompt/> test suite snapshot tests 1`] = `
+<div
+  className="staticPrompt"
+>
+  <div>
+    <p>
+      This is a test message
+    </p>
+    <div
+      className="staticPrompt__btn"
+    />
+  </div>
+</div>
+`;

@@ -1,7 +1,14 @@
 import uuid from 'uuid';
 import axios from '../../../Axios/axiosConfig';
-import { NEW_GAME, ADD_FRAME, ADD_PLAYER_URL, UPDATE_GAME_SCORES, REMOVE_PLAYER_URL} from '../../../Axios/URLS';
+import { NEW_GAME, ADD_FRAME, ADD_PLAYER_URL, UPDATE_GAME_SCORES, REMOVE_PLAYER_URL } from '../../../Axios/URLS';
 import { PLACEHOLDER_ID } from '../../../consts/placeHolderGameId';
+import { LOCAL_STORAGE_FILE } from '../../../consts/localStorageFilename';
+
+import { writeToLocalStorage } from '../../../helpers/localStorage/localStorage';
+import { addNewPlayer } from '../../../helpers/addNewPlayer/addNewPlayer';
+import { removePlayerHelper } from '../../../helpers/removePlayer/removePlayer';
+import { updatePlayerScores } from '../../../helpers/updatePlayerScores/updatePlayerScores';
+import { addNewFrame } from '../../../helpers/addNewFrame/addNewFrame';
 
 import {
     INIT_GAME,
@@ -9,37 +16,48 @@ import {
     ADD_PLAYER,
     REMOVE_PLAYER,
     ADD_NEW_GAME,
-    UPDATE_INDIVIDUAL_SCORE
+    UPDATE_INDIVIDUAL_SCORE,
+    RESET_LIVE_GAME
 } from '../liveGameActionTypes';
 
 
 export const initGame = (playerData) => ({
     type: INIT_GAME,
-    payload: {
-        _id: playerData._id ? playerData._id : PLACEHOLDER_ID,
-        createdAt: playerData.createdAt ? playerData.createdAt : new Date(),
-        players: playerData.players ? playerData.players : {},
-        games: playerData.games ? playerData.games : {},
-    }
+    payload: playerData
 });
 
 
 export const commitNewGame = (playerData) => async (dispatch, getState) => {
-    await axios({
-        method: 'POST',
-        url: NEW_GAME,
-        data: playerData
-    })
-        .then((res) => {
-            if (res.data.error) {
-                console.log(res.data.errors);
-            } else {
-                dispatch(initGame(res.data.item));
-            }
+    const { user } = getState();
+
+    if (!user.token) {        //user not logged in
+        const temp = {
+            _id: playerData._id ? playerData._id : PLACEHOLDER_ID,
+            createdAt: playerData.createdAt ? playerData.createdAt : new Date(),
+            players: playerData.players ? playerData.players : {},
+            games: playerData.games ? playerData.games : {},
+        }
+
+        dispatch(initGame(temp));
+        writeToLocalStorage(LOCAL_STORAGE_FILE, temp);
+
+    } else {        //user logged in
+        await axios({
+            method: 'POST',
+            url: NEW_GAME,
+            data: playerData
         })
-        .catch(err => {
-            console.log(err);
-        })
+            .then((res) => {
+                if (res.data.error) {
+                } else {
+                    dispatch(initGame(res.data.item));
+                    writeToLocalStorage(LOCAL_STORAGE_FILE, res.data.item);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 }
 
 
@@ -50,6 +68,7 @@ export const loadGame = (prevGame) => ({
     payload: prevGame
 })
 
+
 export const addPlayerLocal = (newPlayer) => ({
     type: ADD_PLAYER,
     payload: newPlayer
@@ -59,10 +78,13 @@ export const addPlayer = (newPlayer) => async (dispatch, getState) => {
     const { user, liveGame } = getState();
     const tempId = uuid();
 
-    if (!user.token || liveGame._id === PLACEHOLDER_ID) {
-        dispatch(addPlayerLocal(newPlayer));
+    if (!user.token || liveGame._id === PLACEHOLDER_ID) {   //user not logged in
+        newPlayer._id = tempId;
+        const updated = addNewPlayer(liveGame, newPlayer);      //update the game object
+        dispatch(addPlayerLocal(updated));      //update game store
+        writeToLocalStorage(LOCAL_STORAGE_FILE, updated);   //update localstorage
     } else {
-        await axios({
+        await axios({           //make call to rest api and update store as logged in
             method: 'POST',
             url: `${ADD_PLAYER_URL}/${liveGame._id}`,
             data: {
@@ -72,7 +94,8 @@ export const addPlayer = (newPlayer) => async (dispatch, getState) => {
         })
             .then((res) => {
                 if (!res.error) {
-                    dispatch(addPlayerLocal({ ...newPlayer, _id: tempId }));
+                    dispatch(addPlayerLocal(res.data.item));
+                    writeToLocalStorage(LOCAL_STORAGE_FILE, JSON.stringify(res.data.item));
                 }
             })
     }
@@ -86,21 +109,25 @@ export const removePlayerLocal = (playerId) => ({
     payload: playerId
 });
 
-export const removePlayer = (playerId) => async(dispatch, getState)=>{
-    const {user, liveGame} = getState();
-    
-    if (!user.token || liveGame._id === PLACEHOLDER_ID) {
-        dispatch(removePlayerLocal(playerId));
-    } else{
+
+export const removePlayer = (playerId) => async (dispatch, getState) => {
+    const { user, liveGame } = getState();
+
+    if (!user.token || liveGame._id === PLACEHOLDER_ID) {       //user not logged in
+        const result = removePlayerHelper(liveGame, playerId);
+        dispatch(removePlayerLocal(result));
+        writeToLocalStorage(LOCAL_STORAGE_FILE, result);
+    } else {     //user logged in
         await axios({
             method: 'DELETE',
             url: `${REMOVE_PLAYER_URL}/${liveGame._id}/${playerId}`,
         })
-        .then(res=>{
-            if(!res.error){
-                dispatch(removePlayerLocal(playerId));
-            }
-        })
+            .then(res => {
+                if (!res.error) {
+                    dispatch(removePlayerLocal(res.data.item));
+                    writeToLocalStorage(LOCAL_STORAGE_FILE, res.data.item);
+                }
+            })
     }
 }
 
@@ -110,21 +137,22 @@ export const removePlayer = (playerId) => async(dispatch, getState)=>{
 
 
 
-export const addNewGameLocal = (newGame, key) => ({
+export const addNewGameLocal = (newFrame) => ({
     type: ADD_NEW_GAME,
-    payload: {
-        key,
-        data: newGame
-    }
+    payload: newFrame
 });
 
-//Thunk
+
 export const addNewGame = (newGame) => async (dispatch, getState) => {
     const { user, liveGame } = getState();
-    const key = Object.keys(liveGame.games).length + 1;
+    const key = liveGame.games
+        ? Object.keys(liveGame.games).length + 1
+        : 1
 
-    if (!user.token || liveGame._id === PLACEHOLDER_ID) {
-        dispatch(addNewGameLocal(newGame, key));
+    if (!user.token || liveGame._id === PLACEHOLDER_ID) {       //user not logged in
+        const result = addNewFrame(liveGame, newGame, key);
+        dispatch(addNewGameLocal(result));
+        writeToLocalStorage(LOCAL_STORAGE_FILE, result);
     } else {
         await axios({
             method: 'POST',
@@ -136,7 +164,8 @@ export const addNewGame = (newGame) => async (dispatch, getState) => {
         })
             .then((res) => {
                 if (!res.error) {
-                    dispatch(addNewGameLocal(newGame, key));
+                    dispatch(addNewGameLocal(res.data.item));
+                    writeToLocalStorage(LOCAL_STORAGE_FILE, res.data.item);
                 }
             })
     }
@@ -149,11 +178,14 @@ export const updateIndividualScoreLocal = (updatedScores) => ({
     payload: updatedScores
 });
 
+
 export const updateIndividualScore = (updatedScores) => async (dispatch, getState) => {
     const { user, liveGame } = getState();
 
-    if (!user.token || liveGame._id === PLACEHOLDER_ID) {
-        dispatch(updateIndividualScoreLocal(updatedScores));
+    if (!user.token || liveGame._id === PLACEHOLDER_ID) {       //user not logged in
+        const result = updatePlayerScores(liveGame, updatedScores.id, updatedScores.scores);
+        dispatch(updateIndividualScoreLocal(result));
+        writeToLocalStorage(LOCAL_STORAGE_FILE, result);
     } else {
         await axios({
             method: 'PUT',
@@ -165,7 +197,8 @@ export const updateIndividualScore = (updatedScores) => async (dispatch, getStat
         })
             .then((res) => {
                 if (!res.error) {
-                    dispatch(updateIndividualScoreLocal(updatedScores));
+                    dispatch(updateIndividualScoreLocal(res.data.item));
+                    writeToLocalStorage(LOCAL_STORAGE_FILE, res.data.item);
                 }
             })
             .catch(err => {
@@ -174,3 +207,8 @@ export const updateIndividualScore = (updatedScores) => async (dispatch, getStat
     }
 
 }
+
+
+export const resetLiveGame = () =>({
+    type: RESET_LIVE_GAME
+});

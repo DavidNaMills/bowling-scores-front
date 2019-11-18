@@ -12,17 +12,19 @@ const useDispatchHook = () =>{
     const commitNewGameDispatch = (data) => dispatch(actions.commitNewGame(data));
 
     const removePlayerDispatch = (id) => dispatch(actions.removePlayer(id));
-    const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data))
+    const updateScoresDispatch = (data) => dispatch(actions.updateIndividualScore(data));
+    const resetLiveGameDispatch = () => dispatch(actions.resetLiveGame());
 
     //User actions
     const loginUserDispatch = (data) => dispatch(actions.userLogin(data));
-    const logoutUserDispatch = () => dispatch(actions.userLogout())
+    const logoutUserDispatch = () => dispatch(actions.userLogout());
 
     return {
         addNewPlayerDispatch,
         addNewGameDispatch,
         initGameDispatch,
         commitNewGameDispatch,
+        resetLiveGameDispatch,
         
         removePlayerDispatch,
         updateScoresDispatch,
