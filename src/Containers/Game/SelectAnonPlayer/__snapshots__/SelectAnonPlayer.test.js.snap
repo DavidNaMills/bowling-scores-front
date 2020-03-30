@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectAnonPlayer /> component test suite matches the snapshot 1`] = `
+<div>
+  <div
+    className="title"
+  >
+    <h3
+      className="title__sub"
+    >
+      Please select the name you played as
+    </h3>
+  </div>
+  <div>
+    <p
+      className="caption"
+    >
+      Select Yourself
+    </p>
+    <table
+      className="table"
+    >
+      <thead>
+        <tr>
+          <td>
+            Player
+          </td>
+          <td>
+            Average
+          </td>
+          <td>
+            Pinfall
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className=""
+          onClick={[Function]}
+          style={
+            Object {
+              "background": "linear-gradient(180deg, rgba(255,255,255,1) 37%, rgba(17, 127, 14,1) 100%)",
+            }
+          }
+        >
+          <td>
+            gfdgfds
+          </td>
+          <td>
+            63
+          </td>
+          <td>
+            190
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="largeExtra"
+  >
+    <button
+      className="button button__isFull button__disabled"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Submit
+    </button>
+  </div>
+  <div
+    className="extra"
+  >
+    <button
+      className="button button__isFull button__lightRed"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+`;

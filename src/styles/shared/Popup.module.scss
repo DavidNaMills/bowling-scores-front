@@ -1,0 +1,58 @@
+@import '../colors.scss';
+
+.popup{
+    &__container{
+        position: absolute;
+        top:0;
+        left: 0;
+        background-color: $popup_container_color;
+        height: 100vh;
+        width: 100vw;
+        z-index: 900;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__module{
+        border: $popup_borders;
+        background: $popup_module_color;
+        margin: auto;
+        padding: 10px;
+        width: 80vw;
+        max-width: 400px;
+    }
+
+    &__closeBar{
+        padding:0;
+        display: flex;
+        justify-content: left;
+        
+        &_cls{
+            font-size: 12px;
+            color: $btn_danger_bkg_active_hover;
+        }
+    }
+    
+    &__message{
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        // border-bottom: $popup_borders_separator;
+    }
+    &__message2{
+        padding-top: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        border-bottom: $popup_borders_separator;
+    }
+
+    &__btnContainer{
+        display: flex;
+        justify-content: space-around;
+        padding-top: 10px;
+        margin: 20px;
+    }
+
+}

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SecureRoute test suite matches snapshot 1`] = `
+<div>
+  <p>
+    test comp
+  </p>
+</div>
+`;

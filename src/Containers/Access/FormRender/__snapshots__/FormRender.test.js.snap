@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormRender/> component test suite matches the snapshot 1`] = `
+<div
+  className="contentContainer"
+>
+  <div
+    className="form__container"
+  >
+    <form
+      className="form__form"
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="input__label"
+      >
+        <label
+          htmlFor="username"
+        >
+          user_name
+        </label>
+        <div>
+          <input
+            className="input input__default"
+            id="username"
+            onChange={[Function]}
+            placeholder="user_name"
+            type="text"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root icon icon__required"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="input__label"
+      >
+        <label
+          htmlFor="password"
+        >
+          user_pass
+        </label>
+        <div>
+          <input
+            className="input input__default"
+            id="password"
+            onChange={[Function]}
+            placeholder="user_pass"
+            type="password"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root icon icon__required"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM21.41 6.34l-3.75-3.75-2.53 2.54 3.75 3.75 2.53-2.54z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="largeExtra"
+      >
+        <button
+          className="button button__isFull button__disabled"
+          disabled={true}
+          onClick={[MockFunction]}
+        >
+          <div
+            className="button__children"
+          >
+            <div
+              className="css-17746h"
+            >
+              <div
+                className="css-19jw3fv"
+              />
+              <div
+                className="css-smhglk"
+              />
+              <div
+                className="css-1mflh4g"
+              />
+              <div
+                className="css-7dnnyj"
+              />
+              <div
+                className="css-44qhqd"
+              />
+              <div
+                className="css-1wx6dpf"
+              />
+            </div>
+          </div>
+        </button>
+        <div
+          className="extra"
+        >
+          <button
+            className="button button__isFull button__disabled"
+            disabled={true}
+            onClick={[MockFunction]}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

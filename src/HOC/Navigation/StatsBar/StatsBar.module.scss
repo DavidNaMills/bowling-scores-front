@@ -1,0 +1,13 @@
+@import '../../../styles/colors.scss';
+
+
+.StatsBar {
+    background-color: $btn_blue_bkg_active;
+    // background-color: $btn_lightGreen_bkg;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid $btn_darkGreen_bkg_active 2px;
+    font-size: 14px;
+}

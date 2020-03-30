@@ -1,0 +1,53 @@
+@import '../../styles/colors.scss';
+
+.Infinite{
+    //spacing
+    //font
+
+    &__more{    //load more bar
+        text-align: center;
+        padding-bottom: 10px;
+        padding-top: 15px;
+        font-weight: bold;
+        
+        &_finished{
+            background: rgb(255,255,255);
+            background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(237,245,244,1) 51%, rgba($btn_danger_bkg,0.7539390756302521) 100%);
+            background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(237,245,244,1) 51%, rgba($btn_danger_bkg,0.7539390756302521) 100%);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(237,245,244,1) 51%, rgba($btn_danger_bkg,0.7539390756302521) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#fa7575",GradientType=1);
+        }    //loaded all
+        
+
+        &_toFetch{
+            background: rgb(255,255,255);
+            background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(237,245,244,1) 51%, rgba($btn_darkBlue_bkg_active,1) 100%);
+            background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(237,245,244,1) 51%, rgba($btn_darkBlue_bkg_active,1) 100%);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(237,245,244,1) 51%, rgba($btn_darkBlue_bkg_active,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#cdffc7",GradientType=1);
+            
+        }        //still some to come
+    }
+    
+
+    &__spinner{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+
+
+    &__results{
+        padding: 10px;
+        border-bottom: solid $shadow_color 2px;
+        margin-bottom: 40px;
+
+        &_all{
+
+        }
+
+        &_more{
+
+        }
+    }
+}

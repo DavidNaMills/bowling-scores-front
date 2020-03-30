@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Game/> component test suite creation tests matches snapshot 1`] = `
+<div>
+  <div
+    className="css-mnv97b"
+  >
+    <div
+      className="css-42nwui"
+    />
+    <div
+      className="css-5z299x"
+    />
+    <div
+      className="css-4vijxx"
+    />
+    <div
+      className="css-1ndb4r1"
+    />
+    <div
+      className="css-1mvde9j"
+    />
+    <div
+      className="css-fyec2"
+    />
+  </div>
+  <div
+    className="title"
+  >
+    <h2
+      className="title__section"
+    >
+      Bowling Scores: Play
+    </h2>
+  </div>
+  <div
+    className="contentContainer"
+  >
+    <div
+      className="btns"
+    >
+      <button
+        className="button button__isFull button__blue"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Add Scores
+      </button>
+    </div>
+    <div
+      className="title"
+    >
+      <h3
+        className="title__sub"
+      >
+        Invalid-Date
+      </h3>
+    </div>
+    <div
+      className="gameDetails__center"
+    >
+      <div>
+        <div
+          className="recharts-wrapper"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "cursor": "default",
+              "height": 350,
+              "position": "relative",
+              "width": 800,
+            }
+          }
+        >
+          <svg
+            className="recharts-surface"
+            height={350}
+            version="1.1"
+            viewBox="0 0 800 350"
+            width={800}
+          >
+            <defs>
+              <clipPath
+                id="recharts1-clip"
+              >
+                <rect
+                  height={315}
+                  width={755}
+                  x={40}
+                  y={5}
+                />
+              </clipPath>
+            </defs>
+            <g
+              className="recharts-cartesian-grid"
+            >
+              <g
+                className="recharts-cartesian-grid-horizontal"
+              >
+                <line
+                  fill="none"
+                  height={315}
+                  stroke="#ccc"
+                  strokeDasharray="3 3"
+                  width={755}
+                  x={40}
+                  x1={40}
+                  x2={795}
+                  y={5}
+                  y1={5}
+                  y2={5}
+                />
+                <line
+                  fill="none"
+                  height={315}
+                  stroke="#ccc"
+                  strokeDasharray="3 3"
+                  width={755}
+                  x={40}
+                  x1={40}
+                  x2={795}
+                  y={5}
+                  y1={320}
+                  y2={320}
+                />
+              </g>
+              <g
+                className="recharts-cartesian-grid-vertical"
+              >
+                <line
+                  fill="none"
+                  height={315}
+                  stroke="#ccc"
+                  strokeDasharray="3 3"
+                  width={755}
+                  x={40}
+                  x1={40}
+                  x2={40}
+                  y={5}
+                  y1={5}
+                  y2={320}
+                />
+                <line
+                  fill="none"
+                  height={315}
+                  stroke="#ccc"
+                  strokeDasharray="3 3"
+                  width={755}
+                  x={40}
+                  x1={795}
+                  x2={795}
+                  y={5}
+                  y1={5}
+                  y2={320}
+                />
+              </g>
+            </g>
+            <g
+              className="recharts-layer recharts-cartesian-axis recharts-yAxis yAxis"
+            >
+              <line
+                className="recharts-cartesian-axis-line"
+                fill="none"
+                height={315}
+                stroke="#666"
+                width={40}
+                x={0}
+                x1={40}
+                x2={40}
+                y={5}
+                y1={5}
+                y2={320}
+              />
+              <g
+                className="recharts-cartesian-axis-ticks"
+              />
+            </g>
+          </svg>
+          <div
+            className="recharts-tooltip-wrapper"
+            style={
+              Object {
+                "MozTransform": "translate(undefinedpx, undefinedpx)",
+                "OTransform": "translate(undefinedpx, undefinedpx)",
+                "WebkitTransform": "translate(undefinedpx, undefinedpx)",
+                "msTransform": "translate(undefinedpx, undefinedpx)",
+                "pointerEvents": "none",
+                "position": "absolute",
+                "top": 0,
+                "transform": "translate(undefinedpx, undefinedpx)",
+                "visibility": "hidden",
+              }
+            }
+          >
+            <div
+              className="recharts-default-tooltip"
+              style={
+                Object {
+                  "backgroundColor": "#fff",
+                  "border": "1px solid #ccc",
+                  "margin": 0,
+                  "padding": 10,
+                  "whiteSpace": "nowrap",
+                }
+              }
+            >
+              <p
+                className="recharts-tooltip-label"
+                style={
+                  Object {
+                    "margin": 0,
+                  }
+                }
+              >
+                
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="btns"
+    >
+      <div>
+        <p
+          className="caption"
+        >
+          Click player for more details
+        </p>
+        <table
+          className="table"
+        >
+          <thead>
+            <tr>
+              <td />
+              <td>
+                Player
+              </td>
+              <td>
+                Average
+              </td>
+              <td>
+                Pinfall
+              </td>
+            </tr>
+          </thead>
+          <tbody />
+        </table>
+      </div>
+    </div>
+    <div
+      className="largeExtra"
+    >
+      <button
+        className="button button__isFull button__blue"
+        disabled={false}
+        onClick={[Function]}
+      >
+        Add Players
+      </button>
+      <div
+        className="extra"
+      >
+        <button
+          className="button button__darkGreen"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Start new game
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

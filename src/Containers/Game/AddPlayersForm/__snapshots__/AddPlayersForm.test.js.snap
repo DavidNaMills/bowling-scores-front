@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddPlayersForm /> test suite Snapshot tests matches default snapshot 1`] = `
+<div
+  className="contentContainer"
+>
+  <div
+    className="title"
+  >
+    <h3
+      className="title__sub"
+    >
+      Test
+    </h3>
+  </div>
+  <div
+    className="form__container"
+  >
+    <div
+      className="form__form"
+    >
+      <div
+        className="input__label"
+      >
+        <label
+          htmlFor="name"
+        >
+          Players Name
+        </label>
+        <div>
+          <input
+            className="input input__default"
+            id="name"
+            onChange={[Function]}
+            placeholder=""
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="addPlayers__inline extra"
+      >
+        <div
+          className="addPlayers__halfBtn"
+        >
+          <button
+            className="button button__isFull button__lightBlue"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Select Color
+          </button>
+        </div>
+        <div
+          className="addPlayers__halfBtn"
+        >
+          <button
+            className="button button__isFull button__lightGreen"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Random Colour
+          </button>
+        </div>
+      </div>
+      <div
+        className="largeExtra"
+      >
+        <button
+          className="button button__isFull button__disabled"
+          disabled={true}
+          onClick={[Function]}
+        >
+          Add Player
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="largeExtra"
+  >
+    <div>
+      <p
+        className="caption"
+      >
+        Click player for more details
+      </p>
+      <table
+        className="table"
+      >
+        <thead>
+          <tr>
+            <td />
+            <td>
+              Player
+            </td>
+            <td>
+              Average
+            </td>
+            <td>
+              Pinfall
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            className=""
+            onClick={[Function]}
+            style={
+              Object {
+                "background": "linear-gradient(180deg, rgba(255,255,255,1) 37%, rgba(17, 127, 14,1) 100%)",
+              }
+            }
+          >
+            <td>
+              1
+            </td>
+            <td>
+              gfdgfds
+            </td>
+            <td>
+              63
+            </td>
+            <td>
+              190
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    className="largeExtra"
+  >
+    <button
+      className="button button__isFull button__lightRed"
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      Close
+    </button>
+  </div>
+</div>
+`;

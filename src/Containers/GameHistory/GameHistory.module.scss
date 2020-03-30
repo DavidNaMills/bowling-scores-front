@@ -1,0 +1,42 @@
+@import '../../styles/shared/spacing.module.scss';
+
+@mixin baseShadow() {
+    margin-bottom: 70px;
+    -webkit-box-shadow: 5px 2px 15px 5px rgba(36,112,107,1);
+    -moz-box-shadow: 5px 2px 15px 5px rgba(36,112,107,1);
+    box-shadow: 5px 2px 15px 5px rgba(36,112,107,1);
+    padding: 5px;
+}
+
+@mixin base {
+    width: 100%;
+    display: flex;
+}
+
+.gameHistory{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    &__game{
+        &_desktop{
+            @include baseShadow();
+            width: 450px;
+        }
+    
+        &_mobile{
+            @include baseShadow();
+            width: 100%;
+        }
+    }
+
+    &__spinner{
+        display: flex;
+        margin: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+}

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StatsBar /> component test suite snapshot test 1`] = `
+<div
+  className="StatsBar"
+>
+  <p>
+    Average: 456
+  </p>
+  <p>
+    Games Played: 11111
+  </p>
+</div>
+`;

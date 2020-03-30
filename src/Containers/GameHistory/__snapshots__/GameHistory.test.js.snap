@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameHistory /> component test suite basic tests snapshot tests 1`] = `
+<div>
+  <div
+    className="title"
+  >
+    <h2
+      className="title__section"
+    >
+      History
+    </h2>
+  </div>
+  <div />
+  <div
+    className="gameHistory"
+  >
+    <a
+      aria-current={null}
+      href="/game"
+      onClick={[Function]}
+    >
+      No games to display. Play one?
+    </a>
+  </div>
+  <div />
+</div>
+`;
