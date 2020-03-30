@@ -4,8 +4,8 @@ import {davidScores} from '../tableGamesDataModifier/testData';
 
 
 describe('singlePlayerScores test suite', ()=>{
-    const res = singlePlayerScores(testData, 123);
     it('returns a populated array', ()=>{
+        const res = singlePlayerScores(testData, 123);
         expect(Array.isArray(res)).toBeTruthy();
         expect(res.length).toBe(3);
         
@@ -15,5 +15,10 @@ describe('singlePlayerScores test suite', ()=>{
             expect(res[x].values[x]).toEqual(davidScores[x]);
         }
     });
-    
+
+    it('returns an empty array if the player is not present in the object', ()=>{
+        const res = singlePlayerScores(testData, 123456);
+        expect(Array.isArray(res)).toBeTruthy();
+        expect(res.length).toBe(0);
+    });
 });

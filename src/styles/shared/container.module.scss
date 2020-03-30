@@ -1,5 +1,9 @@
-.contentContainer{
-    padding-left:10px;
-    padding-right:10px;
-    margin-bottom: 50px;
+// .contentContainer{
+
+// }
+
+.centerDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

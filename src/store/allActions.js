@@ -11,5 +11,10 @@ export {
 
 export {
     userLogin,
-    userLogout
+    userLogout,
 } from './user/actions/userActions';
+
+export {
+    updateStats,
+    clearStats
+} from './stats/statsActions/statsActions';

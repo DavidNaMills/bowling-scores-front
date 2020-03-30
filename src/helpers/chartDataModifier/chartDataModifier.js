@@ -2,10 +2,6 @@
 // {game: 1, david: 258, paul: 100, mike: 123,},
 
 
-
-
-
-
 const allPlayers = (data) => {
     let tempArray = [];
     let players = [];

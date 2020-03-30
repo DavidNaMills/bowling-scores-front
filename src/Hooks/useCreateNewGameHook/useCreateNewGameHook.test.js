@@ -1,64 +1,83 @@
 import {renderHook, act} from '@testing-library/react-hooks';
 import useCreateNewGameHook from './useCreateNewGameHook';
 
+// const mockDispatch = jest.fn();
+// jest.mock('../useDispatchHook/useDispatchHook', ()=>({
+//     initGameDispatch: jest.fn(()=>mockDispatch)
+// }));
+// import useDispatchHook from '../useDispatchHook/useDispatchHook';
+
+const mockDispatch = jest.fn();
+jest.mock('react-redux', ()=>({
+    useDispatch: jest.fn(()=>mockDispatch)
+}));
+import {useDispatch} from 'react-redux';
+
+const mockId = '12345678abc';
+jest.mock('uuid');
+import uuid from 'uuid';
+
+// initGameDispatch
+const mockColor = '123, 123, 123';
+jest.mock('../useColorSelection/useColorSelection');
+import {getRandomColor} from '../useColorSelection/useColorSelection';
+
+beforeEach(()=>{
+    jest.clearAllMocks();
+})
+
 
 describe('useCreateNewGameHook test suite', ()=>{
-    //returns an empty object as default
-    //adds players to temp object in correct format
+    uuid.mockImplementation(()=>mockId);
+    getRandomColor.mockImplementation(()=>mockColor);
+    const n = 'alan';
+    const player = {
+        name: {target: {value:n}},
+    };
     
-    it('placeholder', ()=>{
-        expect(true).toBeTruthy();
+    
+    it('adds a player to the game. addPlayer --happy route--', ()=>{
+        const {result} = renderHook(()=>useCreateNewGameHook());
+        expect(result.current.liveGame).toEqual({});
+        act(()=>{result.current.setName(player.name);});
+        act(()=>{result.current.addColor(player.color);});
+        act(()=>{result.current.addPlayer();});
+        
+        expect(Object.keys(result.current.liveGame).length).toBe(1);
+        expect(result.current.liveGame[mockId]).toEqual({
+            id: mockId,
+            name: n,
+            color: mockColor
+        });
     });
-
-    
-    // it('should return an empty object as default', ()=>{
-    //     const {result} = renderHook(()=>useCreateNewGameHook());
-    //     expect(result.current.newGame).toEqual({});
-    // });
     
     
-    // it('adds a player to the temp object with correct values (color supplied)', ()=>{
-    //     const {result} = renderHook(()=>useCreateNewGameHook());
-    //     const temp = {name: 'david', color: '123, 123, 123',  id:456123};
-    //     act(()=>{
-    //         result.current.addPlayerCreate(temp);
-    //     })
-    //     expect(Object.keys(result.current.newGame).length).toEqual(1);
-    //     expect(result.current.newGame[temp.id]).toEqual(temp);
-    // });
-
-    // it('adds a player to the temp object with correct values (no id)', ()=>{
-    //     const {result} = renderHook(()=>useCreateNewGameHook());
-    //     const temp = {name: 'david', color: '123, 123, 123'};
-    //     act(()=>{
-    //         result.current.addPlayerCreate(temp);
-    //     })
-    //     expect(Object.keys(result.current.newGame).length).toEqual(1);
-    // });
-
-    // it('adds a player to the temp object with correct values and color randomised', ()=>{
-    //     const {result} = renderHook(()=>useCreateNewGameHook());
-    //     const temp = {name: 'david', id:456123};
-    //     act(()=>{
-    //         result.current.addPlayerCreate(temp);
-    //     })
-    //     expect(Object.keys(result.current.newGame).length).toEqual(1);
-    //     expect(result.current.newGame[temp.id]).toHaveProperty('color');
-    // });
+    it('adds a player to the game. addPlayer --generates random color--', ()=>{
+        const {result} = renderHook(()=>useCreateNewGameHook());
+        expect(result.current.liveGame).toEqual({});
+        act(()=>{result.current.setName(player.name);});
+        act(()=>{result.current.addPlayer();});
+        
+        expect(Object.keys(result.current.liveGame).length).toBe(1);
+        expect(result.current.liveGame[mockId]).toEqual({
+            id: mockId,
+            name: n,
+            color: mockColor
+        });
+    });
     
+    it('doesnt add the player if there is no name set', ()=>{
+        const {result} = renderHook(()=>useCreateNewGameHook());
+        act(()=>{result.current.addPlayer();});
+        expect(Object.keys(result.current.liveGame).length).toBe(0);
+        expect(result.current.liveGame[mockId]).toBeUndefined();
+    });
     
-    // it('it doesnt add player if name is not present', ()=>{
-    //     const {result} = renderHook(()=>useCreateNewGameHook());
-    //     const temp = {name: '', id:456123};
-    //     act(()=>{
-    //         result.current.addPlayerCreate(temp);
-    //     })
-    //     expect(Object.keys(result.current.newGame).length).toEqual(0);
-    //     expect(result.current.newGame).toEqual({});
+    // it('UNSURE HOW TO MOCK --- commits the game by calling initGameDispatch', ()=>{
+    //     expect(result.current.liveGame).toEqual({});
+    //     act(()=>{result.current.setName(player.name);});
+    //     act(()=>{result.current.addPlayer();});
+    //     act(()=>{result.current.commitGame();});
+    //     expect(true).toBeTruthy();
     // });
-
-
-    // doesnt add if no name provided
-
-
 });

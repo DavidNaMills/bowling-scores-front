@@ -3,6 +3,7 @@ import React from 'react';
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
 import spacing from '../../../styles/shared/spacing.module.scss';
+import classes from './AddScores.module.scss';
 
 import objectToArray from '../../../helpers/objectToArray/objectToArray'
 
@@ -14,19 +15,18 @@ import useScoreInput from '../../../Hooks/useScoreInput/useScoreInput';
 import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
 
-// const addNewGameDispatch = () =>{};
-
-const isDisabled = (values) =>{
+const isDisabled = (values) => {
     let disabled = true
     for (let k in values) {
-        if (values[k].score > 0) {disabled = false};
+        if (values[k].score > 0) { disabled = false };
     }
     return disabled
 }
 
-const AddScores = ({ players, close }) => {
+const AddScores = ({ players, close, user }) => {
     const { values, addValue } = useScoreInput(players);
     const { addNewGameDispatch } = useDispatchHook();
+
     const updateScore = (e) => {
         e.preventDefault();
         addNewGameDispatch(values);
@@ -54,12 +54,19 @@ const AddScores = ({ players, close }) => {
                                         />
                                     )}
                                 <div className={spacing.largeExtra}>
-                                    <Button click={() => { }} isFull label='Save Scores'  isDisabled={isDisabled(values)} />
+                                    <Button 
+                                        click={() => { }} 
+                                        isFull 
+                                        label='Save Scores' 
+                                        isDisabled={isDisabled(values)} 
+                                    />
                                 </div>
                             </form>
                         </div>
+                        <div className={classes.addScores__width}>
                         <div className={spacing.largeExtra}>
-                            <Button isFull click={close} type='warning' label='Close'/>
+                            <Button isFull click={close} label='Close' />
+                        </div>
                         </div>
                     </React.Fragment>
                     : <p>Please wait</p>

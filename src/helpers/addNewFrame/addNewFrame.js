@@ -6,9 +6,10 @@ export const addNewFrame = (gameObj, newFrame, key=null) => {
     for (let k in tempScore) {
         if (+tempScore[k].score > 0) {
             tempScore[k].score = +tempScore[k].score;
-        } else {
-            delete tempScore[k];
-        }
+        } 
+        // else {
+        //     delete tempScore[k];
+        // }
     }
     tempState2.games[`${tempKey}`] = tempScore;
     return tempState2;

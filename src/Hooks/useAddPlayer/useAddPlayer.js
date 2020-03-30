@@ -36,7 +36,6 @@ const useAddPlayer = (isNew) => {
 
     useEffect(()=>{
         if(isNew && loggedInUser ){
-            console.log(loggedInUser);
             const tempPlayer = JSON.parse(JSON.stringify(liveGame));
             const newPlayer = {};
             newPlayer.name=loggedInUser.username;

@@ -8,7 +8,7 @@ const GameTable = () => {
         {
             eventName: "select",
             callback({ chartWrapper }) {
-                console.log("Selected ", chartWrapper.getChart().getSelection());
+                // console.log("Selected ", chartWrapper.getChart().getSelection());
             }
         }
     ];

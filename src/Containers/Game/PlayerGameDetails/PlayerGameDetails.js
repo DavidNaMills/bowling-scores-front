@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import classes from './PlayerGameDetails.module.scss';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
 import spacing from '../../../styles/shared/spacing.module.scss';
-
+import { isMobileOnly, isTablet, withOrientationChange } from 'react-device-detect';
 import useFormHook from '../../../Hooks/useFormHook/useformHook';
 import useDispatchHook from '../../../Hooks/useDispatchHook/useDispatchHook';
 
@@ -14,6 +15,7 @@ import GameChart from '../../../Components/GameChart/GameChart';
 import Table from '../../../Components/Table/Table';
 import InputFactory from '../../../Components/Form/InputFactory/InputFactory';
 import Popup from '../../../Components/StandAloneComponents/Popup/Popup';
+import AreYouSure from '../../../Components/StandAloneComponents/PopupComponents/AreYouSure';
 
 
 import tableModifier from '../../../helpers/tableGamesDataModifier/tableGamesDataModifier';
@@ -23,28 +25,40 @@ import generateForm from '../../../helpers/generateAmendFormConfig/generateAmend
 import objectToArray from '../../../helpers/objectToArray/objectToArray';
 
 import updatesScoresModifier from '../../../helpers/updatesScoresModifier/updatesScoresModifier';
+import useToggle from '../../../Hooks/useToggle/useToggle';
 
 const tHeaders = ['Average', 'Pinfall']
 const tHeaders2 = ['Score']
 
-
+const defaultShowState = {
+    showEdit: false,
+    showPopup: false
+}
 
 const PlayerGameDetails = (props) => {
-    const {removePlayerDispatch, updateScoresDispatch} = useDispatchHook();
-    const gameData = useSelector(state => state.liveGame);
-    const user = useSelector(state => state.user);
-    
     const id = props.location.state.id;
-    let userId= null;
-    if(user.token){
-        userId = user.user._id;
-    } 
 
+
+    const { removePlayerDispatch, updateScoresDispatch } = useDispatchHook();
+    const state = useSelector(state => state);
+    const gameData = state.liveGame;
+    const user = state.user;
+
+    if (Object.keys(gameData.players).length === 0) {
+        props.history.push('/');
+    }
+
+    const length = props.location.state.length;
+
+    let userId = null;
+    if (user.token) {
+        userId = user.user._id;
+    }
+    const { toggle, makeToggle } = useToggle(defaultShowState);
     const { manageState, formState, buildForm } = useFormHook(generateForm(singlePlayerScores(gameData, id)));
 
     const isLoading = false;
-    const [showEdit, setShowEdit] = useState(false);
-    const [showPopup, setPopup] = useState(false);
+
 
     const table1 = useMemo(() => ({
         headers: tHeaders,
@@ -66,14 +80,8 @@ const PlayerGameDetails = (props) => {
             id,
             scores: finalDetails
         });
-        setShowEdit(prev => !prev);
+        makeToggle('showEdit');
     }
-
-    const removePlayerLocal = () => {
-        removePlayerDispatch(id);
-        props.history.push('/game');
-    }
-
 
 
     const buildTable = () => (
@@ -114,71 +122,91 @@ const PlayerGameDetails = (props) => {
     );
 
     const buildPopup = () => (
-        <Popup
-            title={{
-                label: 'Are you sure?',
-                ttlType: 'sub'
-            }}
-            message={`You will totally remove ${gameData.players[id].name} from this game. are you sure?`}
-            action1={{
-                label: 'Remove',
-                type: 'danger',
-                click: () => { removePlayerLocal() }
-            }}
-            action2={{
-                label: 'Cancel',
-                type: 'confirm',
-                click: () => setPopup(false)
-            }}
-        />
+        <Popup>
+            <AreYouSure
+                message1={`You will totally remove ${gameData.players[id].name} from this game. are you sure?`}
+                dangerLbl={'Are you sure?'}
+                safeLbl={'Cancel'}
+                dangerClick={() => {
+                    removePlayerDispatch(id);
+                    props.history.push('/game');
+                }}
+                safeClick={() => makeToggle('showPopup')}
+
+            />
+        </Popup>
     )
 
-    const buildDeleteButton = () =>(
-        <div className={spacing.superLarge}>
-            <Button isFull label='Remove Player' type='danger' click={() => setPopup(true)} />
+    const buildDeleteButton = () => (
+        <div id='buildDelete' className={spacing.superLarge}>
+            <Button isFull label='Remove Player' type='danger' click={() => makeToggle('showPopup')} />
         </div>
     )
 
+    let width = 0
+
+    if (isMobileOnly) {
+        width = props.isPortrait
+            ? (window.innerWidth - 50)
+            : (window.innerWidth - 100);
+    } else if (isTablet) {
+        width = props.isPortrait
+            ? 700
+            : 800;
+    } else {
+        width = 800;
+    }
+
     return (
         <div className={body.contentContainer}>
-            {showPopup && buildPopup()}
-            {buildBackButton()}
+            {(toggle.showPopup && length > 1) && buildPopup()}
+
+            <div className={classes.playerDetails__width}>
+                {buildBackButton()}
+            </div>
+
             <Title label={gameData.players[id].name} ttlType='section' />
-            <div className={spacing.extra}>
+
+            <div className={[spacing.extra, classes.playerDetails__width].join(' ')}>
                 <Table data={table1} />
             </div>
 
-            <div className={spacing.extra}>
+            <div className={[spacing.extra, body.centerDiv].join(' ')}>
                 <GameChart
                     players={gameData.players}
                     data={chartParser(gameData, id)}
+                    width={width}
                 />
             </div>
 
-            {
-                showEdit
-                    ?
-                    <React.Fragment>
-                        {buildEditForm()}
-                        <div className={spacing.largeExtra}>
-                            <Button label='Close' type='danger' click={() => setShowEdit(prev => !prev)} isFull isDisabled={isLoading} />
-                        </div>
-                    </React.Fragment>
-                    : buildTable()
-            }
-            {
-                !showEdit &&
-                <React.Fragment>
-                    <div className={spacing.extra}>
-                        <Button isFull label={showEdit ? 'Close' : 'Edit scores'} type='warning' click={() => { setShowEdit(prev => !prev) }} />
-                    </div>
+            <div className={classes.playerDetails__width}>
 
-                    {buildBackButton()}
-                    {userId !== id && buildDeleteButton()}
-                </React.Fragment>
-            }
+                {
+                    toggle.showEdit
+                        ?
+                        <React.Fragment>
+                            {buildEditForm()}
+                            <div className={spacing.largeExtra}>
+                                <Button label='Close' type='danger' click={() => makeToggle('showEdit')} isFull isDisabled={isLoading} />
+                            </div>
+                        </React.Fragment>
+                        : buildTable()
+                }
+                {
+                    !toggle.showEdit &&
+                    <React.Fragment>
+                        <div className={spacing.extra}>
+                            <Button isFull label={toggle.showEdit ? 'Close' : 'Edit scores'} type='warning' click={() => { makeToggle('showEdit') }} />
+                        </div>
+
+                        {buildBackButton()}
+                        {(userId !== id && length > 1) && buildDeleteButton()}
+                    </React.Fragment>
+                }
+            </div>
+
         </div>
     )
 }
 
-export default PlayerGameDetails;
+export default withOrientationChange(PlayerGameDetails);

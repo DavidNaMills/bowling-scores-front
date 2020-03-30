@@ -5,8 +5,6 @@ import {SwatchesPicker} from 'react-color';
 
 describe('useColorSelection test suite', ()=>{
     describe('hook test suite', ()=>{
-    
-        
         it('sets the color to null as default', ()=>{
             const {result} = renderHook(()=>useColorSelection());
             expect(result.current.color).toBe(null);
@@ -38,6 +36,4 @@ describe('useColorSelection test suite', ()=>{
             expect(+x>=0 || +x<=255).toBeTruthy();
         })
     });
-
-    //getRandomColor returns a string with 3 values (parse and test)
 });

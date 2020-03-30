@@ -5,7 +5,6 @@ export const writeToLocalStorage = (file = defaultFileName, data) => {
         localStorage.clear(file);
         localStorage.setItem(file, JSON.stringify(data));
     }catch(err){
-        console.log(err);
     }
 }
 
@@ -24,6 +23,6 @@ export const removeFromLocalStorage = (file = defaultFileName, data) =>{
         localStorage.removeItem(file, data);
     }catch(err){
         return null;
-        console.log(err);
+        // console.log(err);
     }
 }

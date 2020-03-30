@@ -45,8 +45,6 @@ const useCreateNewGameHook = () => {
             tempPlayer[newPlayer.id] = newPlayer;
             setliveGame(tempPlayer);
         }
-
-        console.log(tempPlayer);
     }
 
     const commitGame = () =>{

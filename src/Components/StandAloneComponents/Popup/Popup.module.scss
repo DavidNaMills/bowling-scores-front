@@ -35,7 +35,16 @@
     }
     
     &__message{
-        padding: 30px;
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        // border-bottom: $popup_borders_separator;
+    }
+    &__message2{
+        padding-top: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
         border-bottom: $popup_borders_separator;
     }
 

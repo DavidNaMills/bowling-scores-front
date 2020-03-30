@@ -11,4 +11,24 @@
         display: flex;
         justify-content: space-between;
     }
+
+    &__width{
+        width: 75vw;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        padding-top: 20px;
+
+        @media (max-width: 500px) {
+            width: 100%;
+        }
+        
+        @media (min-width: 1000px) {
+            width: 80vw;
+        }
+
+        @media (min-width: 1200px) {
+            width: 50vw;
+        }
+    }
 }

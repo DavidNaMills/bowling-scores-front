@@ -5,17 +5,19 @@ export default {
         elementtype: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'user_name'
+            placeholder: 'Screen name'
         },
         value: '',
         validation: {
             minLength: {
                 req: MIN_LENGTH,
-                errMsg: 'login_err1'
+                errMsg: 'Cant be empty'
+                // errMsg: 'login_err1'
             },
             maxLength: {
                 req: MAX_LENGTH,
-                errMsg: 'login_err2'
+                errMsg: 'Too Long! maximum 20 characters'
+                // errMsg: 'login_err2'
             }
         },
         touched: false,
@@ -27,18 +29,20 @@ export default {
         elementtype: 'input',
         elementConfig: {
             type: 'password',
-            placeholder: 'user_pass'
+            placeholder: 'Password'
         },
         value: '',
         isValid: false,
         validation: {
             minLength: {
                 req: MIN_LENGTH_PASSWORD,
-                errMsg: 'login_err1'
+                errMsg: 'Cant be empty'
+                // errMsg: 'login_err1'
             },
             maxLength: {
                 req: MAX_LENGTH,
-                errMsg: 'login_err2'
+                errMsg: 'Too Long! Maximum 20 characters'
+                // errMsg: 'login_err2'
             }
         },
         touched: false,

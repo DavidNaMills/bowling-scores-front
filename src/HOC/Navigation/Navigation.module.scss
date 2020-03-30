@@ -2,30 +2,34 @@
 
 .navigation{
     background-color: $navigation_background ;
-    padding: 5px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     border-bottom: solid $popup_color 2px;
+    top: 0;
+    position: sticky;
+    z-index: 999;
 
     &_section{
-        // width: 120px;
         min-width: 120px;
         display:flex;
         justify-content: space-between;
     }
 
     &__link{
-        color: $btn_font_clr;
+        color: $btn_font_clr_light;
+        // color: $btn_font_clr;
         text-decoration: none;
 
         &:hover{
-            color: rgb(28, 75, 135);
-            font-weight: bold;
+            color: $btn_darkGreen_bkg_active;
+            // font-weight: bold;
         }
         
         &_active{
-            color: green;
-            font-weight: bold;
+            color: $btn_darkBlue_bkg;
+            border-bottom: solid $btn_darkBlue_bkg 3px;
+            // font-weight: bold;
         }
     }
 

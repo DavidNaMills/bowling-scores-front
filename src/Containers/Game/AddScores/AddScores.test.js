@@ -2,6 +2,10 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {mount} from 'enzyme';
 
+jest.mock('react-redux', ()=>({
+    useDispatch: jest.fn()
+}));
+
 import AddScores from './AddScores';
 import CombinedInput from './CombinedInput/CombinedInput';
 import Button from '../../../Components/StandAloneComponents/Button/Button';
@@ -25,39 +29,38 @@ const mockPlayers = {
 
 const close = jest.fn();
 
+afterEach(()=>{
+    jest.clearAllMocks();
+})
 
 describe('<AddScores/> test suite', () => {
-    it('placeholder', ()=>{
-        expect(true).toBeTruthy();
+
+    describe('snapshot tests', () => {
+        const component = renderer.create(<AddScores players={mockPlayers} close={close} />)
+        const app = component.toJSON();
+        expect(app).toMatchSnapshot();
     });
 
-    // describe('snapshot tests', () => {
-    //     const component = renderer.create(<AddScores players={mockPlayers} close={close} />)
-    //     const app = component.toJSON();
-    //     expect(app).toMatchSnapshot();
-    // });
-
-    // describe('render test suite', () => {
-    //     const wrapper = mount(<AddScores players={mockPlayers} close={close} />);
+    describe('render test suite', () => {
+        const wrapper = mount(<AddScores players={mockPlayers} close={close} />);
         
-    //     it('renders a <Title>', ()=>{
-    //         expect(wrapper.find(Title).length).toBe(1);
-    //     });
+        it('renders a <Title>', ()=>{
+            expect(wrapper.find(Title).length).toBe(1);
+        });
 
-    //     it('renders a form with accompanying containers', ()=>{
-    //         expect(wrapper.find('.form__container').length).toBe(1);
-    //         expect(wrapper.find('.form__form').length).toBe(1);
-    //         expect(wrapper.find('form').length).toBe(1);
-    //     });
+        it('renders a form with accompanying containers', ()=>{
+            expect(wrapper.find('.form__container').length).toBe(1);
+            expect(wrapper.find('.form__form').length).toBe(1);
+            expect(wrapper.find('form').length).toBe(1);
+        });
         
-    //     it(`form contains ${Object.keys(mockPlayers).length} <CombinedInputs`, ()=>{
-    //         expect(wrapper.find(CombinedInput).length).toBe(Object.keys(mockPlayers).length);
-    //     });
+        it(`form contains ${Object.keys(mockPlayers).length} <CombinedInputs`, ()=>{
+            expect(wrapper.find(CombinedInput).length).toBe(Object.keys(mockPlayers).length);
+        });
 
-    //     it('contains 2 <Buttons /> with accompanying containers', ()=>{
-    //         expect(wrapper.find('.largeExtra').length).toBe(2);
-    //         expect(wrapper.find(Button).length).toBe(2);
-    //     });
-    // });
-
+        it('contains 2 <Buttons /> with accompanying containers', ()=>{
+            expect(wrapper.find('.largeExtra').length).toBe(2);
+            expect(wrapper.find(Button).length).toBe(2);
+        });
+    });
 });

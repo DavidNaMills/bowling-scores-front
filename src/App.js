@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -6,20 +6,37 @@ import { LOGIN, SIGNUP } from './Axios/URLS';
 
 import Navigation from './HOC/Navigation/Navigation';
 
-import AccessContainer from './Containers/AccessContainer/AccessContainer';
+import Login from './Containers/Access/Login/Login';
+import Signup from './Containers/Access/Signup/Signup';
 import Landing from './Containers/Landing/Landing';
 import loginFormConfig from './formConfigs/loginFormConfig';
 import signupFormConfig from './formConfigs/signupFormConfig';
-import Game from './Containers/Game/Game'
+import Spinner from './Components/Spinner/Spinner';
 import PlayerGameDetails from './Containers/Game/PlayerGameDetails/PlayerGameDetails';
-import Dashboard from './Containers/Dashboard/Dashboard';
-import Logout from './Containers/Logout/Logout';
 
-import SecureRoute from './HOC/SecureRoute/SecureRoute';
+const Game = React.lazy(()=>import('./Containers/Game/Game'));
+const Dashboard = React.lazy(()=>import('./Containers/Dashboard/Dashboard'));
+const Logout = React.lazy(()=>import('./Containers/Logout/Logout'));
+const SecureRoute = React.lazy(()=>import('./HOC/SecureRoute/SecureRoute'));
+
+
+
+
+
+
+// const Game = React.lazy(() => {
+//   return new Promise(resolve => {
+//     setTimeout(() => resolve(import('./Containers/Game/Game')), 3000);
+//   });
+// });
+
+
 
 
 const App = (props) => {
-  const user = useSelector(state => state.user);
+  const state = useSelector(state => state);
+  const user = state.user;
+  const stats = state.stats;
 
   useEffect(() => {
     props.history.push('/dashboard');
@@ -28,35 +45,22 @@ const App = (props) => {
   return (
     <div>
       <Switch>
-        <Navigation user={user}>
+        <Navigation user={user} stats={stats}>
+          <Suspense fallback={<Spinner center/>}>
+
           <Route path='/' exact={true} component={Landing} />
-          <Route path='/signup' component={() => <AccessContainer formConfig={signupFormConfig} title='Signup' url={SIGNUP} />} />
-          <Route path='/login' component={() => <AccessContainer formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
+          <Route path='/signup' component={() => <Signup formConfig={signupFormConfig} title='Signup' url={SIGNUP} />} />
+          <Route path='/login' component={() => <Login formConfig={loginFormConfig} title='Login' url={LOGIN} />} />
           <Route path='/player' component={PlayerGameDetails} />
           <Route path='/game' component={Game} />
 
           <SecureRoute path='/dashboard' component={Dashboard} />
           <Route path='/logout' component={Logout} />
+          </Suspense>
         </Navigation>
       </Switch>
     </div>
   );
 }
-
-
-// <div>
-//     <Title label={testLabel} ttlType='main'/>
-//     <Title label={testLabel} ttlType='section'/>
-//     <Title label={testLabel} ttlType='sub'/>
-//   <br/>
-//     <Button label='Test'/>
-//     <Button label='Test' type='warning'/>
-//     <Button label='Test' type='danger'/>
-//   <br/>
-//     <Input id='test' changed={()=>{}} icon label='hello world' />
-//     <Input id='test' changed={()=>{}} icon label='hello world' isRequired />
-//     <Input id='test' changed={()=>{}} icon label='hello world' isRequired isValid/>
-//     <Input id='test' changed={()=>{}} icon label='hello world' error={['sdfa', 'fdsa']}/>
-// </div>
 
 export default withRouter(App);

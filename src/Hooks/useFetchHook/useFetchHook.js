@@ -10,7 +10,7 @@ const useFetchHook = () => {
     const [isLoading, setLoading] = useState(false);
     const [result, setResult] = useState(initData);
 
-    const makeCall = (axios, type, url, data = null) => {
+    const makeCall = (axios, type, url, data = null, id=null) => {
         const base = {
             method: type,
             url
@@ -23,25 +23,28 @@ const useFetchHook = () => {
         axios(config)
             .then(res => {
 
-                console.log(res);
-
                 if (res.data === 'Unauthorized') {
                     setResult({
+                        id,
                         data: null,
                         error: true
                     });
                 } else {
 
                     setResult({
+                        id,
                         data: res.data,
                         error: false
                     });
                 }
+
                 setLoading(false);
+
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
                 setResult({
+                    id,
                     data: null,
                     error: true
                 });
@@ -59,4 +62,4 @@ const useFetchHook = () => {
     }
 };
 
-export default useFetchHook;
+export default useFetchHook;    

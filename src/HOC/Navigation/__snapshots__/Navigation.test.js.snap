@@ -10,11 +10,10 @@ exports[`<Navigation /> test suite snapshot tests should match the snapshot <Log
         className="navigation_section"
       >
         <a
-          aria-current="page"
-          className="navigation__link navigation__link_active"
-          href="/"
+          aria-current={null}
+          className="navigation__link"
+          href="/dashboard"
           onClick={[Function]}
-          style={Object {}}
         >
           Home
         </a>
@@ -30,7 +29,14 @@ exports[`<Navigation /> test suite snapshot tests should match the snapshot <Log
       <div
         className="navigation_section"
       >
-        <p>
+        <p
+          className="navigation__username"
+          style={
+            Object {
+              "color": "rgb(undefined)",
+            }
+          }
+        >
           david
         </p>
         <a
@@ -42,6 +48,14 @@ exports[`<Navigation /> test suite snapshot tests should match the snapshot <Log
           Logout
         </a>
       </div>
+    </div>
+    <div>
+      <p>
+        Average: 145
+      </p>
+      <p>
+        Games Played: 11114
+      </p>
     </div>
   </div>
 </header>

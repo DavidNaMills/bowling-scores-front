@@ -15,7 +15,7 @@ const Title = ({ label = '', ttlType = 'sub' }) => {
             item = <h3 className={classes.title__sub}>{label}</h3>
             break;
         default:
-            item = <h3 className={classes.title__sub}>{label}</h3>
+            item = <h4 className={classes.title__sub}>{label}</h4>
             break;
     }
 
@@ -26,4 +26,4 @@ const Title = ({ label = '', ttlType = 'sub' }) => {
     )
 }
 
-export default Title;
+export default React.memo(Title);

@@ -3,11 +3,14 @@ import classes from './Button.module.scss';
 
 
 
-const Button = ({ click = () => { }, label, isDisabled = false, type = 'default', isFull=false}) => {
+const Button = ({ click = () => { }, label, isDisabled = false, type = 'default', isFull = false, children = null, largeText = false }) => {
     let style = [classes.button];
 
-    if(isFull){
+    if (isFull) {
         style = style.concat(classes.button__isFull);
+    }
+    if (largeText) {
+        style = style.concat(classes.button__largeText);
     }
     if (isDisabled) {
         style = style.concat(classes.button__disabled);
@@ -48,8 +51,14 @@ const Button = ({ click = () => { }, label, isDisabled = false, type = 'default'
     }
 
     return (
-        <button onClick={click} disabled={isDisabled} className={style.join(' ')}>{label}</button>
+        <button onClick={click} disabled={isDisabled} className={style.join(' ')}>
+            {label}
+        </button>
     );
 };
 
-export default Button;
+export default React.memo(Button);
+// {children
+//     ? <div className={classes.button__children}>{children} <span className={classes.button__children_span}>{label}</span></div>
+//     : label
+// }

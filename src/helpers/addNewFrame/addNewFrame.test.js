@@ -26,4 +26,8 @@ describe('addNewFrame test suite', () => {
             }
         });
     });
+
+    it('removes the player from frame if they have score of 0', (args)=>{
+        body
+    });
 });

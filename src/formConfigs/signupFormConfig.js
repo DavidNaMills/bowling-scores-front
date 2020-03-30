@@ -5,17 +5,19 @@ export default {
         elementtype: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'name'
+            placeholder: 'Name'
         },
         value: '',
         validation: {
             minLength: {
                 req: MIN_LENGTH,
-                errMsg: 'too_short'
+                errMsg: 'Cant be empty'
+                // errMsg: 'too_short'
             },
             maxLength: {
                 req: MAX_LENGTH,
-                errMsg: 'too_long'
+                errMsg: `Too long! maximum ${MAX_LENGTH} characters`
+                // errMsg: 'too_long'
             }
         },
         touched: false,
@@ -27,17 +29,19 @@ export default {
         elementtype: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'user_name'
+            placeholder: 'Screen name'
         },
         value: '',
         validation: {
             minLength: {
                 req: MIN_LENGTH,
-                errMsg: 'too_short'
+                errMsg: 'Cant be empty'
+                // errMsg: 'too_short'
             },
             maxLength: {
                 req: MAX_LENGTH,
-                errMsg: 'too_long'
+                errMsg: `Too long! maximum ${MAX_LENGTH} characters`
+                // errMsg: 'too_long'
             }
         },
         touched: false,
@@ -49,17 +53,18 @@ export default {
         elementtype: 'input',
         elementConfig: {
             type: 'password',
-            placeholder: 'user_pass'
+            placeholder: 'Password'
         },
         value: '',
         validation: {
             minLength: {
                 req: MIN_LENGTH_PASSWORD,
-                errMsg: 'min_pass'
+                errMsg: `Too short! minimum ${MIN_LENGTH_PASSWORD} characters`
+                // errMsg: 'min_pass'
             },
             maxLength: {
                 req: MAX_LENGTH,
-                errMsg: 'too_long'
+                errMsg: `Too long! maximum ${MAX_LENGTH} characters`
             }
         },
         touched: false,
@@ -71,13 +76,13 @@ export default {
         elementtype: 'input',
         elementConfig: {
             type: 'password',
-            placeholder: 'user_pass_confirm'
+            placeholder: 'Confirm Password'
         },
         value: '',
         validation: {
             isSame: {
                 field: 'password',
-                errMsg: 'pass_not_same'
+                errMsg: 'Passwords not the same'
             }
         },
         touched: false,

@@ -1,11 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import GameDetails from './GameDetails';
 import Button from '../../../Components/StandAloneComponents/Button/Button';
+import Title from '../../../Components/StandAloneComponents/Title/Title';
 import Table from '../../../Components/Table/Table';
 import GameChart from '../../../Components/GameChart/GameChart';
+import StaticPrompt from '../../../Components/StandAloneComponents/StaticPrompt/StaticPrompt';
 
 
 const testLiveData = {
@@ -38,21 +40,44 @@ describe('<GameDetails/> test suite', () => {
         it('matches the snapshot', () => {
             expect(true).toBeTruthy();
         });
+
+        it('exists', ()=>{
+            const wrapper = shallow(<GameDetails {...allConfig}/>);
+            expect(wrapper.exists).toBeTruthy();
+        });
     });
 
-    describe('component rendering suite', () => {
-        const wrapper = mount(<GameDetails {...allConfig} />)
+    describe('default render', ()=>{
+        let wrapper;
 
-        it('should render 3 <Buttons/>', () => {
-            expect(wrapper.find(Button).length).toBe(3);
+        beforeEach(()=>{
+            wrapper = mount(<GameDetails {...allConfig}/>);
+        });
+        
+        it('renders a <Title/> component', ()=>{
+            expect(wrapper.find('.contentContainer').length).toBe(1);
+            expect(wrapper.find(Title).length).toBe(1);
         });
 
-        it('should render <GameChart />', () => {
+        it('renders a <GameChart/> component', ()=>{
             expect(wrapper.find(GameChart).length).toBe(1);
         });
-
-        it('should render <Table />', () => {
+        
+        it('renders a <Table/> component', ()=>{
             expect(wrapper.find(Table).length).toBe(1);
         });
+        
+        it('renders 5 <Button/> components', ()=>{
+            expect(wrapper.find(Button).length).toBe(5);
+        });
+    });
+
+    it('renders <StaticPromp/> if user prop is null', ()=>{
+        const tempConfig = {
+            ...allConfig,
+            user: null
+        }
+        const wrapper = mount(<GameDetails {...tempConfig}/>);
+        expect(wrapper.find(StaticPrompt).length).toBe(1);
     });
 });

@@ -5,18 +5,20 @@ import {
     REMOVE_PLAYER,
     UPDATE_ALL_SCORES,
     UPDATE_INDIVIDUAL_SCORE,
-    ADD_NEW_GAME
+    ADD_NEW_GAME,
+    RESET_LIVE_GAME,
+    SET_LOADING
 } from '../liveGameActionTypes';
 
 import gameReducer from './liveGameReducer';
 import toLoad from '../../../helpers/tableGamesDataModifier/testData';
 
 const playerData = {
-    players:{
-    123: { name: 'david', color: 'red' },
-    456: { name: 'paul', color: 'blue' }
+    players: {
+        123: { name: 'david', color: 'red' },
+        456: { name: 'paul', color: 'blue' }
     },
-    games:{}
+    games: {}
 }
 
 
@@ -25,7 +27,8 @@ describe('liveGameReducer test suite', () => {
         const state = gameReducer(undefined, { type: '@@INIT' })
         expect(state).toEqual({
             games: {},
-            players: {}
+            players: {},
+            isLoading: false
         });
     });
 
@@ -57,47 +60,47 @@ describe('liveGameReducer test suite', () => {
 
 
     it('should add a new player to the players object with ID specified', () => {
-        const id = 1278456;
-        const name = 'Bob';
-        const color = 'purple'
-
-        const newPlayer = {
-            id, //if null auto create id in reducer. otherwise logged in _id
-            name,
-            color
+        const test = {
+            players: {
+                alan: {test: 123}
+            }
         };
 
-        const state = gameReducer(toLoad, { type: ADD_PLAYER, payload: newPlayer });
-        expect(Object.keys(state.players).length).toBe(4);
-        expect(state.players[id]).toEqual({
-            name,
-            color
+        const state = gameReducer(toLoad, { type: ADD_PLAYER, payload: test });
+        expect(state).toEqual({
+            ...test,
+            isLoading: false
         });
     });
 
 
     it('should add a new player to the players object and generates an ID', () => {
-        const id = null;
-        const name = 'Bob';
-        const color = 'purple'
-
-        const newPlayer = {
-            id, //if null auto create id in reducer. otherwise logged in _id
-            name,
-            color
+        const test = {
+            players: {
+                alan: {test: 123}
+            }
         };
 
-        const state = gameReducer(toLoad, { type: ADD_PLAYER, payload: newPlayer });
-        expect(Object.keys(state.players).length).toBe(4);
+        const state = gameReducer(toLoad, { type: ADD_PLAYER, payload: test });
+        expect(state).toEqual({
+            ...test,
+            isLoading: false
+        });
     });
 
 
     it('should remove a player from the players object', () => {
-        const id = 123;
-        const state = gameReducer(toLoad, { type: REMOVE_PLAYER, payload: id });
+        const test = {
+            players: {
+                alan: {test: 123}
+            }
+        };
 
-        expect(Object.keys(state.players).length).toBe(2);
-        expect(state.players[id]).toBe(undefined);
+        const state = gameReducer(toLoad, { type: REMOVE_PLAYER, payload: test });
+        expect(state).toEqual({
+            ...test,
+            isLoading: false
+        });
     });
 
 
@@ -115,39 +118,76 @@ describe('liveGameReducer test suite', () => {
 
     it('adds a new game to the games object and auto sets the key', () => {
         const newGame = {
-            123: {
-                name: 'david',
-                score: 156
-            },
-            456: {
-                name: 'paul',
-                score: 248
+            games: {
+                123: {
+                    name: 'david',
+                    score: 156
+                },
+                456: {
+                    name: 'paul',
+                    score: 248
+                }
             }
         };
 
         const state = gameReducer(toLoad, { type: ADD_NEW_GAME, payload: newGame });
-        const key = +Object.keys(toLoad.games).length + 1;
-
-        expect(Object.keys(state.games).length).toBe(4);
-        expect(state.games[`${key}`]).toEqual(newGame);
+        expect(state).toEqual({
+            ...newGame,
+            isLoading: false
+        });
     });
 
-
-    it('updates the scores of a specific player. Removes a game if score is 0', () => {
-        const id = 123;
-        const updatedGame = {
-            id,
-            scores: {
-                1: 300,
-                2: 245,
-                3: 0
+    it('updates an individual players score <UPDATE_INDIVIDUAL_SCORE>', () => {
+        const test = {
+            players: {
+                'fdsafsdafsda': { name: 'david' }
+            },
+            games: {
+                123: {
+                    name: 'david',
+                    score: 156
+                },
+                456: {
+                    name: 'paul',
+                    score: 248
+                }
             }
         };
-        const state = gameReducer(toLoad, { type: UPDATE_INDIVIDUAL_SCORE, payload: updatedGame });
+        const state = gameReducer(toLoad, { type: UPDATE_INDIVIDUAL_SCORE, payload: test });
+        expect(state).toEqual({
+            ...test,
+            isLoading: false
+        })
+    });
 
-        expect(state.games[1][id].score).toEqual(updatedGame.scores[1]);
-        expect(state.games[2][id].score).toEqual(updatedGame.scores[2]);
-        expect(state.games[3][id]).toBeFalsy();
+    it('resets the live game', ()=>{
+        const test = {
+            players: {
+                'fdsafsdafsda': { name: 'david' }
+            },
+            games: {
+                123: {
+                    name: 'david',
+                    score: 156
+                },
+                456: {
+                    name: 'paul',
+                    score: 248
+                }
+            }
+        };
+        const state = gameReducer(toLoad, { type: RESET_LIVE_GAME, payload: test });
+        expect(state).toEqual({
+            ...test,
+            isLoading: false
+        })
+    });
+    it('sets the loading to true', ()=>{
+        const state = gameReducer(toLoad, { type: SET_LOADING, payload: true });
+        expect(state).toEqual({
+            isLoading: true,
+            ...toLoad
+        })
     });
 
 });

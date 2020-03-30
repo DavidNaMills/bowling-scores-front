@@ -1,13 +1,166 @@
 @import '../../styles/colors.scss';
 
+@mixin withImage ($height, $image, $opacity) {
+    min-width: 100%;
+    position: relative;
+    padding-top: $height;
+    padding-bottom: $height;
+    
+    
+    &::before {
+        background: url($image) no-repeat;
+        background-size: cover;
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100%;
+        z-index: -2;
+        opacity: $opacity;
+    }
+}
+
 .landing{
     padding: 10px;
-    // width: 75vw;
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 30px;
     
+    &__withImg{
+        @media (max-width: 1100px){
+            @include withImage(150px, '/images/ballsCut-small.jpg' , 0.4);
+        }
+        @media (min-width: 1101px){
+            @include withImage(200px, '/images/ballsCut-large.jpg' , 0.4);
+        }
+        display: flex;
+        justify-content: space-between;
+        align-items: space-between;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    &__comingsoon{
+        @media (max-width: 1100px){
+            @include withImage(100px, '/images/myBall-small.jpg' , 0.4);
+        }
+        @media (min-width: 1101px){
+            @include withImage(100px, '/images/myBall-large.jpg' , 0.4);
+        }
+        
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        
+        &_inside{
+            flex-wrap: wrap;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            align-items: stretch;
+        }
+
+    }
+
+
+    &__btn{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 25px;
+    }
+
+    &__about{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(79, 133, 145, 0.4);
+        height: 80vh;
+        padding-bottom: 50px;
+        
+        &_inner{
+            @media (max-width: 1100px){
+                transform: translateY(-100px);
+                width: 75vw;
+            }
+            @media (min-width: 1101px){
+                transform: translateY(-100px);
+                width: 60vw;
+            }
+            display: flex;
+            flex-direction: column;
+            align-content: space-around;
+            justify-content: space-around;
+            
+            height: 100%;
+            background-color: rgb(255, 254, 254,);
+            @media (max-width: 1100px){
+                transform: translateY(-100px);
+            }
+            @media (min-width: 1101px){
+                transform: translateY(-100px);
+            }
+            padding: 50px;
+            height: 100%;
+            
+        }
+        
+        &_row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+    }
+
+    &__footer{
+        display: flex;
+        justify-content: space-evenly;
+        background-color: rgba(79, 133, 145, 0.2);
+
+        height: 100px;
+    }
+    
+    &__item{
+        -webkit-backdrop-filter: blur(5px);
+        // background-color: rgba(10, 26, 24, 0.5);
+        background-color: rgba(252, 252, 252, 0.4);
+        backdrop-filter: blur(5px);
+        width: 150px;
+        
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 400px){
+            padding: 30px;
+        }
+        padding: 80px;
+    }
+    
+    &__img{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    &__content_desktop{
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+    }
+
+
+
 
     &__prof{
         background-color: $btn_lightBlue_bkg;
@@ -29,7 +182,7 @@
         display: flex;
 
         &_container{
-            width:50%;
+            width: 40%;
         }
     }
 }

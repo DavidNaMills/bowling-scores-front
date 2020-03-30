@@ -1,10 +1,22 @@
 import { updatePlayerScores } from './updatePlayerScores';
-import gameTestData, { deleteId, updateId } from '../../testData/gameControllerTestData';
+import uuid from 'uuid';
+
+const updateId = uuid();
+const deleteId = uuid();
 
 const testData = {
-    ...gameTestData,
+
     games: {
-        ...gameTestData.games,
+        "1": {
+            [updateId]: {
+                name: 'David',
+                score: '123'
+            },
+            [deleteId]: {
+                name: 'bob',
+                score: '154'
+            },
+        },
         "2": {
             [updateId]: {
                 name: 'David',

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import GameHistory from '../GameHistory/GameHistory';
+
 const Dashboard = (props) =>{
 
     return (
         <div>
-            this is the dashboard
+            <GameHistory />
         </div>
     )
 }

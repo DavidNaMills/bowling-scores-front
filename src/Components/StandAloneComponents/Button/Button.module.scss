@@ -8,12 +8,29 @@
     min-width: 100px;
     font-weight: 550;
 
+    &__children{
+        // height: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &_span{
+            margin-left: 20px;
+        }
+
+    }
+
     &__disabled{
         background-color: $btn_disabled;
     }
     
     &__isFull{
         width: 100%;
+    }
+
+    &__largeText {
+        font-size: 30px;
     }
 
     &__default{

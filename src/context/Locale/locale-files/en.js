@@ -17,5 +17,6 @@ export default {
     too_long: `Maximum of ${MAX_LENGTH} characters`,
     max_length_2: `Maximum of ${MAX_LENGTH_2} characters`,
 
-    pass_not_same: 'Passwords are not the same'
+    pass_not_same: 'Passwords are not the same',
+    usrTaken: 'This username has been taken'
 }

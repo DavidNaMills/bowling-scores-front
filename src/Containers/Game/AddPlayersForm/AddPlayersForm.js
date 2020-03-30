@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 import body from '../../../styles/shared/container.module.scss';
 import form from '../../../styles/shared/form.module.scss';
@@ -42,18 +42,13 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
         }
     }, [color]);
 
-    const addPlayerProxy = () => {
+    const addPlayerProxy = useCallback(() => {
         setShowSelect(false);
         addPlayer();
-    }
+    }, []);
 
-    const checkDisabled = () => {
-        if (Object.keys(liveGame.players).length === 0 && isNew) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    const checkDisabled = () => (Object.keys(liveGame.players).length === 0 && isNew) ? true : false;
+
     return (
         <div className={body.contentContainer}>
             <Title label={title} ttlType='sub' />
@@ -68,10 +63,7 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                     />
 
 
-                    {
-                        showSelect && showColorPickerComponent()
-
-                    }
+                    {showSelect && showColorPickerComponent()}
 
                     <div className={[classes.addPlayers__inline, spacing.extra].join(' ')}>
                         <div className={showSelect ? classes.addPlayers__fullBtn : classes.addPlayers__halfBtn}>
@@ -95,31 +87,36 @@ const AddPlayersForm = ({ title, playerSelect, onClose, isNew = false, close = (
                             }}
                         >{newPlayer.name}</div>}
                     <div className={spacing.largeExtra}>
-                        <Button isFull label='Add Player' type='blue' click={addPlayerProxy} isDisabled={newPlayer.name.length>0?false:true}/>
+                        <Button isFull label='Add Player' type='blue' click={addPlayerProxy} isDisabled={newPlayer.name.length > 0 ? false : true} />
                     </div>
+                    {isNew
+                        ? <div className={spacing.largeExtra}>
+                            <Button isFull label='Start Game' click={() => commitGame(close)} isDisabled={checkDisabled()} />
+                        </div>
+                        :
+                        <div className={spacing.largeExtra}>
+                            <Button isFull label={'Close'} click={onClose} />
+                        </div>
+                    }
                 </div>
             </div>
 
+            <div className={classes.addPlayers__width}>
 
-            {isNew &&
                 <div className={spacing.largeExtra}>
-                    <Button isFull label='Start Game' click={() => commitGame(close)} isDisabled={checkDisabled()} />
+                    <Table
+                        data={{
+                            headers: tHeaders,
+                            rows: useMemo(() => tableParser(liveGame), [])
+                        }}
+                        selectRow={playerSelect}
+                        showRowNum
+                        caption='Click player for more details'
+                    />
                 </div>
-            }
-
-            <div className={spacing.largeExtra}>
-                <Table
-                    data={{
-                        headers: tHeaders,
-                        rows: tableParser(liveGame)
-                    }}
-                    selectRow={playerSelect}
-                    showRowNum
-                    caption='Click player for more details'
-                />
-            </div>
-            <div className={spacing.largeExtra}>
-                <Button isFull type={'lightred'} label={isNew ? 'Cancel' : 'Close'} click={onClose} />
+                <div className={spacing.largeExtra}>
+                    <Button isFull type={'lightred'} label={isNew ? 'Cancel' : 'Close'} click={onClose} />
+                </div>
             </div>
         </div>
     )

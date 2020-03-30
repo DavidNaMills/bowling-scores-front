@@ -46,9 +46,4 @@ describe('<InputFactory /> test suite', () => {
         expect(wrapper.find(Input).length).toBe(1);
     })
 
-
-
-    //TODO: handle errors
-    //TODO: add more components when needed
-    //returns error
 })

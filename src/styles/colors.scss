@@ -1,57 +1,58 @@
 
 $btn_font_clr: rgb(66, 66, 66);
-// $btn_font_clr_light: rgb(168, 171, 167);
-// $btn_font_clr_light: rgb(240, 240, 240);
 $btn_font_clr_light: rgb(255, 255, 255);
 
 $btn_disabled: rgb(184, 184, 184);
 
 
-//done
-$btn_default_bkg: rgb(84, 179, 109);
+//default button
+$btn_default_bkg: rgb(4, 219, 61);
+// $btn_default_bkg: rgb(84, 179, 109);
 $btn_default_bkg_active: rgb(51, 255, 105);
 $btn_default_bkg_active_hover: rgb(62, 173, 92);
 
-//done
+//warning button
 $btn_warning_bkg: rgb(255, 221, 128);
 $btn_warning_bkg_active: rgb(255, 198, 41);
 $btn_warning_bkg_active_hover: rgb(255, 187, 0);
 
-//done
+//danger button
 $btn_danger_bkg: rgb(224, 83, 83);
 $btn_danger_bkg_active: rgb(189, 8, 8);
 $btn_danger_bkg_active_hover: rgb(255, 0, 0);
 
-//done
+//light green button
 $btn_lightGreen_bkg: rgb(234, 255, 232);
 $btn_lightGreen_bkg_active: rgb(162, 255, 150);
 $btn_lightGreen_bkg_active_hover: rgb(205, 255, 199);
 
-//done
+//dark green button
 $btn_darkGreen_bkg: rgb(32, 145, 17);
 $btn_darkGreen_bkg_active: rgb(106, 199, 93);
 $btn_darkGreen_bkg_active_hover: rgb(55, 219, 33);
 
-//done
-$btn_blue_bkg: rgb(93, 194, 199);
+//blue button
+$btn_blue_bkg: rgb(0, 159, 212);
+// $btn_blue_bkg: rgb(93, 194, 199);
 $btn_blue_bkg_active: rgb(18, 142, 148);
 $btn_blue_bkg_active_hover: rgb(32, 194, 201);
 
-//blue
+//light blue button
 $btn_lightBlue_bkg: rgb(207, 253, 255);
 $btn_lightBlue_bkg_active: rgb(110, 248, 255);
 $btn_lightBlue_bkg_active_hover: rgb(149, 233, 237);
 
-//done
+//dark blue button
 $btn_darkBlue_bkg: rgb(56, 135, 255);
 $btn_darkBlue_bkg_active: rgb(23, 116, 255);
 $btn_darkBlue_bkg_active_hover: rgb(28, 97, 201);
 
-//done
+//light red button
 $btn_lightRed_bkg: rgb(255, 224, 224);
 $btn_lightRed_bkg_active: rgb(255, 176, 176);
 $btn_lightRed_bkg_active_hover: rgb(250, 117, 117);
 
+// light yellow button
 $btn_lightYellow_bkg: rgb(250, 255, 201);
 $btn_lightYellow_bkg_active: rgb(243, 255, 128);
 $btn_lightYellow_bkg_active_hover: rgb(237, 255, 61);
@@ -62,8 +63,12 @@ $btn_lightYellow_bkg_active_hover: rgb(237, 255, 61);
 
 $title_shadow_color: rgb(240, 245, 241);
 $title_shadow_full: -10px 10px 23px 3px $title_shadow_color;
-$title_main_color: rgb(86, 156, 156);
-$title_rest_color: rgb(38, 74, 74);
+
+
+$title_main_color: rgb(33, 82, 122);
+// $title_main_color: rgb(30, 81, 101);
+$title_rest_color: rgb(33, 82, 122);
+
 
 $valid_color: rgb(176,245,164);
 $valid_input_shadow: inset 1px -2px 37px 9px rgba($valid_color,0.5);
@@ -77,6 +82,11 @@ $popup_module_color: rgb(255, 255, 255);
 $popup_borders: solid black 2px;
 $popup_borders_separator: solid black 1px;
 
-$navigation_background: rgb(224, 224, 224);
+$navigation_background: rgba(33, 82, 122, 1);
+// $navigation_background: rgba(156, 156, 156, 0.7);
+// $navigation_background: rgb(224, 224, 224);
 
-$shadow_color: rgba(94,107,125,1);
+$shadow_color: rgba(69, 81, 97, 1);
+// $shadow_color: rgba(94,107,125,1);
+
+$spinner_color: #2445ff;

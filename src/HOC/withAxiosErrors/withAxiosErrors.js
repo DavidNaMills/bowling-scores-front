@@ -5,28 +5,20 @@ const withAxiosErrors = (WrappedComponent, axios) => {
     return (props) => {
         const [msg, setMsg] = useState(null);
 
-
-        // const reqInterceptor = axios.interceptors.request.use(req => {
-        //     console.log('[reqInterceptor]');
-        //     console.log(req);
-        //     return req;
-        // },
-        // error=>{
-        //     console.log('[reqInterceptor]');
-        //     console.log(error);
-        // });
-
+            const reqInterceptor = axios.interceptors.request.use(req => {
+                    return req;
+            },
+            error=>{
+                return error;
+            });
 
 
 
         const resInterceptor = axios.interceptors.response.use(res => {
             setMsg(null);
-
-            console.log(res);
             return res;
         },
             error => {
-                console.log(error);
                 const status = error.response.status;
                 const cutStr = error.response.config.url.slice(error.config.url.lastIndexOf('/')+1, error.response.config.url.length);
 
@@ -36,8 +28,14 @@ const withAxiosErrors = (WrappedComponent, axios) => {
                 else if(status === 401){
                     setMsg('Unauthorized');
                 }
+                else if(status === 409){
+                    setMsg('Username has been taken');
+                }
+                else if(status === 500){
+                    setMsg('Something has went wrong');
+                }
                 else {
-                    setMsg('Something went wrong. we are sorry. someone will be fired');
+                    setMsg(`${error.response.data.message}`);
                 }
                 window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
                 return Promise.reject(error);
@@ -48,7 +46,7 @@ const withAxiosErrors = (WrappedComponent, axios) => {
         useEffect(() => {
             return () => {
                 axios.interceptors.response.eject(resInterceptor)
-                // axios.interceptors.request.eject(reqInterceptor)
+                axios.interceptors.request.eject(reqInterceptor)
             }
         }, [resInterceptor]);
 

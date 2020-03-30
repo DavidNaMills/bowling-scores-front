@@ -1,17 +1,16 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import useLocalStorage from './useLocalStorage';
 
-
-jest.spyOn(window.localStorage.__proto__, 'setItem');
-jest.spyOn(window.localStorage.__proto__, 'getItem');
-jest.spyOn(window.localStorage.__proto__, 'removeItem');
-window.localStorage.__proto__.setItem = jest.fn();
-window.localStorage.__proto__.getItem = jest.fn();
-window.localStorage.__proto__.removeItem = jest.fn();
+jest.mock('../../helpers/localStorage/localStorage', ()=>({
+    writeToLocalStorage: jest.fn(),
+    readFromLocalStorage: jest.fn(),
+    removeFromLocalStorage: jest.fn()
+}));
+import {writeToLocalStorage, readFromLocalStorage, removeFromLocalStorage} from '../../helpers/localStorage/localStorage';
 
 
 const testFilename = 'bowling-scores-test';
-const defaultFileName = 'bowling-scores-temp'
+const defaultFileName = 'bowling-scores'
 
 const testData = {
     players: {
@@ -33,64 +32,61 @@ const testData = {
     }
 }
 
+afterEach(()=>{
+    jest.clearAllMocks();
+})
+
 it('placeholder', ()=>{
     expect(true).toBeTruthy();
 });
 
-// describe('useLocalStorage test suite', () => {
+describe('useLocalStorage test suite', () => {
 
-//     beforeEach(() => {
-//         jest.spyOn(window.localStorage.__proto__, 'setItem');
-//         jest.spyOn(window.localStorage.__proto__, 'getItem');
-//         jest.spyOn(window.localStorage.__proto__, 'removeItem');
-//         window.localStorage.__proto__.setItem = jest.fn();
-//         window.localStorage.__proto__.getItem = jest.fn();
-//         window.localStorage.__proto__.removeItem = jest.fn();
-//     });
-
-
-//     it('should write to the file using default file name', async () => {
-//         const { result } = renderHook(() => useLocalStorage());
-//         act(() => {
-//             result.current.writeToLocalStorage(testData);
-//         });
-//         expect(localStorage.setItem).toHaveBeenCalledWith(defaultFileName, JSON.stringify(testData));
-//     });
+    it('should write to the file using default file name', async () => {
+        const { result } = renderHook(() => useLocalStorage());
+        act(() => {
+            result.current.writeToStorage(testData);
+        });
+        expect(writeToLocalStorage).toHaveBeenCalledWith(defaultFileName, testData);
+        expect(writeToLocalStorage).toHaveBeenCalledTimes(1);
+    });
 
 
-//     it('should write to the file using specified file name', () => {
-//         const { result } = renderHook(() => useLocalStorage(testFilename))
-//         act(() => {
-//             result.current.writeToLocalStorage(testData);
-//         });
-//         expect(localStorage.setItem).toHaveBeenCalledWith(testFilename, JSON.stringify(testData));
-//     });
+    it('should write to the file using specified file name', () => {
+        const { result } = renderHook(() => useLocalStorage(testFilename))
+        act(() => {
+            result.current.writeToStorage(testData);
+        });
+        expect(writeToLocalStorage).toHaveBeenCalledWith(testFilename, testData);
+        expect(writeToLocalStorage).toHaveBeenCalledTimes(1);
+    });
 
 
-//     it('reads in from file', () => {
-//         const { result } = renderHook(() => useLocalStorage());
-//         act(() => {
-//             result.current.writeToLocalStorage(testData);
-//         });
-//         let returned=null;
-//         act(() => {
-//             result.current.readFromLocalStorage(testData);
-//         });
-//         expect(localStorage.getItem).toHaveBeenCalled();
-//     });
+    it('reads in from file', () => {
+        const { result } = renderHook(() => useLocalStorage());
+        act(() => {
+            result.current.writeToStorage(testData);
+        });
+        let returned=null;
+        act(() => {
+            result.current.readFromStorage(testData);
+        });
+        expect(readFromLocalStorage).toHaveBeenCalledWith(defaultFileName);
+        expect(readFromLocalStorage).toHaveBeenCalledTimes(1);
+    });
 
 
-//     it('removes the file', () => {
-//         const { result } = renderHook(() => useLocalStorage());
-//         act(() => {
-//             result.current.writeToLocalStorage(testData);
-//         });
+    it('removes the file', () => {
+        const { result } = renderHook(() => useLocalStorage());
+        act(() => {
+            result.current.writeToStorage(testData);
+        });
 
-//         act(() => {
-//             result.current.removeFromLocalStorage(testData);
-//         });
-//         expect(localStorage.removeItem).toHaveBeenCalledWith(defaultFileName, testData);
-//         expect(localStorage.removeItem).toHaveBeenCalled();
-//     });
+        act(() => {
+            result.current.removeFromStorage(testData);
+        });
+        expect(removeFromLocalStorage).toHaveBeenCalledWith(defaultFileName, testData);
+        expect(removeFromLocalStorage).toHaveBeenCalledTimes(1);
+    });
 
-// });
+});

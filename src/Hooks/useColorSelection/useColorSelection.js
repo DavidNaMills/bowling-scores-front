@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 
 import { SwatchesPicker } from 'react-color';
 
-export const getRandomColor = () => {
-    const max = 255;
-    const min = 0;
+const max = 255;
+const min = 0;
 
-    const r = Math.floor(Math.random() * (max - min + 1) + min);
-    const g = Math.floor(Math.random() * (max - min + 1) + min);
-    const b = Math.floor(Math.random() * (max - min + 1) + min);
+const randomise = ()=> Math.floor(Math.random() * (max - min + 1) + min);
+
+export const getRandomColor = () => {
+
+    const r = randomise();
+    const g = randomise();
+    const b = randomise();
 
     return `${r}, ${g}, ${b}`;
 }

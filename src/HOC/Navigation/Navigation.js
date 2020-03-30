@@ -1,6 +1,7 @@
 import React from 'react';
 import UnLoggedInNavigation from './UnLoggedInNavigation/UnLoggedInNavigation';
 import LoggedInNavigation from './LoggedInNavigation/LoggedInNavigation';
+import StatsBar from './StatsBar/StatsBar';
 
 const Navigation = (props) => {
     return (
@@ -8,7 +9,10 @@ const Navigation = (props) => {
             <div>
                 {
                     props.user.token
-                        ? <LoggedInNavigation user={props.user.user} />
+                        ? <React.Fragment>
+                            <LoggedInNavigation user={props.user.user} />
+                            <StatsBar stats={props.stats} />
+                        </React.Fragment>
                         : <UnLoggedInNavigation />
                 }
             </div>

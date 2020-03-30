@@ -1,15 +1,13 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip
 } from 'recharts';
 
 
-
 const GameChart = ({players, data, width=380, height=350}) => {
     return (
-        <div>
             <LineChart
-                width={width-25}
+                width={width}
                 height={height}
                 data={data.data}
                 margin={{
@@ -21,12 +19,19 @@ const GameChart = ({players, data, width=380, height=350}) => {
                 <YAxis width={40}/>
                 <Tooltip />
                 {
-                    data.players.map((x,i)=>
-                        <Line key={i} type="monotone" dataKey={players[x].name} stroke={`rgb(${players[x].color})`} fill={`rgb(${players[x].color})`} activeDot={{ r: 9 }} />
-                    )
+                    useMemo(()=>data.players.map((x,i)=>{
+                        return <Line 
+                            key={i} 
+                            type="monotone" 
+                            dataKey={players[x].name} 
+                            stroke={`rgb(${players[x].color})`} 
+                            fill={`rgb(${players[x].color})`} 
+                            activeDot={{ r: 9 }} 
+                        />
+                    }
+                    ), [data.data])
                 }
             </LineChart>
-        </div>
     )
 };
 

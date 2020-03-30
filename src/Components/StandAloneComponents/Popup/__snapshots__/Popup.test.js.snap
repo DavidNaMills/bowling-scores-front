@@ -9,7 +9,7 @@ exports[`<Popup /> test suite snapshot test matches default snapshot 1`] = `
   >
     <div>
       <p
-        className="popup__message"
+        className="popup__message2"
       >
         This is a test message
       </p>

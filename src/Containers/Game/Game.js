@@ -1,175 +1,172 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import useLocalStorage from '../../Hooks/useLocalStorage/useLocalStorage';
-import useDispatchHook from '../../Hooks/useDispatchHook/useDispatchHook';
-
 import GameDetails from './GameDetails/GameDetails';
-import AddScores from './AddScores/AddScores';
 import AddPlayersForm from './AddPlayersForm/AddPlayersForm';
+import AddScores from './AddScores/AddScores';
+import SelectAnonPlayer from './SelectAnonPlayer/SelectAnonPlayer';
 
-import Popup from '../../Components/StandAloneComponents/Popup/Popup';
-import Title from '../../Components/StandAloneComponents/Title/Title';
+import useShowHook from '../../Hooks/useShowHook/useShow';
+import useToggle from '../../Hooks/useToggle/useToggle';
+import useSubmitAnonPlayer from './GameHooks/useSubmitAnonPlayer/useSubmitAnonPlayer';
+import useFindExisting from './GameHooks/useFindExisting/useFindExisting';
 
-import {PLACEHOLDER_ID} from '../../consts/placeHolderGameId';
-
-// import classes from './Game.module.scss';
-
+import PopUp from '../../Components/StandAloneComponents/Popup/Popup';
+import Popup1Body from './GamePopups/Popup1Body';
+import Popup2Body from './GamePopups/Popup2Body';
+import Popup3Body from './GamePopups/Popup3Body';
+import Popup4Body from './GamePopups/Popup4Body';
 
 const showDefault = {
-    gameDetails: true,
+    gameDetails: false,
     addPlayers: false,
-    addscores: false,
-    newGame: false
+    newGame: false,
+    addScores: false,
+    selectPlayer: false
+};
+
+const popupDefault = {
+    popup1: false,
+    popup2: false,
+    popup3: false,
+    popup4: false,
 }
 
 const Game = (props) => {
-    const liveGame = useSelector(state => state.liveGame);
-    const user = useSelector(state => state.user);
+    const hasChecked = useRef(false);
+    const existingGame = useRef(null);
 
-    const { readFromStorage } = useLocalStorage();
-    const { initGameDispatch, resetLiveGameDispatch} = useDispatchHook();
+    const state = useSelector(state => state);
+    const user = state.user;
+    const liveGame = state.liveGame;
 
-    const [showWhich, setWhich] = useState(showDefault);
-    const [showPopup, setPopup] = useState(false);
-    const [showPopup2, setPopup2] = useState(false);
-
+    const { isShow, changeShow } = useShowHook(showDefault, null);
+    const { toggle, makeToggle } = useToggle(popupDefault);
+    const { makeSubmit } = useSubmitAnonPlayer({
+        existingGame,
+        changeShow,
+        user
+    });
+    const { checkForExisting } = useFindExisting({ makeToggle, existingGame, user, hasChecked });
 
     useEffect(() => {
-        const hasExistingGame = readFromStorage();
-        const plr = Object.keys(liveGame.players).length;
+        checkForExisting();
+        changeShow('newGame');
+    }, [])
 
-        if(hasExistingGame._id !== PLACEHOLDER_ID && !user.token || user.user._id !== hasExistingGame._id) {
-            setPopup2(true);
-        }else if (hasExistingGame && plr === 0) {
-            initGameDispatch(JSON.parse(hasExistingGame));
-            setPopup(true);
+    useEffect(() => {
+        if (!liveGame.isLoading) {
+            if (liveGame && Object.keys(liveGame.players).length < 1) {
+                changeShow('newGame');
+            } else {
+                changeShow('gameDetails');
+            }
         }
-    }, []);
-
-
-    // useEffect(() => {
-    //     const plr = Object.keys(liveGame.players).length;
-    //     if (plr > 0) {
-    //         writeToLocalStorage(liveGame);
-    //     }
-    // }, [liveGame]);
-
+    }, [liveGame]);
 
 
     const playerSelect = (id) => {
-        setWhich(showDefault);
+        changeShow(showDefault);
         props.history.push({
             pathname: '/player',
             state: {
-                id
+                id,
+                length: Object.keys(liveGame.players).length
             }
         })
     }
 
-    const changeFromGame = (id) => {
-        const base = {
-            gameDetails: false,
-            addPlayers: false,
-            addscores: false,
-            newGame: false
-        }
-        setWhich({
-            ...base,
-            [id]: true
-        })
-    }
-
-    const buildGameDetails = () => (
-        <GameDetails
-            liveGame={liveGame}
-            addNewPlayers={() => changeFromGame('addPlayers')}
-            playerSelect={playerSelect}
-            addScores={() => changeFromGame('addscores')}
-            newGame={() => changeFromGame('newGame')}
-            history={props.history}
-            user={user.token}
-        />
-    )
-
-    const buildNewGame = () => (
-        <AddPlayersForm
-            title='Create New Game'
-            liveGame={{}}
-            playerSelect={playerSelect}
-            onClose={() => setWhich(showDefault)}
-            isNew
-            close={() => changeFromGame('gameDetails')}
-        />
-    )
-
-    const buildAddPlayersForm = () => (
-        <AddPlayersForm
-            title='Add Player'
-            liveGame={liveGame}
-            playerSelect={playerSelect}
-            onClose={() => setWhich(showDefault)}
-        />
-    )
-
-    const buildAddScores = () => (
-        <AddScores
-            players={liveGame.players}
-            close={() => setWhich(showDefault)}
-        />
-    )
-
-    const buildPopup = () => (
-        <Popup
-            title={{
-                label: 'Game in Progress',
-                ttlType: 'sub'
-            }}
-            message='Hey!!! you have already started a game. would you like to continue or start a new game?'
-            action1={{
-                label: 'Start New Game',
-                type: 'default',
-                click: () => { changeFromGame('newGame'); setPopup(false) }
-            }}
-            action2={{
-                label: 'Continue',
-                type: 'blue',
-                click: () => setPopup(false)
-            }}
-            close={() => setPopup(false)}
-        />
-    )
-    
-    const buildPopup2 = () => (
-        <Popup
-            title={{
-                label: 'Slight problem...',
-                ttlType: 'sub'
-            }}
-            message='There is a game in progress, but you need to login to continue'
-            action1={{
-                label: 'Start New Game',
-                type: 'default',
-                click: () => { changeFromGame('newGame'); setPopup2(false) }
-            }}
-            action2={{
-                label: 'Login',
-                type: 'darkBlue',
-                click: () => {setPopup2(false); props.history.push('/login')}
-            }}
-        />
-    )
 
     return (
         <div>
-            <Title ttlType='section' label='Bowling Scores: Play' />
-            {showPopup && buildPopup()}
-            {showPopup2 && buildPopup2()}
-            {showWhich.gameDetails && buildGameDetails()}
-            {showWhich.newGame && buildNewGame()}
-            {showWhich.addPlayers && buildAddPlayersForm()}
-            {showWhich.addscores && buildAddScores()}
+            {toggle.popup1 && <PopUp>
+                <Popup1Body
+                    openPopup={makeToggle}
+                    hasExistingGame={existingGame.current}
+                    id='popup1'
+                />
+            </PopUp>}
+            {toggle.popup2 && <PopUp>
+                <Popup2Body
+                    openPopup={makeToggle}
+                    hasExistingGame={existingGame.current}
+                    id='popup2'
+                    push={props.history.push}
+                />
+            </PopUp>}
 
+            {toggle.popup3 && <PopUp>
+                <Popup3Body
+                    openPopup={makeToggle}
+                    hasExistingGame={existingGame.current}
+                    id='popup3'
+                    changeFromGame={changeShow}
+                />
+            </PopUp>}
+            {toggle.popup4 && <PopUp>
+                <Popup4Body
+                    openPopup={makeToggle}
+                    id='popup4'
+                />
+            </PopUp>}
+            {
+                isShow.gameDetails
+                    ? <GameDetails
+                        liveGame={liveGame}
+                        addNewPlayers={() => changeShow('addPlayers')}
+                        playerSelect={playerSelect}
+                        addScores={() => changeShow('addScores')}
+                        newGame={() => changeShow('newGame')}
+                        history={props.history}
+                        user={user.token}
+                    /> : null
+            }
+            {
+                isShow.addPlayers
+                    ? <AddPlayersForm
+                        title='Add Player'
+                        liveGame={liveGame}
+                        playerSelect={playerSelect}
+                        onClose={() => changeShow('gameDetails')}
+                    />
+                    : null
+            }
+            {
+                isShow.addScores ?
+                    <AddScores
+                        players={liveGame.players}
+                        close={() => { changeShow('gameDetails') }}
+                        onClose={() => { changeShow('gameDetails') }}
+                        user={user}
+                    />
+                    : null
+            }
+            {
+                isShow.newGame ?
+                    <AddPlayersForm
+                        title='Create New Game'
+                        liveGame={{}}
+                        playerSelect={() => { }}
+                        onClose={() => {
+                            if (Object.keys(liveGame.players).length === 0) {
+                                props.history.push('/');
+                            } else {
+                                changeShow('gameDetails')
+                            }
+                        }}
+                        isNew
+                        close={() => changeShow('gameDetails')}
+                    />
+                    : null
+            }
+            {
+                isShow.selectPlayer &&
+                <SelectAnonPlayer
+                    game={existingGame.current}
+                    cancelClick={() => changeShow('newGame')}
+                    submitClick={makeSubmit}
+                />
+            }
         </div>
     )
 }

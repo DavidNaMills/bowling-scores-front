@@ -8,11 +8,10 @@ exports[`<LoggedIn /> test suite snapshot test 1`] = `
     className="navigation_section"
   >
     <a
-      aria-current="page"
-      className="navigation__link navigation__link_active"
-      href="/"
+      aria-current={null}
+      className="navigation__link"
+      href="/dashboard"
       onClick={[Function]}
-      style={Object {}}
     >
       Home
     </a>

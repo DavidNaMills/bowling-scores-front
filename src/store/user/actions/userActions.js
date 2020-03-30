@@ -1,12 +1,12 @@
-import {setAuthorizationToken} from '../../../Axios/axiosConfig';
+import { setAuthorizationToken } from '../../../Axios/axiosConfig';
 import {
     USER_LOGIN,
     USER_LOGOUT,
     USER_INIT_GAMES
 } from '../userActionTypes';
+import { updateStats, clearStats } from '../../allActions';
 
-import {PLACEHOLDER_ID} from '../../../consts/placeHolderGameId';
-import {commitNewGame, resetLiveGame} from '../../liveGame/actions/liveGameActions';
+import { resetLiveGame } from '../../liveGame/actions/liveGameActions';
 
 
 export const userLoginLocal = (data) => ({
@@ -14,28 +14,24 @@ export const userLoginLocal = (data) => ({
     payload: data
 });
 
-export const userLogin = (data) => (dispatch, getState)=>{
+export const userLogin = (data) => (dispatch) => {
     setAuthorizationToken(data.token);
     dispatch(userLoginLocal(data));
-
-    const {liveGame} = getState();
-    if(liveGame && liveGame._id===PLACEHOLDER_ID){
-        delete liveGame._id;
-        dispatch(commitNewGame(liveGame));
-    }
+    dispatch(updateStats(data.stats));
 }
 
 export const userLogoutLocal = () => ({
     type: USER_LOGOUT
 });
 
-export const userLogout = () => (dispatch, getState)=>{
+export const userLogout = () => (dispatch,) => {
     dispatch(resetLiveGame());
     dispatch(userLogoutLocal());
+    dispatch(clearStats());
 };
-
 
 export const userInitGames = (data) => ({
     type: USER_INIT_GAMES,
     payload: data
 });
+

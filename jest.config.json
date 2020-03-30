@@ -1,5 +1,12 @@
 {
     "testRegex": "((\\.|/*.)(test))\\.js?$",
+    "testCoverage":{
+      "collectCoverage": true,
+      "coverageReporters": [
+        "text",
+        "html"
+      ]
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/jest.setup.js"
     ],
